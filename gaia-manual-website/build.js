@@ -126,12 +126,21 @@ const DOC_REFS = {
   ],
   'appendix': [
     { title: 'GAIA Master Index', path: '00_索引与导航/GAIA Master Index.md' },
+    { title: 'GAIA 分角色导读', path: '00_索引与导航/GAIA 分角色导读.md' },
+    { title: '创世者誓', path: '03_创世与权益/创世者誓.md' },
+    { title: '创世者在GAIA体系中的定位', path: '03_创世与权益/创世者在GAIA体系中的定位.md' },
+    { title: '创世者权利与约束附录', path: '03_创世与权益/《创世者权利与约束附录》.md' },
+    { title: '创世者行动纲要', path: '03_创世与权益/创世者行动纲要（Founders\u2019 Action Charter · v1.0）.md' },
+    { title: '创世者随身文本', path: '03_创世与权益/创世者随身文本 · Founders\u2019 Pocket Charter.md' },
+    { title: 'GAIA 宪法 · 创世者随身文本', path: '03_创世与权益/GAIA 宪法 · 创世者随身文本.md' },
     { title: '文档分层与项目结构说明', path: '00_索引与导航/文档分层与项目结构说明.md' },
     { title: '快速查找表', path: '00_索引与导航/快速查找表.md' },  // 建时过滤敏感行
     { title: '新节点入门包', path: '00_索引与导航/新节点入门包.md' },
     { title: '更新日志', path: '00_索引与导航/更新日志.md' },
     { title: '06_解释与叙事 索引', path: '06_解释与叙事/06_索引.md' },
     { title: 'GAIA 完整思想包（单文件参考版）', path: '06_解释与叙事/GAIA 完整思想包（单文件参考版）.md' },
+    { title: 'GAIA 1.0 全系统集成规范（Master Spec）', path: '02_协议与规范/GAIA 1.0 全系统集成规范（Master Spec）.md' },
+    { title: 'GAIA 1.0 创世发布声明', path: '06_解释与叙事/GAIA 1.0 创世发布声明.md' },
     { title: 'GAIA Video PPT Script (Simple EN)', path: '06_解释与叙事/GAIA Video PPT Script (Simple EN).md' },
     { title: 'GAIA Implementation Roadmap (Simple EN)', path: '06_解释与叙事/GAIA Implementation Roadmap (Simple EN).md' },
   ]
@@ -185,6 +194,7 @@ function buildDocAliases() {
     ['分配方案', '02_协议与规范/分配方案：公式化定档与供应商定价（草案）.html'],
     ['衍生业务优先权与最惠国条款', '实例/WhoAmI.Art/docs/WhoAmI.Art 衍生业务优先权与最惠国条款（摘要版）.html'],
     ['GAIA 标准术语与概念表', '00_索引与导航/GAIA 标准术语与概念表.html'],
+    ['快速查找表', '00_索引与导航/快速查找表.html'],
     ['Founder-AI 协作约定', '00_索引与导航/Founder-AI 协作约定.html'],
     ['输入与解释映射表', '00_索引与导航/输入与解释映射表.html'],
     ['联盟创世档案', '00_索引与导航/联盟创世档案（制宪会议）.html'],
@@ -395,8 +405,11 @@ const docIndexHtml = `
 <tr><td><a href="docs/00_索引与导航/GAIA 标准术语与概念表.html" class="doc-link">GAIA 标准术语与概念表</a></td><td>00_索引与导航/</td><td>§12</td></tr>
 <tr><td><a href="docs/00_索引与导航/联盟创世档案（制宪会议）.html" class="doc-link">联盟创世档案（制宪会议）</a></td><td>00_索引与导航/</td><td>§4</td></tr>
 <tr><td><a href="docs/00_索引与导航/GAIA Master Index.html" class="doc-link">GAIA Master Index</a></td><td>00_索引与导航/</td><td>总索引</td></tr>
+<tr><td><a href="docs/00_索引与导航/GAIA 分角色导读.html" class="doc-link">GAIA 分角色导读</a></td><td>00_索引与导航/</td><td>入门首选</td></tr>
 <tr><td><a href="docs/00_索引与导航/快速查找表.html" class="doc-link">快速查找表</a></td><td>00_索引与导航/</td><td>总索引</td></tr>
 <tr><td><a href="docs/00_索引与导航/新节点入门包.html" class="doc-link">新节点入门包</a></td><td>00_索引与导航/</td><td>总索引</td></tr>
+<tr><td><a href="docs/02_协议与规范/GAIA 1.0 全系统集成规范（Master Spec）.html" class="doc-link">GAIA 1.0 全系统集成规范（Master Spec）</a></td><td>02_协议与规范/</td><td>协议标准</td></tr>
+<tr><td><a href="docs/06_解释与叙事/GAIA 1.0 创世发布声明.html" class="doc-link">GAIA 1.0 创世发布声明</a></td><td>06_解释与叙事/</td><td>创世宣告</td></tr>
 <tr><td><a href="docs/01_宪法与治理/GAIA 宪法 → 系统模块映射表.html" class="doc-link">GAIA 联盟宪章 → 系统模块映射表</a></td><td>01_宪法与治理/</td><td>§7</td></tr>
 <tr><td><a href="docs/02_协议与规范/CTO技术共识协议.html" class="doc-link">CTO 技术共识协议</a></td><td>02_协议与规范/</td><td>§6</td></tr>
 <tr><td><a href="docs/02_协议与规范/FCR 1.1 创始贡献者权利协议.html" class="doc-link">FCR 1.1 创始贡献者权利协议</a></td><td>02_协议与规范/</td><td>§6</td></tr>
