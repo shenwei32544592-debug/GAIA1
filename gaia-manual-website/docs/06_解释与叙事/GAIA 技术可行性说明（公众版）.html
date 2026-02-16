@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAIA 技术可行性说明（公众版） · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>GAIA 技术可行性说明（公众版）</h1>
+<h2>为何在 IT 与物理层面可实现</h2>
+<p><strong>用途</strong>：面向公众的解释性文档；帮助对 IT 了解较少的读者理解艺术家联盟（GAIA）在技术上的可行原因<br><strong>版本</strong>：v0.1<br><strong>联盟宪章引用</strong>：<a href="../01_%E5%AE%AA%E6%B3%95%E4%B8%8E%E6%B2%BB%E7%90%86/GAIA%20%E5%AE%AA%E6%B3%95%C2%B7%E5%BA%8F%E8%A8%80.html">《GAIA 联盟宪章》</a>·<a href="../02_%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%A7%84%E8%8C%83/%E5%88%9B%E6%84%8F%E8%BD%BD%E4%BD%93%E8%A7%84%E8%8C%83%EF%BC%88%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91%E6%91%98%E8%A6%81%EF%BC%89.html">《创意载体规范》</a>·<a href="../01_%E5%AE%AA%E6%B3%95%E4%B8%8E%E6%B2%BB%E7%90%86/GAIA%20%E5%AE%AA%E6%B3%95%20%E2%86%92%20%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97%E6%98%A0%E5%B0%84%E8%A1%A8.html">《GAIA 联盟宪章 → 系统模块映射表》</a><br><strong>性质</strong>：解释性文档，非联盟宪章正文、非工程规范</p>
+<hr>
+<h2>一、为何需要这份说明</h2>
+<p>艺术家联盟的联盟宪章与成立理由书，回答了<strong>为何联合</strong>、<strong>权利从何而来</strong>。<br>本说明回答另一个问题：<strong>这一切在 IT 和物理层面，为何可信、为何可落地？</strong></p>
+<p><strong>本说明写给谁</strong>：对 IT 技术了解有限、甚至完全不懂的读者——包括创始人自己在内。<br><strong>本说明做什么</strong>：替你做技术层面的思考与解释；用国家档案、银行流水、法院存证等现实世界已有先例作类比，说明艺术家联盟采用的技术类别是<strong>已被验证可行的</strong>，数据安全可控、协作可持续、技术服从宪政治理。你<strong>有知情权</strong>知道这些；但你<strong>不必因不懂技术细节而担心或怀疑</strong>——就像普通公民不必懂档案馆的恒温恒湿技术，也能信任档案不会丢失。</p>
+<p><strong>常见疑虑</strong>：<br>「源头不可抹除」——平台改数据怎么办？<br>「分配引擎无人可改」——谁说了算？<br>「灵肉分离」——听上去抽象，实际是什么？<br>「用不用区块链？技术靠谱吗？」<br>「我不懂技术，怎么相信这一切？」</p>
+<p><strong>本说明的目的</strong>：用通俗语言和类比，逐一回答上述问题；说明承诺在技术上<strong>如何实现、如何可验证、为何可信</strong>，而非展开实现细节。</p>
+<p><strong>读完本说明，你将理解</strong>：<br>(1) 源头、分账、灵肉分离在技术上如何实现；(2) IT 如何服从宪政治理（文官统军）；(3) <strong>各节点如何参与制约 IT</strong>——付款时的多方共管机制，不让任何人钻空子；(4) 采用的技术类别在国家档案、银行、法院中早有先例，非实验性；(5) Web3/区块链是可选工具，非必需；(6) 民众有知情权，但不必因不懂技术而担心——信任来自制度设计，不来自理解技术细节。</p>
+<hr>
+<h2>二、源头不可抹除：技术如何实现</h2>
+<p><strong>宪章原则</strong>：创意主权、署名权、历史溯源优先于当前所有权。</p>
+<p><strong>公众疑虑</strong>：平台会不会偷偷改掉我的署名？历史会不会被覆盖？</p>
+<p><strong>技术实现逻辑</strong>（通俗表述）：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>疑虑</th>
+<th>技术手段</th>
+<th>通俗类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>署名被篡改</td>
+<td>系统设计为：署名记录<strong>只允许追加，禁止覆盖</strong>。任何修改都作为新记录追加，旧记录永久保留</td>
+<td>像银行流水：每笔交易记一笔，不能回头删掉某一条</td>
+</tr>
+<tr>
+<td>历史被抹除</td>
+<td>数据存储采用<strong>版本不可删除</strong>策略；所有变更留痕</td>
+<td>像国家档案馆：原件封存，修正只能以新文档形式追加</td>
+</tr>
+<tr>
+<td>平台消失怎么办</td>
+<td>规矩与档案 与 商业实例<strong>分离</strong>；数据可按标准格式导出、迁移</td>
+<td>见第四节「灵肉分离」</td>
+</tr>
+</tbody></table></div>
+<p><strong>可验证性</strong>：<br>艺术家、裁定者、公益节点均可查询历史记录；若发现「覆盖」而非「追加」行为，即构成对联盟宪章的违反，可启动共识裁定。</p>
+<hr>
+<h2>三、分配引擎无人可改：技术如何保证</h2>
+<p><strong>宪章原则</strong>：65/5/20/10 等参数由创世者锁定；分配引擎按规则执行，任何人不得 override。</p>
+<p><strong>公众疑虑</strong>：平台会不会偷偷改分成比例？创世者会不会单方加码？</p>
+<p><strong>技术实现逻辑</strong>（通俗表述）：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>疑虑</th>
+<th>技术手段</th>
+<th>通俗类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>参数被悄悄修改</td>
+<td>分润参数<strong>写入系统配置</strong>，变更须经创世者书面同意及多签；变更记录可查</td>
+<td>像宪章修正案：有流程、有记录、可追溯</td>
+</tr>
+<tr>
+<td>单笔交易被人为改写</td>
+<td>分配引擎按 <strong>RuleID</strong> 自动执行；会计与结算系统<strong>服从 RuleID</strong>，无管理员 override 接口</td>
+<td>像自动售货机：投币后按设定吐货，无人可中途改结果</td>
+</tr>
+<tr>
+<td>谁监督执行</td>
+<td>每笔分配有<strong>账本记录</strong>；公益金池、治理基准池等<strong>全平台可查</strong></td>
+<td>像阳光下的财政：人民须看好钱袋子</td>
+</tr>
+</tbody></table></div>
+<p><strong>可验证性</strong>：<br>任何人可查阅分配规则版本、公益金池余额与流水；若发现未经流程的变更，即构成违规。</p>
+<hr>
+<h2>四、灵肉分离：架构上如何实现</h2>
+<p><strong>宪章原则</strong>：GAIA 管规矩与档案（灵魂）；signa.ink、WhoAmI.Art 等管生意（肉体）。实例可替换，规矩与数据不随之消失。</p>
+<p><strong>公众疑虑</strong>：「灵魂」和「肉体」分开，具体是什么意思？</p>
+<p><strong>技术实现逻辑</strong>（通俗表述）：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>概念</th>
+<th>技术含义</th>
+<th>通俗类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>灵魂层（GAIA）</td>
+<td>联盟宪章、创世档案、RuleID、署名与溯源数据结构；不依赖任一商业平台存活</td>
+<td>像一国法律：政府可换届，法律文本与档案独立存在</td>
+</tr>
+<tr>
+<td>肉体层（实例）</td>
+<td>对接支付、物流、获客的商业系统；负责赚钱与履约</td>
+<td>像政府执行部门：按法律办事，可重组、可替换</td>
+</tr>
+<tr>
+<td>数据可迁移</td>
+<td>数据结构按<strong>跨系统可迁移</strong>设计；实例倒闭时，数据可导入新实例</td>
+<td>像银行账户可跨行转账：你的存款不绑定某家银行</td>
+</tr>
+</tbody></table></div>
+<p><strong>可验证性</strong>：<br>若 signa.ink 因监管或攻击消失，GAIA 的联盟宪章、创世档案、艺术家与用户数据仍可经标准流程迁移至新实例，实现永续经营（Going Concern）。</p>
+<hr>
+<h2>五、物理载体：工业基底与自由源头</h2>
+<p><strong>创意载体规范原则</strong>：物理载体必须臣服于精神印记；工业基底（Order）≥ 0.15mm；自由源头（Flow）严禁算法平滑。</p>
+<p><strong>公众疑虑</strong>：黄铜笔上刻的签名，凭什么说是「真」的？算法会不会偷偷改了我的笔触？</p>
+<p><strong>技术实现逻辑</strong>（通俗表述）：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>概念</th>
+<th>技术/物理含义</th>
+<th>通俗类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>工业基底 0.15mm</td>
+<td>线宽、路径闭合等<strong>物理可制造底线</strong>；低于此无法在黄铜等载体上成型，系统必须拦截</td>
+<td>像建筑规范：承重墙有最低厚度，低于则不能通过验收</td>
+</tr>
+<tr>
+<td>自由源头</td>
+<td>艺术家的<strong>原始笔触</strong>（飞白、抖动、力度）；系统<strong>严禁</strong>算法「平滑」「美化」；符合工业基底则须 <strong>100% 还原</strong></td>
+<td>像指纹：机器只负责识别与复刻，不能「优化」成别人的指纹</td>
+</tr>
+<tr>
+<td>系统行为边界</td>
+<td>系统可<strong>检测、预警、驳回</strong>；严禁<strong>生成创意路径、替代人类创作、未经人类操作修改灵韵层</strong></td>
+<td>像质检员：可说不合格，不能替你重画</td>
+</tr>
+</tbody></table></div>
+<p><strong>可验证性</strong>：<br>艺术家可对比源头文件与物理成品；若发现算法擅自修改笔触形态，即违反创意载体规范，可启动审查。</p>
+<hr>
+<h2>六、共识裁定：技术如何支持</h2>
+<p><strong>宪章原则</strong>：争议由同行共识裁定；无永久法官；公众可指认源头（PAC）。</p>
+<p><strong>公众疑虑</strong>：裁定会不会被平台或创世者单方操纵？</p>
+<p><strong>技术实现逻辑</strong>（通俗表述）：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>环节</th>
+<th>技术支撑</th>
+<th>通俗类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>谁有权裁定</td>
+<td>裁定者从<strong>高贡献节点</strong>中选取；按议题临时组陪审团，<strong>议题结束即散</strong></td>
+<td>像陪审团：随机抽取、一案一组、无永久法官</td>
+</tr>
+<tr>
+<td>公众如何参与</td>
+<td>任何人可发起 <strong>PAC</strong>（公众源头指认）；提案进入共识流程</td>
+<td>像公民提案：可发起，须经流程审议</td>
+</tr>
+<tr>
+<td>裁决是否可被覆盖</td>
+<td>共识结果写入<strong>不可覆盖的账本</strong>；无「管理员一键裁决」接口</td>
+<td>像法院判决：落槌即入档，不能事后悄悄改</td>
+</tr>
+</tbody></table></div>
+<p><strong>可验证性</strong>：<br>裁定流程、证据链、结论均可查询；若存在未经共识程序的「裁决」，即违规。</p>
+<hr>
+<h2>七、宪政治理统辖 IT：技术层如何臣服于治理层</h2>
+<p><strong>核心问题</strong>：IT 部门用哪些技术，保证互联网协作安全持续、数据安全可控，且<strong>技术执行必须听从宪政治理</strong>——就像宋代武官必须听从文官的制度设计？</p>
+<h3>7.1 文官统军的类比</h3>
+<p>宋代「文官统军」：武官掌兵，但调兵、决策权在文官；武官不能凭武力推翻文官决策。</p>
+<p><strong>艺术家联盟的对应</strong>：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>角色</th>
+<th>类比</th>
+<th>约束关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>宪政治理层</td>
+<td>文官</td>
+<td>制定规则；决定「能做什么、不能做什么」</td>
+</tr>
+<tr>
+<td>IT 执行层</td>
+<td>武官</td>
+<td>实现规则；<strong>无权定义规则、无权覆盖规则</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>技术上的保证</strong>：不是靠「IT 人员自觉」，而是靠<strong>系统设计</strong>——把宪政约束写进架构，让违反约束的操作在技术上<strong>无法执行</strong>。</p>
+<p><strong>IT 系统的多角色与高透明</strong>：艺术家联盟的 IT 系统采用<strong>多角色、高透明</strong>设计——在数据层和代码层，均有专业人员参与监督；<strong>无人能单独协调改动</strong>，任何关键变更须经多签或约定程序。此设计与中央银行结算系统类似：多方共管、职责分离、操作留痕，从而具备高安全性的可实现基础。参见央行结算系统的多中心、多节点校验与审计机制。</p>
+<p><strong>联盟为何能与时俱进</strong>：联盟之所以能持续迭代、让人感到高效先进，是因为有强大的 CTO（技术节点）负责落实<strong>任何节点提出的 IT 建设需求</strong>——谁有想法、谁提需求，技术有人对接、有人落实；不因技术缺位而停滞。</p>
+<p><strong>法律层面的追索机制</strong>：管理法规中明确约定——<strong>非授权改动</strong>将被视为违规：违规者在联盟内的利益可被清算，且在现实世界中可被起诉追责。技术约束 + 法律追索，共同构成「没人敢、没人能」的双重威慑；这正是 IT 基底成为<strong>最可信原因之一</strong>的依据。</p>
+<h3>7.2 IT 将使用的技术类别（保证安全、持续、可控）</h3>
+<p>以下为<strong>技术类别</strong>而非具体产品名；工程实现时可选用符合这些类别的成熟方案。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>目标</th>
+<th>技术类别</th>
+<th>通俗说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数据不可篡改</strong></td>
+<td>只追加存储（Append-Only）</td>
+<td>署名、账本等核心数据只允许新增记录，禁止覆盖、删除；违反则系统拒绝执行</td>
+</tr>
+<tr>
+<td><strong>传输与存储安全</strong></td>
+<td>加密（Encryption）</td>
+<td>数据传输用 HTTPS 等加密通道；敏感数据存储加密；防止窃听与泄露</td>
+</tr>
+<tr>
+<td><strong>谁有权做什么</strong></td>
+<td>权限与能力隔离（Access Control）</td>
+<td>每个节点按身份获得「能力面具」；CTO 无分配参数修改权；管理员无「一键裁决」接口</td>
+</tr>
+<tr>
+<td><strong>操作可追溯</strong></td>
+<td>审计日志（Audit Trail）</td>
+<td>所有关键操作留痕；谁、何时、做了什么，可查；覆盖日志即违规</td>
+</tr>
+<tr>
+<td><strong>关键变更须多方同意</strong></td>
+<td>多签（Multi-Signature）</td>
+<td>分配参数、联盟宪章修正等须经创世者书面同意及约定多签；单方无法完成；见下文「多签机制通俗解释」</td>
+</tr>
+<tr>
+<td><strong>业务层服从规则层</strong></td>
+<td>RuleID 驱动</td>
+<td>分配引擎按 RuleID 自动执行；会计、结算系统<strong>读取 RuleID、执行分配</strong>，无 override 入口</td>
+</tr>
+<tr>
+<td><strong>实例可替换、数据不丢</strong></td>
+<td>数据可迁移设计</td>
+<td>规矩与档案 与 实例分离；数据格式标准化；实例倒闭时，数据可导出、迁移至新实例</td>
+</tr>
+<tr>
+<td><strong>持续可用</strong></td>
+<td>备份与冗余</td>
+<td>核心数据多副本；关键服务可故障切换；保障协作不因单点故障中断</td>
+</tr>
+</tbody></table></div>
+<h3>7.2.1 多签机制通俗解释</h3>
+<p><strong>多签（Multi-Signature）是什么？</strong></p>
+<p>通俗说：<strong>一件事必须经多方同时同意，才能生效；缺一不可。</strong></p>
+<p><strong>现实世界类比</strong>：</p>
+<ul>
+<li><strong>公司银行账户</strong>：大额转账须总经理 + 财务总监两人签字，少一个，银行不办。</li>
+<li><strong>保险柜</strong>：双钥匙或双密码，两人各持一把/各知一段，缺一不可才能打开。</li>
+<li><strong>核按钮</strong>：多人各自持有密码的一部分，必须一起操作才能发射——单方无法完成。</li>
+</ul>
+<p><strong>艺术家联盟里的多签</strong>：</p>
+<p>分配参数（65/5/20/10 等）若要变更，须经<strong>创世者书面同意</strong>，并视条款级别同步履行：</p>
+<ul>
+<li><strong>多签参与方</strong>：创世者 + CTO + 法务/财务（或约定的其他多方）</li>
+<li><strong>逻辑</strong>：创世者说「我同意改」，还不够；CTO、法务/财务等也须签字确认，变更才能写入系统</li>
+<li><strong>效果</strong>：创世者不能背着别人单方改参数；CTO 不能背着创世者改；任何一方想钻空子，其他方不签，就改不了</li>
+</ul>
+<p><strong>实现方式</strong>（可选，工程团队选型）：</p>
+<ul>
+<li><strong>传统方式</strong>：纸质或电子变更单，各方签字后存档；系统管理员凭「已获多签的变更单」执行更新，审计可查</li>
+<li><strong>技术方式</strong>：多签钱包、多签审批流程、密钥分持等——具体由技术团队根据成熟度选定</li>
+</ul>
+<p><strong>核心</strong>：不是「谁权力大谁说了算」，而是<strong>制度规定「必须多少人同时同意」</strong>；少一个，变更无效。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>联盟宪章约束</th>
+<th>技术实现方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>源头不可抹除</td>
+<td>署名、溯源表<strong>禁止 UPDATE</strong>；只允许 APPEND；数据库层或应用层强制</td>
+</tr>
+<tr>
+<td>分配引擎无人可改</td>
+<td>分配参数存入<strong>只读配置</strong>；变更走多签流程；分配逻辑与参数分离，CTO 只实现逻辑，不持有参数写入权</td>
+</tr>
+<tr>
+<td>无管理员一键裁决</td>
+<td>系统<strong>不提供</strong>「管理员直接改结果」的 API；裁决结果只能经共识流程写入</td>
+</tr>
+<tr>
+<td>历史不可覆盖</td>
+<td>版本化存储；删除、覆盖操作在代码层面<strong>被拒绝</strong></td>
+</tr>
+<tr>
+<td>CTO 无权改参数</td>
+<td>权限设计中，CTO 角色<strong>无</strong>分配参数写入能力；创世者持有；变更须书面流程</td>
+</tr>
+</tbody></table></div>
+<h3>7.3 制度设计的 IT 可行性：递归反哺、待认领池、公众指认</h3>
+<p><strong>常见疑虑</strong>：想法很好，无法实现也只能是空想。递归反哺、行业始祖 0.1%、待认领池、公众指认——这些制度在技术上能不能落地？</p>
+<p><strong>结论</strong>：<strong>可落地</strong>。均为标准账务 + 治理决议驱动，无实验性技术依赖。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>制度环节</th>
+<th>IT 实现逻辑</th>
+<th>通俗类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>0.1% 分流</strong></td>
+<td>订单分配时，按衍生创作者声明的品类，将 0.1% 计入该品类待认领子账户</td>
+<td>像电商：每笔订单按规则拆成卖家款、平台费、退款池——纯账务逻辑</td>
+</tr>
+<tr>
+<td><strong>待认领池</strong></td>
+<td>按品类分账的表结构（如 <code>ancestor_escrow(category_id, amount, ...)</code>）；余额可查询、可审计</td>
+<td>像代管金：钱先放着，等有决议再划出</td>
+</tr>
+<tr>
+<td><strong>指认→支付始祖</strong></td>
+<td>经公众指认确认后，治理决议触发：系统将待认领余额 + 未来 0.1% 路由至始祖账户</td>
+<td>像退款：买家确认收货后，系统按规则把钱从 escrow 打给卖家</td>
+</tr>
+<tr>
+<td><strong>公投→转入公益</strong></td>
+<td>行业内公投通过后，治理决议触发：系统将待认领余额从 escrow 转入公益金池</td>
+<td>像慈善捐赠：董事会决议后，财务按决议划款</td>
+</tr>
+<tr>
+<td><strong>公众指认（PAC）</strong></td>
+<td>提案提交 → 进入共识流程 → 裁定者裁定 → 结论写入不可覆盖账本</td>
+<td>像公民提案：可发起，须经流程审议；技术支撑流程与留痕</td>
+</tr>
+</tbody></table></div>
+<p><strong>无根本实现障碍</strong>；与银行流水、电商分账、公益基金托管同类。表结构与实现方向见<a href="../02_协议与规范/递归反哺与源头确权细则.html" class="doc-link">《递归反哺与源头确权细则》</a>§5.8.6。</p>
+<hr>
+<h3>7.4 小结：技术臣服于治理</h3>
+<p><strong>宪政治理定义「什么合法、什么非法」；IT 实现「让非法的在技术上无法执行」。</strong></p>
+<ul>
+<li><p>文官（治理层）说：武官不得擅自调兵。<br>技术保证：调兵接口需多签，单方调用无效。</p>
+</li>
+<li><p>宪政说：署名不可覆盖。<br>技术保证：数据库约束 + 应用逻辑，UPDATE 署名字段即报错。</p>
+</li>
+<li><p>宪政说：分配引擎无人可 override。<br>技术保证：分配引擎无管理员入参；会计系统只读 RuleID，不接收人工改写指令。</p>
+</li>
+</ul>
+<p><strong>这不是信任 IT 人员，而是用制度把宪政约束编译进系统</strong>——技术层在架构上即已臣服于治理层。</p>
+<h3>7.5 Web3、区块链是什么，GAIA 用不用？</h3>
+<p><strong>区块链 / Web3 是什么（通俗解释）？</strong></p>
+<p>可以把它想成一本<strong>大家共有的账本</strong>：每发生一件事，就往上记一条，记上去就不能再改、不能删。很多人各留一份副本，谁想偷偷改自己那份，会跟别人的对不上，立刻被发现。所以「只追加、不可篡改」是它天生的特性。</p>
+<p><strong>GAIA 需要的能力， blockchain 恰好有；但 GAIA 未必非用 blockchain 不可。</strong></p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>宪政需要的能力</th>
+<th>区块链天生具备</th>
+<th>传统技术也能做到</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>只追加不覆盖</td>
+<td>链上每笔都是新区块，不能回头改</td>
+<td>数据库设约束：禁止 UPDATE/DELETE；违反即报错</td>
+</tr>
+<tr>
+<td>多方可验证</td>
+<td>链上数据公开或按权限可查</td>
+<td>审计日志、开放查询接口</td>
+</tr>
+<tr>
+<td>不可单方篡改</td>
+<td>需多数节点同意才能写</td>
+<td>多签；权限隔离；CTO 无写权限</td>
+</tr>
+</tbody></table></div>
+<p><strong>所以</strong>：区块链是一种<strong>可选工具</strong>。如果工程团队评估后认为它成熟、合规、成本可承受，可以采用；如果认为传统数据库 + 严格约束更稳妥，也可以。<strong>宪政原则不变——要的是「只追加、不可篡改、可审计」，不是「必须用某一种技术」。</strong></p>
+<p><strong>术可与时俱进</strong>：今天用 A 技术，五年后若有更好的 B 技术，可以在不违背宪政的前提下迁移。国家档案从纸质到电子、从单机到云端，也是这样演进的。</p>
+<h3>7.6 术的层面：现实世界早有先例，民众有知情权但不必因不懂而担心</h3>
+<p><strong>这些技术在现实世界中是否已被验证？</strong></p>
+<p>是。<strong>国家、银行、法院、企业，早已用同类技术支撑协作与存证。</strong> 艺术家联盟采用的，不是实验性概念，而是已被证明可行的技术类别。</p>
+<p><strong>国家档案库的类比</strong>：</p>
+<p>国家有档案馆，存法律文书、司法卷宗、历史记录。公民不必懂防磁防潮、温湿度控制、数字化格式，也能信任：档案不会轻易丢失，不会被某个人悄悄涂改。<strong>为什么？</strong> 因为：(1) 有法律规范怎么存、怎么取；(2) 有专职人员按规程操作；(3) 有审计和抽查。公民的信任，建立在<strong>制度 + 专业 + 可追查</strong>上，而不是自己懂技术。</p>
+<p><strong>艺术家联盟的对应</strong>：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>国家档案</th>
+<th>艺术家联盟</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>法律规范存管</td>
+<td>联盟宪章、创意载体规范规定什么可做、什么禁止</td>
+</tr>
+<tr>
+<td>专职人员按规程</td>
+<td>IT 按宪政约束实现；权限隔离，越权操作被拒绝</td>
+</tr>
+<tr>
+<td>审计可查</td>
+<td>审计日志、全平台可查的公益金池、分配记录</td>
+</tr>
+</tbody></table></div>
+<p><strong>银行流水的类比</strong>：</p>
+<p>你查银行 App 的余额和流水，不会担心银行偷偷改数字。你并不懂数据库怎么存、备份有几份、怎么防止内部人篡改。你信任的，是<strong>监管 + 审计 + 法律追责</strong>这套制度。艺术家联盟的分配引擎、RuleID、全平台可查账本，逻辑相同：<strong>制度保证可查、可追、越权即违规</strong>。</p>
+<p><strong>知情权：你可以知道什么？</strong></p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>你有权知道</th>
+<th>具体可查</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>有规则约束技术</td>
+<td>联盟宪章、创意载体规范、CTO 共识协议明文禁止哪些行为</td>
+</tr>
+<tr>
+<td>数据有保护</td>
+<td>加密传输、权限隔离、只追加不覆盖——技术团队按这些类别实现</td>
+</tr>
+<tr>
+<td>关键操作可追溯</td>
+<td>分配规则变更、公益金出入、共识裁定结论，均有记录</td>
+</tr>
+<tr>
+<td>数据不会随平台消失</td>
+<td>灵肉分离；数据可迁移；实例可换，档案不丢</td>
+</tr>
+</tbody></table></div>
+<p><strong>不必因不懂而担心</strong>：</p>
+<p>你不需要懂 HTTPS 的加密原理，也能相信网页密码不会被中途截获；不需要懂数据库锁，也能相信银行不会偷偷改流水。<strong>信任来自制度设计，不是来自你理解技术细节。</strong> 艺术家联盟亦然：宪政与创意载体规范定义了「道」；技术是「术」。你只需确认：道是对的、术是现实世界已验证的类别、有制度保证术服从道。具体用哪种数据库、是否上链，是工程选型问题，<strong>普通民众有知情权知道「用了哪几类技术、为何足够」，但不必因不懂具体实现而怀疑</strong>。</p>
+<p><strong>道与术的区分</strong>：</p>
+<ul>
+<li><strong>道</strong>（不变）：宪章原则、创意载体规范、源头不可抹除、分配引擎无人可改。这些不因技术换代而改变。</li>
+<li><strong>术</strong>（可演进）：具体用 PostgreSQL 还是区块链、用哪种加密算法、用哪家云服务。国家也会升级档案系统、引进新存证方式；艺术家联盟的技术选型同样可以与时俱进，只要不违背道。</li>
+</ul>
+<h3>7.7 可能出什么问题？谁在监督技术？</h3>
+<p><strong>如果不懂技术，自然会问：万一出事怎么办？谁保证 IT 不会乱来？</strong></p>
+<p><strong>可能的风险与应对</strong>：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>风险</th>
+<th>应对</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>平台被攻击、数据泄露</td>
+<td>加密存储；权限隔离（攻击者拿不到全部）；审计日志可追溯泄露源</td>
+</tr>
+<tr>
+<td>平台倒闭、服务中断</td>
+<td>灵肉分离：规矩与档案 与 数据可迁移至新实例；你的署名、分润权不绑定某一家公司</td>
+</tr>
+<tr>
+<td>IT 人员擅自改数据</td>
+<td>权限设计：CTO 无分配参数写入权；署名只追加不覆盖，改即违规；审计日志留痕</td>
+</tr>
+<tr>
+<td>某笔分账被人工改写</td>
+<td>分配引擎无 override 接口；会计系统只读 RuleID；若发现异常可启动共识裁定</td>
+</tr>
+</tbody></table></div>
+<p><strong>谁监督技术？</strong></p>
+<ul>
+<li><strong>宪政治理层</strong>（创世者、门类理事会、裁定者）定义规则；技术层实现规则，<strong>无权修改规则</strong>。</li>
+<li><strong>共识裁定</strong>：若有人指控技术违规（如篡改署名、擅自改分配），可启动裁定者陪审团调查；审计日志、代码审查可提供证据。</li>
+<li><strong>全平台可查</strong>：公益金池、分配记录、规则版本——任何人可查；异常会被发现。</li>
+<li><strong>制度优于信任</strong>：不依赖「相信某个技术人员是好人」，而依赖「他即使想乱来，系统也不提供那个入口」。</li>
+</ul>
+<p><strong>总结</strong>：技术风险有对应预案；技术层受治理层约束、受审计约束、受共识裁定约束。普通民众不必懂具体实现，只需知道<strong>有制度在兜底</strong>。</p>
+<h3>7.8 各节点如何参与制约 IT：付款时的多方共管机制</h3>
+<p><strong>核心问题</strong>：不是只有 IT 和创世者在管钱；<strong>艺术家、门类理事会、裁定者、执行节点、联盟代表会</strong>——各方如何参与制约？付款时如何<strong>多方共管</strong>，让任何人钻不了空子？</p>
+<h4>付款流程中的角色分工（谁管什么、谁不能管什么）</h4>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>角色</th>
+<th>在付款/分配中的权力</th>
+<th>制约方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>创世者</strong></td>
+<td>锁定 65/5/20/10 等参数；参数变更须书面同意</td>
+<td>变更须<strong>多签</strong>（Founder + CTO + 法务/财务）；创世者<strong>不得修改已生效分配规则</strong></td>
+</tr>
+<tr>
+<td><strong>CTO / 技术节点</strong></td>
+<td>实现分配引擎代码</td>
+<td><strong>无参数写入权</strong>；只实现逻辑，不持有修改比例的权限</td>
+</tr>
+<tr>
+<td><strong>执行节点（LLC）</strong></td>
+<td>代收代付；对接 Stripe/Mercury；按指令打款</td>
+<td><strong>会计系统必须服从 RuleID</strong>；无权改分配比例；禁止利润滞留；银行流水对联盟代表会<strong>公开</strong>；联盟代表会可<strong>撤回授权</strong>、24h 内换执行节点</td>
+</tr>
+<tr>
+<td><strong>分配引擎</strong></td>
+<td>按 RuleID 生成分配指令</td>
+<td><strong>无人可 override</strong>；无管理员改结果接口</td>
+</tr>
+<tr>
+<td><strong>门类理事会</strong></td>
+<td>管准入，不碰钱、不碰码</td>
+<td>不参与付款，但可<strong>查阅</strong>；若发现分配异常可提议调查</td>
+</tr>
+<tr>
+<td><strong>裁定者</strong></td>
+<td>裁定争议</td>
+<td>若有人指控分配被篡改、执行节点截留，可启动<strong>共识裁定</strong>；审计日志、流水可作证据</td>
+</tr>
+<tr>
+<td><strong>艺术家 / 用户</strong></td>
+<td>收款方；可查自己分润</td>
+<td><strong>分润明细可查</strong>；公益金池<strong>全平台可查</strong>；发现异常可发起 PAC 或提请调查</td>
+</tr>
+<tr>
+<td><strong>联盟代表会</strong></td>
+<td>签署<a href="../实例/WhoAmI.Art/docs/WhoAmI.Art 自然人宪章说明.html" class="doc-link">《自然人宪章》</a>的联合体；授权执行节点</td>
+<td>可<strong>撤回</strong>执行节点授权；执行节点是<strong>代理人（Agent）</strong>，不拥有分配决策权</td>
+</tr>
+</tbody></table></div>
+<h4>付款时的多方共管：钱怎么流、谁动不了</h4>
+<pre><code>用户付款 → Stripe/Mercury 收钱 → 执行节点（LLC）代收
+                    ↓
+           分配引擎按 RuleID 生成分配指令（65%艺术家 / 5%创世分润池(2%+2%+1%) / 20%运营池 / 10%储备金）
+                    ↓
+           执行节点会计系统【只读 RuleID，按指令执行】——无 override 入口
+                    ↓
+           打款至艺术家、各池、公益金账户
+</code></pre>
+<p><strong>关键约束</strong>：</p>
+<ul>
+<li>执行节点<strong>不能</strong>自己决定「这笔钱我少给艺术家 10%」——系统不提供这个入口；它只能按 RuleID 执行。</li>
+<li>CTO<strong>不能</strong>改分配比例——权限设计上无此能力。</li>
+<li>创世者<strong>不能</strong>单方改参数——须多签。</li>
+<li>任何人想「钻空子」改单笔分配——<strong>没有接口</strong>；想改就得改 RuleID 或参数，而那两条路都有制约。</li>
+</ul>
+<h4>堵漏洞：若有人想钻空子，怎么防？</h4>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>想钻的空子</th>
+<th>防护机制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>执行节点截留、少给艺术家</td>
+<td>分配比例硬编码；会计服从 RuleID；银行流水对联盟代表会公开；禁止利润滞留（授权书明文）</td>
+</tr>
+<tr>
+<td>CTO 偷偷改比例</td>
+<td>权限隔离：CTO 无参数写入权；变更须多签</td>
+</tr>
+<tr>
+<td>创世者单方加码</td>
+<td>多签流程；变更记录可查；联盟宪章约束「不得修改已生效分配规则」</td>
+</tr>
+<tr>
+<td>某人 override 单笔分账</td>
+<td>系统<strong>不提供</strong> override 接口；分配引擎无人工入参</td>
+</tr>
+<tr>
+<td>执行节点把 RuleID/域名列为公司资产</td>
+<td>授权书禁止；联盟代表会可撤回、换节点</td>
+</tr>
+<tr>
+<td>某池（如公益金）被挪用</td>
+<td>公益金池全平台可查；动用权分层、有协议约定；异常可被任何人发现并提请调查</td>
+</tr>
+<tr>
+<td>紧急状态被滥用</td>
+<td>14 天披露期；75% 共识；7 天生效；每次≤6 月、续延≤3 月；12 月冷却期；60 天内裁定者事后审查；无决议不划款</td>
+</tr>
+<tr>
+<td>固定雇佣吃掉 FCR 结余</td>
+<td>无人受雇原则：全外包、按单计费；法定签字人为受托人非雇员；成本随业务量波动</td>
+</tr>
+</tbody></table></div>
+<p><strong>总结</strong>：付款不是「一个人或一个部门说了算」。创世者锁参数、多签才能改；CTO 只实现、不能改参数；执行节点只执行、不能改指令；艺术家和公众可查、可质疑；裁定者可裁定。<strong>多方共管，相互制约，不让任何人钻空子</strong>。</p>
+<h3>7.8.1 现实法律层面：谁承担与收款壳公司、资金池的相应关系？</h3>
+<p><strong>核心问题</strong>：银行账户、Stripe、资金池——在法律上，哪个实体或个体是账户持有人？谁对银行、税务、合同负责？</p>
+<h4>法律结构概览</h4>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>层级</th>
+<th>法律定性</th>
+<th>现实中的对应</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>联盟代表会</strong></td>
+<td>由<a href="../实例/WhoAmI.Art/docs/WhoAmI.Art 自然人宪章说明.html" class="doc-link">《自然人宪章》</a>签署人组成的联合体；<strong>非法人联合体</strong>（不构成公司、合伙企业）</td>
+<td>创始人、CTO、门类理事会成员等<strong>自然人</strong>签署宪章后形成；他们是制度的<strong>委托人（Principal）</strong></td>
+</tr>
+<tr>
+<td><strong>执行节点（LLC）</strong></td>
+<td>联盟代表会的<strong>代收代付代理人（Agent）</strong>；在特定法域（如美国德拉华州）设立的公司</td>
+<td>实际持有银行账户（Mercury）、Stripe 账户；与银行、支付机构<strong>签约的主体</strong>；资金在此实体名下流转</td>
+</tr>
+<tr>
+<td><strong>资金池</strong></td>
+<td>逻辑上的分账结构（艺术家 65%、治理 5%、运营 20%、储备 10%、公益金）</td>
+<td>资金<strong>实际存放</strong>于执行节点 LLC 的银行账户（或该 LLC 名义下的子账户、信托账户）；账本记录各池权重与流水</td>
+</tr>
+</tbody></table></div>
+<h4>谁对谁负责？</h4>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>关系</th>
+<th>法律上的承担方</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>与银行、Stripe 的合同</strong></td>
+<td>执行节点 LLC——它是账户持有人、签约方</td>
+</tr>
+<tr>
+<td><strong>与税务当局</strong></td>
+<td>执行节点 LLC 申报、纳税；若为单成员 LLC，成员（如创始人）可能涉及穿透申报，视法域而定</td>
+</tr>
+<tr>
+<td><strong>对艺术家、用户的付款义务</strong></td>
+<td>执行节点 LLC 按 RuleID 执行打款；若 LLC 违约（如截留），联盟代表会可撤回授权、换节点，并依授权书追究</td>
+</tr>
+<tr>
+<td><strong>对联盟代表会的服从义务</strong></td>
+<td>执行节点 LLC 作为 Agent，须服从授权书；银行流水对联盟代表会公开；联盟代表会可撤回授权</td>
+</tr>
+<tr>
+<td><strong>公益金池等托管</strong></td>
+<td>递归反哺细则：托管主体为「平台（LLC）或指定合规主体」；决策权与执行权分离——治理主体决定用途，平台按决议划款</td>
+</tr>
+</tbody></table></div>
+<h4>通俗类比</h4>
+<ul>
+<li><strong>联盟代表会</strong> = 业主；<strong>执行节点 LLC</strong> = 物业公司。业主委托物业代收物业费、代付维修款；物业的银行账户里有钱，但物业<strong>不能擅自决定</strong>怎么分——必须按业主约定的规则（RuleID）执行。业主可随时换物业。</li>
+<li><strong>资金池</strong> = 物业账户里的「虚拟分账」：多少归 A 楼、多少归 B 楼、多少入储备金——实际钱在同一个或关联的银行账户，账本记录每笔归属。</li>
+</ul>
+<h4>重要澄清</h4>
+<ul>
+<li>联盟代表会<strong>不是</strong>法人，不直接持有银行账户；自然人通过宪章联结，授权 LLC 代为执行。</li>
+<li>执行节点 LLC 是<strong>工具</strong>——「公司只是被宪章调用的工具」；联盟代表会通过授权书约束其行为，通过撤回权保持控制。</li>
+<li>具体法人形态（单成员 LLC、多成员 LLC、未来公益信托等）由法务与税务按落地法域设计；<strong>原则</strong>是：执行节点为 Agent、联盟代表会为 Principal、资金池逻辑清晰、决策与执行分离。</li>
+</ul>
+<p><em>本段为解释性说明；具体法律结构以正式法律文件为准。</em></p>
+<h3>7.8.2 长期以后：谁在现实世界中对外签字并产生法律效力？</h3>
+<p><strong>核心问题</strong>：联盟代表会由自然人组成，非法人。长期以后，当创世者年迈、卸任或故去，<strong>谁的签字能代表联盟代表会、产生法律效力？</strong> 就像总统：当选且在任期内签字有效，卸任后无效。将来由什么样的组织机构，委托出什么样的自然人或机构，行使现实世界中的签字权与法人地位权利？</p>
+<h4>当前阶段（创世期）的约定</h4>
+<ul>
+<li><strong>授权书签署</strong>：由「宪章签署人代表联邦向 LLC 发出本授权书」</li>
+<li><strong>实际操作</strong>：创世者及首批 创世公民 签署宪章后，由其中<strong>具备代表性者</strong>（如创世者）作为联盟代表会的<strong>授权签字人</strong>，对外签署执行节点授权书等法律文件</li>
+<li><strong>依据</strong>：联盟代表会内部约定（可写入宪章或配套协议）：谁有权代表联盟代表会签字、签字须经何种确认（如多签、会议决议）</li>
+</ul>
+<h4>长期须建立的制度（已起草草案）</h4>
+<p><strong>原则</strong>：签字权与法人地位的行使，必须来自<strong>联盟宪章或自然人宪章规定的程序</strong>，而非某人的自然继承或私下指定。谁「在任」、谁有权签字，应当<strong>可查、可验证、可承继</strong>。</p>
+<p><strong>已起草草案</strong>：<a href="../02_%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%A7%84%E8%8C%83/%E7%AD%BE%E5%AD%97%E6%9D%83%E4%B8%8E%E6%B3%95%E4%BA%BA%E5%9C%B0%E4%BD%8D%E6%89%BF%E7%BB%A7%E8%A7%84%E5%88%99%EF%BC%88%E8%8D%89%E6%A1%88%EF%BC%89.html">《签字权与法人地位承继规则（草案）》</a></p>
+<p>草案要点摘要：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>制度要素</th>
+<th>草案规定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>创世期</strong></td>
+<td>创世者为主签字人；执行节点授权等须主签字人 + 至少 1 名 创世公民 联署；可指定 1–2 名备份签字人</td>
+</tr>
+<tr>
+<td><strong>长期</strong></td>
+<td>主签字人经 创世公民 推举或门类理事会+创世者提名，创世公民 过半数确认；任期 3 年，可连任</td>
+</tr>
+<tr>
+<td><strong>签字生效</strong></td>
+<td>关键文件须多签（主签字人 + 备份签字人/创世公民/门类理事会代表）</td>
+</tr>
+<tr>
+<td><strong>承继</strong></td>
+<td>卸任须 90 天提前通知；30 日内完成继任程序；死亡/失能时备份签字人代行</td>
+</tr>
+<tr>
+<td><strong>法人受托</strong></td>
+<td>可选；经 创世公民 + 门类理事会决议可委托公益信托等法人；创世期不启动</td>
+</tr>
+<tr>
+<td><strong>公示</strong></td>
+<td>当前签字人名单须在 GAIA 官网可查</td>
+</tr>
+</tbody></table></div>
+<h4>与第六编的衔接</h4>
+<p>联盟宪章第六编规定：修正案须经技术审查、伦理评审、裁定者超级多数共识。<strong>签字权与法人地位的承继规则</strong>，可作为宪章配套协议，经 创世公民 与门类理事会确认后生效；重大修正可同步履行第六编 consensus 流程。文明延续条款（第六十六条）——「不以公司存续为前提，只以文明记忆为依托」——要求：<strong>谁有权签字、谁代表联盟，必须由协议与共识决定，而非依附于某一家公司或某一个人</strong>。</p>
+<hr>
+<h2>八、与联盟宪章的对应关系</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>宪章原则</th>
+<th>技术可实现方式</th>
+<th>本说明章节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>源头不可抹除</td>
+<td>只追加不覆盖；版本不可删除</td>
+<td>§二</td>
+</tr>
+<tr>
+<td>分配引擎无人可改</td>
+<td>RuleID 驱动；参数锁定；无 override</td>
+<td>§三</td>
+</tr>
+<tr>
+<td>协议高于平台</td>
+<td>灵肉分离；数据可迁移</td>
+<td>§四</td>
+</tr>
+<tr>
+<td>物理载体臣服精神印记</td>
+<td>工业基底 + 自由源头双轨</td>
+<td>§五</td>
+</tr>
+<tr>
+<td>共识高于裁决</td>
+<td>临时陪审团；PAC；无永久法官</td>
+<td>§六</td>
+</tr>
+<tr>
+<td>宪政治理统辖 IT</td>
+<td>权限隔离；约束写进架构；技术层无法覆盖治理层</td>
+<td>§七</td>
+</tr>
+<tr>
+<td>递归反哺、待认领池、公众指认</td>
+<td>标准账务 + 治理决议驱动；无根本实现障碍</td>
+<td>§7.3</td>
+</tr>
+<tr>
+<td>付款多方共管</td>
+<td>创世者锁参数、多签变更；执行节点只执行 RuleID；各方可查可裁；堵漏洞</td>
+<td>§7.8</td>
+</tr>
+<tr>
+<td>法律主体关系</td>
+<td>联盟代表会（Principal）→ 执行节点 LLC（Agent）；资金池由 LLC 托管，决策与执行分离</td>
+<td>§7.8.1</td>
+</tr>
+<tr>
+<td>签字权与承继</td>
+<td>长期须建立：经宪政程序产生授权签字人；任期、轮替、可查证；不依附单人单司</td>
+<td>§7.8.2</td>
+</tr>
+<tr>
+<td>账户应急指令（ACI）</td>
+<td>可选存储表（emergency_contacts、beneficiaries）；录入 2FA；激活时证明上传、审计日志；标准 CRUD + 工作流</td>
+<td>《账户应急指令规则（草案）》§7</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>九、延伸阅读</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>文献</th>
+<th>与本文的关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../02_%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%A7%84%E8%8C%83/%E9%80%92%E5%BD%92%E5%8F%8D%E5%93%BA%E4%B8%8E%E6%BA%90%E5%A4%B4%E7%A1%AE%E6%9D%83%E7%BB%86%E5%88%99.html">《递归反哺与源头确权细则》</a></td>
+<td>0.1%、待认领池、多源引用规则；§5.8.6 表结构；§5.7 IT 可行性引用</td>
+</tr>
+<tr>
+<td><a href="../01_%E5%AE%AA%E6%B3%95%E4%B8%8E%E6%B2%BB%E7%90%86/GAIA%20%E5%AE%AA%E6%B3%95%C2%B7%E5%BA%8F%E8%A8%80.html">《GAIA 联盟宪章·序言》</a></td>
+<td>原则来源</td>
+</tr>
+<tr>
+<td><a href="../02_%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%A7%84%E8%8C%83/%E5%88%9B%E6%84%8F%E8%BD%BD%E4%BD%93%E8%A7%84%E8%8C%83%EF%BC%88%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91%E6%91%98%E8%A6%81%EF%BC%89.html">《创意载体规范》</a></td>
+<td>工业基底、自由源头的完整规范</td>
+</tr>
+<tr>
+<td><a href="../01_%E5%AE%AA%E6%B3%95%E4%B8%8E%E6%B2%BB%E7%90%86/GAIA%20%E5%AE%AA%E6%B3%95%20%E2%86%92%20%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97%E6%98%A0%E5%B0%84%E8%A1%A8.html">《GAIA 联盟宪章 → 系统模块映射表》</a></td>
+<td>技术团队用；将宪章条款映射为系统模块</td>
+</tr>
+<tr>
+<td><a href="../02_%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%A7%84%E8%8C%83/%E7%AD%BE%E5%AD%97%E6%9D%83%E4%B8%8E%E6%B3%95%E4%BA%BA%E5%9C%B0%E4%BD%8D%E6%89%BF%E7%BB%A7%E8%A7%84%E5%88%99%EF%BC%88%E8%8D%89%E6%A1%88%EF%BC%89.html">《签字权与法人地位承继规则（草案）》</a></td>
+<td>谁有权签字、如何承继；§7.8.2 配套</td>
+</tr>
+<tr>
+<td><a href="../02_%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%A7%84%E8%8C%83/%E8%B4%A6%E6%88%B7%E5%BA%94%E6%80%A5%E6%8C%87%E4%BB%A4%E8%A7%84%E5%88%99%EF%BC%88%E8%8D%89%E6%A1%88%EF%BC%89.html">《账户应急指令规则（草案）》</a></td>
+<td>死亡/失能/失联时的处理约定；经济权益受益人指定；IT 实现 §7</td>
+</tr>
+<tr>
+<td><a href="GAIA%20%E6%88%90%E7%AB%8B%E7%90%86%E7%94%B1%E4%B9%A6%EF%BC%88%E8%89%BA%E6%9C%AF%E5%AE%B6%E4%B8%BA%E4%BD%95%E8%81%94%E5%90%88%EF%BC%89.html">《GAIA 成立理由书》</a></td>
+<td>为何联合；与本文互补</td>
+</tr>
+<tr>
+<td><a href="GAIA%20%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88FAQ%EF%BC%89%C2%B7%E8%81%94%E9%82%A6%E5%85%9A%E4%BA%BA%E6%96%87%E9%9B%86%E6%BA%AF%E6%BA%90.html">《GAIA 常见问题（FAQ）·联邦党人文集溯源》</a></td>
+<td>治理设计的思想溯源</td>
+</tr>
+</tbody></table></div>
+<hr>
+<p><em>本说明为解释性文档，具体工程实现以技术团队文档为准；联盟宪章与创意载体规范为最高规范。</em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

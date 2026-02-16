@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>建国期人事网：自发协作结构设计（草案） · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>建国期人事网：自发协作结构设计（草案）</h1>
+<p><strong>用途</strong>：在去中心化联盟前提下，让建国期具备「人事组织部」般的有序协作能力；使加入的节点在制度框架内<strong>自发长出</strong>有层级、有明确任务和权利的协作结构（人事网）<br><strong>版本</strong>：草案 v0.1<br><strong>依据</strong>：<a href="./创世贡献记录与确认机制（论坛版）.html" class="doc-link">《创世贡献记录与确认机制》</a><a href="../04_工程与落地/GAIA 节点角色与 IT 平台映射.html" class="doc-link">《GAIA 节点角色与 IT 平台映射》</a><a href="./GAIA 社区早期权重（Reputation Score）计算逻辑.html" class="doc-link">《GAIA 社区早期权重计算逻辑》</a><a href="./裁定者身份、遴选与退出细则.html" class="doc-link">《裁定者身份、遴选与退出细则》</a><br><strong>原则</strong>：制度预留位，节点填位；任务公开，认领制；贡献→资格→权利；层级自发涌现，非 Founder 任命</p>
+<hr>
+<h2>一、核心矛盾与设计取向</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>矛盾</th>
+<th>设计取向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>去中心化 vs 建国期需协调</td>
+<td><strong>制度定骨架，节点填血肉</strong>；协议定义「有哪些位子、什么权利」，人不指定</td>
+</tr>
+<tr>
+<td>自发 vs 有序</td>
+<td><strong>任务公开 + 认领制</strong>；谁认领、谁完成、谁被确认，全透明可见</td>
+</tr>
+<tr>
+<td>层级 vs 非任命</td>
+<td><strong>贡献→资格→权利</strong>；达到阈值自动具备某角色资格；层级由贡献与附和自然浮现</td>
+</tr>
+<tr>
+<td>人事能力 vs 无传统人事部</td>
+<td><strong>论坛 + 看板 + 贡献记账</strong>；人事网不是部门，而是<strong>可查询、可追溯、可演进的协作图谱</strong></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>二、人事网的骨架：制度预留位</h2>
+<p>联盟宪章与既有协议已定义的角色与位子，构成人事网的<strong>空位</strong>；节点通过认领、贡献、确认来<strong>填位</strong>。</p>
+<h3>2.1 层级与位子（按就位时间排序）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>层级</th>
+<th>位子</th>
+<th>定义</th>
+<th>填位方式</th>
+<th>权利</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>L0 内核</strong></td>
+<td>创世者、创世技术官</td>
+<td>制度设计所需；已锁定</td>
+<td>创始既定</td>
+<td>执行权、72h 暂停、公益金决策（Founder）；技术架构（CTO）</td>
+</tr>
+<tr>
+<td><strong>L1 治理候选池</strong></td>
+<td>创世公民、门类理事会成员、裁定者候选人</td>
+<td>高贡献、可参与治理</td>
+<td>90 日内贡献 + 确认人附和 + 共识/投票</td>
+<td>治理投票、准入审核、裁定陪审资格</td>
+</tr>
+<tr>
+<td><strong>L2 任务负责人</strong></td>
+<td>各建&quot;国&quot;任务的认领者/责任人</td>
+<td>认领并完成具体任务</td>
+<td>论坛认领 + 完成 + 确认</td>
+<td>该任务范围内的协调权、产出定义权</td>
+</tr>
+<tr>
+<td><strong>L3 贡献者</strong></td>
+<td>FCR 贡献者、有效参与人</td>
+<td>有实质贡献但未达 L1</td>
+<td>贡献自报 + 附和确认</td>
+<td>参与度可见、FCR 评估输入、权重积累</td>
+</tr>
+<tr>
+<td><strong>L4 围观/潜在</strong></td>
+<td>发言者、认领门类未签约者</td>
+<td>参与但未形成可确权贡献</td>
+<td>发言、附和、认领门类</td>
+<td>被看见、参与度展示、转化通道</td>
+</tr>
+</tbody></table></div>
+<h3>2.2 位子之间的演进路径</h3>
+<pre><code>L4 围观 → 发言/认领门类 → 参与度可见
+         ↓
+L3 贡献者 ← 贡献自报 + 附和确认
+         ↓ (90日内实质贡献 + 权重达标)
+L1 治理候选池 ← 创世公民签约 / 门类理事会就位 / 裁定者池入选
+         ↓
+L2 任务负责人 ← 认领建&quot;国&quot;任务 + 完成 + 确认
+</code></pre>
+<p><strong>关键</strong>：L2 可与 L1/L3 重叠；一节点可同时为创世公民 + 某任务责任人。层级描述的是<strong>资格与权利类型</strong>，非行政隶属。</p>
+<hr>
+<h2>三、任务公开与认领制</h2>
+<h3>3.1 建&quot;国&quot;任务清单（已有，见创世贡献机制 §3.2）</h3>
+<p>创世者在论坛开立「建&quot;国&quot;任务」专区，列出：</p>
+<ul>
+<li>协议起草、技术模块、合规、财务、首单闭环、首批艺术家引入、门类开通、论坛搭建…</li>
+<li>每一任务可设：责任人（<strong>空缺待认领</strong>）、截止意向、产出定义</li>
+</ul>
+<h3>3.2 认领规则</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>规则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>公开认领</strong></td>
+<td>节点在论坛发帖：「认领任务 X；预计产出 Y；截止意向 Z」</td>
+</tr>
+<tr>
+<td><strong>确认人附和</strong></td>
+<td>创世者或指定确认人回复「确认」或「+1」→ 认领生效</td>
+</tr>
+<tr>
+<td><strong>完成即留证</strong></td>
+<td>完成后在同一任务帖下回复：产出物、日期、可验证链接</td>
+</tr>
+<tr>
+<td><strong>一人多任务</strong></td>
+<td>允许；但建议单节点同时认领不超过 2–3 项，避免过载</td>
+</tr>
+<tr>
+<td><strong>让出与交接</strong></td>
+<td>责任人可发帖说明无法继续，开放重新认领；交接须有确认人见证</td>
+</tr>
+</tbody></table></div>
+<h3>3.3 任务→权利映射</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>任务类型</th>
+<th>完成后的权利/资格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>技术模块交付</td>
+<td>计入 FCR；可进入裁定者池候选（若领域相关）</td>
+</tr>
+<tr>
+<td>艺术家引入（≥N 人签约）</td>
+<td>计入 FCR；拉人权重；可提名门类理事会</td>
+</tr>
+<tr>
+<td>门类开通与运营</td>
+<td>该门类理事会成员候选</td>
+</tr>
+<tr>
+<td>合规、财务、法律</td>
+<td>计入 FCR；专业能力标识，可参与相关裁定陪审遴选</td>
+</tr>
+<tr>
+<td>论坛搭建、制度广场</td>
+<td>计入 FCR；CTO 或 IT 贡献者；技术权重</td>
+</tr>
+</tbody></table></div>
+<p><strong>无节点能出力时的紧急采购</strong>：建&quot;国&quot;任务中须对外采购但无内部资源的，可由<a href="%E5%BB%BA%E5%9B%BD%E8%80%85%E5%85%B1%E5%BB%BA%E9%87%91%EF%BC%9A%E5%B0%8F%E9%A2%9D%E6%8A%95%E5%85%A5%E4%B8%8E%E7%B4%A7%E6%80%A5%E9%87%87%E8%B4%AD%E6%9C%BA%E5%88%B6%EF%BC%88%E8%8D%89%E6%A1%88%EF%BC%89.html">《建国者共建金》</a>支持。</p>
+<hr>
+<h2>四、贡献→资格→权利（量化与阈值）</h2>
+<h3>4.1 与既有机制的衔接</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>机制</th>
+<th>本设计中的用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>创世贡献记录（论坛）</strong></td>
+<td>贡献自报、附和、任务完成留证</td>
+</tr>
+<tr>
+<td><strong>Reputation Score</strong></td>
+<td>参与度、建议被采纳、有效邀请→权重；高权重→发言高亮、FCR 协商参考</td>
+</tr>
+<tr>
+<td><strong>FCR 评估</strong></td>
+<td>90 日结束后的比例约定；任务完成、附和、邀请人数为输入</td>
+</tr>
+<tr>
+<td><strong>裁定者遴选</strong></td>
+<td>FCR 贡献突出 + 能力标识 + 共识/投票→进入裁定者池</td>
+</tr>
+<tr>
+<td><strong>门类理事会</strong></td>
+<td>门类认领 + 该门类任务完成 + 艺术家引入→理事会成员候选</td>
+</tr>
+</tbody></table></div>
+<h3>4.2 资格阈值（示意，可经创世期共识微调）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>资格</th>
+<th>阈值（示意）</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>创世公民签约</td>
+<td>认同宪章 + 创世者/确认人认可</td>
+<td>已有流程</td>
+</tr>
+<tr>
+<td>门类理事会成员</td>
+<td>该门类认领者中贡献分 Top N + 共识确认</td>
+<td>3–5 人/门类</td>
+</tr>
+<tr>
+<td>裁定者池入选</td>
+<td>贡献分达有效区间 + 能力标识 + 创世公民/门类理事会过半数确认</td>
+<td>见<a href="./裁定者身份、遴选与退出细则.html" class="doc-link">《裁定者身份、遴选与退出细则》</a></td>
+</tr>
+<tr>
+<td>任务责任人</td>
+<td>认领 + 确认人附和</td>
+<td>无贡献分硬门槛；完成度事后评估</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>五、人事网的可视化与透明</h2>
+<h3>5.1 看板元素（建议）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>元素</th>
+<th>内容</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>任务看板</strong></td>
+<td>任务清单、认领人、状态（待认领/进行中/已完成）</td>
+<td>谁在干什么，一目了然</td>
+</tr>
+<tr>
+<td><strong>节点图谱</strong></td>
+<td>按门类/任务/贡献分层展示；谁在 L1 池、谁在 L2 负责什么</td>
+<td>人事网即协作图谱</td>
+</tr>
+<tr>
+<td><strong>参与度排行</strong></td>
+<td>发帖数、附和、采纳、邀请（脱敏或自愿公开）</td>
+<td>谁在积极参与，可见</td>
+</tr>
+<tr>
+<td><strong>门类认领数</strong></td>
+<td>各门类已认领人数、已签约艺术家数</td>
+<td>火势可见；FOMO 促行动</td>
+</tr>
+</tbody></table></div>
+<h3>5.2 实现层级（与创世贡献机制 Phase 1–3 对齐）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>Phase</th>
+<th>人事网可实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Phase 1</strong></td>
+<td>任务清单 + 认领帖 + 确认人附和；手工维护看板或简单表格</td>
+</tr>
+<tr>
+<td><strong>Phase 2</strong></td>
+<td>论坛标签/徽章：任务责任人、门类理事会、裁定者池；参与度、RP 展示</td>
+</tr>
+<tr>
+<td><strong>Phase 3</strong></td>
+<td>自动图谱：任务→责任人→贡献→资格；权重参数公开；裁定者池数量可查</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>六、自发涌现的保障机制</h2>
+<h3>6.1 防止「占位不干活」</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>机制</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>贡献分时效衰减</strong></td>
+<td>长期不参与→贡献分衰减→跌出裁定者池/门类理事会有效区间</td>
+</tr>
+<tr>
+<td><strong>任务让出</strong></td>
+<td>责任人久未更新可经确认人提醒；超期无产出可开放重新认领</td>
+</tr>
+<tr>
+<td><strong>退出通道</strong></td>
+<td>裁定者、门类理事会均有退出细则；无永久占位</td>
+</tr>
+</tbody></table></div>
+<h3>6.2 防止「层级固化为阶层」</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>原则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>按案遴选</strong></td>
+<td>裁定者无永久法官；每次按领域+随机从池中抽</td>
+</tr>
+<tr>
+<td><strong>门类轮换</strong></td>
+<td>门类理事会可设任期（如 2 年）；届满可连任但须经共识</td>
+</tr>
+<tr>
+<td><strong>FCR 不绑定治理权</strong></td>
+<td>治理层进入资格基于角色与能力，非 FCR 持有（见 FCR 附录）</td>
+</tr>
+</tbody></table></div>
+<h3>6.3 中枢角色：不定人事，定规则与确认</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>中枢职责</th>
+<th>不职责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发布任务清单、定义产出</td>
+<td>不指定「谁必须是责任人」</td>
+</tr>
+<tr>
+<td>对认领与完成进行确认、附和</td>
+<td>不否决合规认领（除非明显冲突）</td>
+</tr>
+<tr>
+<td>组织盘点、共识、投票</td>
+<td>不单方面任命门类理事会/裁定者</td>
+</tr>
+<tr>
+<td>维护看板、促进透明</td>
+<td>不隐瞒谁在什么位子</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>七、与既有文档的衔接</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>文档</th>
+<th>衔接点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>创世贡献记录与确认机制</td>
+<td>§3.2 任务清单、§3.3 贡献自报与附和、§3.5 最终评估</td>
+</tr>
+<tr>
+<td>GAIA 节点角色与 IT 平台映射</td>
+<td>12 类角色 = 人事网位子的制度定义</td>
+</tr>
+<tr>
+<td>裁定者身份、遴选与退出细则</td>
+<td>裁定者池填位路径、贡献分、按案遴选</td>
+</tr>
+<tr>
+<td>GAIA 社区早期权重计算逻辑</td>
+<td>RP、参与度、采纳→权重→资格参考</td>
+</tr>
+<tr>
+<td>创世公民与准入分层</td>
+<td>运营锚点/名誉锚点、谁签宪章</td>
+</tr>
+<tr>
+<td>有效路径与时间节点安排</td>
+<td>门类理事会、裁定者就位时间线</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>八、下一步行动</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>动作</th>
+<th>责任方</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在论坛建「建&quot;国&quot;任务」专区，发首批任务清单（责任人空缺）</td>
+<td>Founder</td>
+</tr>
+<tr>
+<td>在任务帖中明确认领格式、产出定义</td>
+<td>Founder</td>
+</tr>
+<tr>
+<td>首次认领发生时，确认人附和，并在看板中更新</td>
+<td>Founder / 指定人</td>
+</tr>
+<tr>
+<td>90 日盘点时，将任务完成、贡献、附和纳入 FCR 评估输入</td>
+<td>Founder + 确认人</td>
+</tr>
+<tr>
+<td>门类理事会、裁定者就位时，按贡献分+共识执行，不任命</td>
+<td>创世公民 + 门类理事会 + Founder</td>
+</tr>
+</tbody></table></div>
+<hr>
+<p><em>本文档为建国期人事网设计草案；强调自发、有序、层级清晰、权利明确；与去中心化原则兼容，与既有协议配套。</em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

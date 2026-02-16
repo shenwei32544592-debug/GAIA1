@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>建国债券发行与认购机制 · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>建&quot;国&quot;债券发行与认购机制</h1>
+<p><strong>用途</strong>：建&quot;国&quot;阶段按需募集资金；纯资本参与者路径；合规框架；创世者兜底保证募满<br><strong>版本</strong>：1.0<br><strong>性质</strong>：资金参与的设计说明，与<a href="./广发英雄贴：设计与操作说明.html" class="doc-link">《广发英雄贴》</a>《建&quot;国&quot;务实进度看板》配套使用<br><strong>合规口径</strong>：早期支持者认购；资金锁定支持建&quot;国&quot;；到期返还本金；建&quot;国&quot;者优先为非金融回报</p>
+<hr>
+<h2>一、核心逻辑</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>要素</th>
+<th>设计</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>发债触发</strong></td>
+<td>每次有明确资金需求时发一期；不预先发大额，按需募资</td>
+</tr>
+<tr>
+<td><strong>认购资格</strong></td>
+<td>节点中的任何人可自由购买；配额与抢购见下</td>
+</tr>
+<tr>
+<td><strong>本金返回</strong></td>
+<td>创世资金有明确的返回机制；Escrow + 到期日 + 返还路径</td>
+</tr>
+<tr>
+<td><strong>创世者兜底</strong></td>
+<td>限时认购、抢购后仍有余的，由创世者认购；保证每期募满</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>二、发行流程</h2>
+<pre><code>资金需求 → 发一期债 → 全节点等额配额 → 限时认购 → 未售出 → 抢购 → 仍有余 → 创世者兜底
+</code></pre>
+<h3>2.1 配额（最简方法）</h3>
+<ul>
+<li><strong>全节点等额配额</strong>：本期总额 ÷ 发债时有效节点数 = 每人可认购量  </li>
+<li>节点定义：创世公民、已签 FCR 者、forum 认领/附和≥1 次者；由创世期约定</li>
+</ul>
+<h3>2.2 限时认购</h3>
+<ul>
+<li>设定截止日；节点在期限内认领本额  </li>
+<li>先到先得本额</li>
+</ul>
+<h3>2.3 抢购</h3>
+<ul>
+<li>逾期未售出部分进入抢购；开放给所有节点  </li>
+<li>先到先得</li>
+</ul>
+<h3>2.4 兜底</h3>
+<ul>
+<li>抢购后仍未售完的，由创世者认购  </li>
+<li>保证每期募满</li>
+</ul>
+<hr>
+<h2>三、本金返回与提前退出</h2>
+<h3>3.1 正常到期</h3>
+<ul>
+<li>认购资金锁定于约定账户（Escrow 或专用账户）  </li>
+<li>约定期限（如 90 日 / 180 日）  </li>
+<li>到期按约定返还本金（原支付方式或转为平台信用）  </li>
+<li>建&quot;国&quot;者优先等权益为非金融回报，单独约定</li>
+</ul>
+<h3>3.2 提前退出（可选）</h3>
+<p>锁定期内若允许提前退出，须在发债时约定：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>是否允许</strong></td>
+<td>由每期发债条款约定；可允许、可禁止</td>
+</tr>
+<tr>
+<td><strong>条件</strong></td>
+<td>如：书面申请、提前 X 日通知</td>
+</tr>
+<tr>
+<td><strong>扣减</strong></td>
+<td>若允许，可约定轻微扣减（如 1–2%）以补偿流动性损失；或不扣减</td>
+</tr>
+<tr>
+<td><strong>目的</strong></td>
+<td>降低认购者流动性焦虑；具体以当期条款为准</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>四、对外合规口径</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>表述</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>建&quot;国&quot;债券 / Founding Bonds / Founding Notes</td>
+<td>工具名称</td>
+</tr>
+<tr>
+<td>早期支持者认购</td>
+<td>参与方式</td>
+</tr>
+<tr>
+<td>资金锁定支持建&quot;国&quot;</td>
+<td>用途</td>
+</tr>
+<tr>
+<td>到期返还本金</td>
+<td>资金去向</td>
+</tr>
+<tr>
+<td>建&quot;国&quot;者优先、最惠国</td>
+<td>非金融回报</td>
+</tr>
+</tbody></table></div>
+<p><strong>避免</strong>：投资、回报、yield、股权、保证收益等表述。</p>
+<hr>
+<h2>五、与既有机制的关系</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>既有设计</th>
+<th>债券对接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>广发英雄贴</td>
+<td>资金类需求可通过认购建&quot;国&quot;债券参与</td>
+</tr>
+<tr>
+<td>论坛记录</td>
+<td>认购凭证、金额、到期日可记录</td>
+</tr>
+<tr>
+<td>看板</td>
+<td>展示债券认购总额、认购人数、锁定期</td>
+</tr>
+<tr>
+<td>确权</td>
+<td>认购记录 = 资金贡献确权依据之一</td>
+</tr>
+</tbody></table></div>
+<hr>
+<p><em>配合使用：<a href="./广发英雄贴：设计与操作说明.html" class="doc-link">《广发英雄贴：设计与操作说明》</a>《建&quot;国&quot;务实进度看板：设计说明》</em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

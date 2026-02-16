@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>建国回补与确定性溢价机制（草案） · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>建国回补与确定性溢价机制（草案）</h1>
+<p><strong>全称</strong>：建国信用池与后进艺术家短期共建义务<br><strong>用途</strong>：补偿创世公民在验证期承担的系统性风险；让享受确定性红利的后进者对早期试错成本做有限回补；制造「上车要趁早」的制度压力，但以制度型、有限度、可解释的方式实现<br><strong>版本</strong>：草案 v0.1<br><strong>性质</strong>：协议附件，与<a href="../实例/WhoAmI.Art/docs/WhoAmI.Art 分润与财务逻辑补充（财务工程 v1.0）.html" class="doc-link">《分润与财务逻辑补充》</a>《FCR 1.1》配套；须经共识程序通过后生效<br><strong>设计意图</strong>：风险对价补偿（Risk-Adjusted Compensation）；确定性是有价格的；早期出命收息，后来买单获利</p>
+<hr>
+<h2>一、核心逻辑：确定性是有价格的</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>代际</th>
+<th>承担</th>
+<th>对价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>创世代（Batch 0）</strong></td>
+<td>100% 系统崩塌风险；时间、声誉、机会成本</td>
+<td>FCR、创世公民 5% 基准桶、最高分润、原始决策权重</td>
+</tr>
+<tr>
+<td><strong>扩张代（Batch 1+）</strong></td>
+<td>系统已跑通；享受验证后的确定性、品牌、规则</td>
+<td>标准 65%；<strong>限期回补义务</strong>——对早期试错成本做小额共建</td>
+</tr>
+<tr>
+<td><strong>收割代（远期）</strong></td>
+<td>系统已成行业标准，品牌溢价极高</td>
+<td>回补比例与期限由当时共识约定；原则不变</td>
+</tr>
+</tbody></table></div>
+<p><strong>公平表述</strong>：早期的人承担的是「系统可能失败」的风险；后来的人享受的是「系统已被证明可用」的确定性。后来者用一小段时间，回补早期的试错成本，这是同一套公平。</p>
+<hr>
+<h2>二、建国回补条款（Founding Payback）</h2>
+<h3>2.1 适用范围</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>对象</th>
+<th>是否适用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Batch 0 艺术家</strong>（90 日内加入且为创世公民/FCR 贡献者）</td>
+<td><strong>不适用</strong></td>
+</tr>
+<tr>
+<td><strong>Batch 1+ 艺术家</strong>（建国成功或 FCR 窗口关闭后加入）</td>
+<td><strong>适用</strong></td>
+</tr>
+</tbody></table></div>
+<h3>2.2 回补机制（限期小比例）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>约定（示意，待共识确定）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>回补来源</strong></td>
+<td>该艺术家当笔订单的 Artist Pool（65% 部分）中的 <strong>1%–3%</strong></td>
+</tr>
+<tr>
+<td><strong>回补期限</strong></td>
+<td><strong>前 90 天</strong> 或 <strong>前 30 单</strong>（以先到为准）</td>
+</tr>
+<tr>
+<td><strong>回补去向</strong></td>
+<td><strong>建国信用池</strong>（Founding Credit Pool）</td>
+</tr>
+<tr>
+<td><strong>自动结束</strong></td>
+<td>满足期限或单量后，该艺术家自动恢复标准 65%；<strong>不构成永久抽成</strong></td>
+</tr>
+<tr>
+<td><strong>艺术家实得</strong></td>
+<td>回补期内：Net Pool × (65% - 回补比例)；回补期后：Net Pool × 65%</td>
+</tr>
+</tbody></table></div>
+<p><strong>示例</strong>：回补比例 2%，期限 90 天。新艺术家第 1 单 Net Pool $900，其 65% = $585，其中 2% = $11.7 入建国信用池，艺术家实得 $573.3。第 91 天起或第 31 单起，艺术家恢复全额 65%。</p>
+<h3>2.3 建国信用池用途与分配</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>用途</strong></td>
+<td>补偿创世公民的早期贡献；联盟公共基础设施维护；<strong>不得被任何个人或执行节点挪用</strong></td>
+</tr>
+<tr>
+<td><strong>分配逻辑</strong></td>
+<td>按 RuleID 权重或 FCR 比例自动分配；与 20% 池结余的 FCR 分配逻辑可衔接</td>
+</tr>
+<tr>
+<td><strong>可审计</strong></td>
+<td>池子流水与分配为<strong>可追溯、可公示</strong>的公开记录</td>
+</tr>
+<tr>
+<td><strong>上限</strong></td>
+<td>单艺术家回补总额可有封顶（如不超过其回补期内 Artist Pool 的 X%）；防止极端情形</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>三、三条红线（不可突破）</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>红线</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>禁止无限期</strong></td>
+<td>回补为限期机制；到期自动停止</td>
+</tr>
+<tr>
+<td><strong>禁止进私人/公司</strong></td>
+<td>必须池化；按 RuleID/FCR 权重分配；不得进入 Founder 或某公司利润</td>
+</tr>
+<tr>
+<td><strong>禁止恐吓营销</strong></td>
+<td>用公平逻辑解释，不用「越晚越亏」制造焦虑；回补是共建义务，非惩罚</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>四、代际划分与分润阶梯（示意）</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>代际</th>
+<th>加入时点</th>
+<th>标准分润</th>
+<th>回补义务</th>
+<th>回补期满后</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Batch 0</strong></td>
+<td>FCR 窗口内（90 日）</td>
+<td>65%（或参与基建共投者 55%）</td>
+<td>无</td>
+<td>65%</td>
+</tr>
+<tr>
+<td><strong>Batch 1</strong></td>
+<td>建国成功 ~ 12 月内</td>
+<td>65% - 1%~3%</td>
+<td>90 天或 30 单</td>
+<td>65%</td>
+</tr>
+<tr>
+<td><strong>Batch 2+</strong></td>
+<td>12 月后</td>
+<td>65% - 1%~3%</td>
+<td>90 天或 30 单（或经共识微调）</td>
+<td>65%</td>
+</tr>
+</tbody></table></div>
+<p><strong>注</strong>：具体比例、期限、代际边界须经治理共识确定；上表为示意。</p>
+<hr>
+<h2>五、与分润结构的关系</h2>
+<p>建国信用池为<strong>独立会计科目</strong>，从 Batch 1+ 艺术家的 Artist Pool 中 carve-out，不改变 65/5/20/10 主结构中其他参与方的比例。Batch 0 艺术家不受影响。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>池子</th>
+<th>与建国回补关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>艺术家利润部分（65%）</strong></td>
+<td>Batch 1+ 在回补期内，65% 中 1%~3% 转入建国信用池</td>
+</tr>
+<tr>
+<td><strong>FCR / 20% 池</strong></td>
+<td>建国信用池分配可依 FCR 权重；与 20% 池结余分配逻辑互补</td>
+</tr>
+<tr>
+<td><strong>公益金池</strong></td>
+<td>独立；建国信用池不流入公益金池</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>六、对外表述（公平、可信、无金融味）</h2>
+<blockquote>
+<p><strong>早期的人承担的是「系统可能失败」的风险；<br>后来的人享受的是「系统已被证明可用」的确定性。<br>所以后来者用一小段时间（如 90 天或首批 30 单），<br>对早期试错成本做有限回补，这是同一套公平。<br>回补进入建国信用池，按早期贡献权重分配；<br>比例小、期限短、规则公开、可审计。</strong></p>
+</blockquote>
+<hr>
+<h2>七、对内参数速查（待共识确定）</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>参数</th>
+<th>建议值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>回补比例</td>
+<td>1%~3%</td>
+<td>占 Artist Pool 的比例；具体由共识定</td>
+</tr>
+<tr>
+<td>回补期限</td>
+<td>90 天 或 30 单</td>
+<td>以先到为准；可二选一或并用</td>
+</tr>
+<tr>
+<td>代际 cutoff</td>
+<td>建国成功日 / FCR 窗口关闭日</td>
+<td>此前加入为 Batch 0，不适用</td>
+</tr>
+<tr>
+<td>单艺术家回补上限</td>
+<td>可选</td>
+<td>如不超过回补期内 Artist Pool 的 5%；防止极端</td>
+</tr>
+<tr>
+<td>建国信用池分配</td>
+<td>按 FCR 权重</td>
+<td>与 20% 池结余分配逻辑一致</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>八、生效条件</h2>
+<ol>
+<li>本草案经治理共识通过  </li>
+<li>具体参数（比例、期限、上限）写入生效版  </li>
+<li>分润系统具备按艺术家代际、订单数/日期自动计算回补的能力  </li>
+<li>建国信用池流水可被全平台查询、审计</li>
+</ol>
+<hr>
+<p><em>配套：<a href="../%E5%AE%9E%E4%BE%8B/WhoAmI.Art/docs/WhoAmI.Art%20%E5%88%86%E6%B6%A6%E4%B8%8E%E8%B4%A2%E5%8A%A1%E9%80%BB%E8%BE%91%E8%A1%A5%E5%85%85%EF%BC%88%E8%B4%A2%E5%8A%A1%E5%B7%A5%E7%A8%8B%20v1.0%EF%BC%89.html">《分润与财务逻辑补充》</a>、<a href="FCR%201.1%20%E5%88%9B%E5%A7%8B%E8%B4%A1%E7%8C%AE%E8%80%85%E6%9D%83%E5%88%A9%E5%8D%8F%E8%AE%AE.html">《FCR 1.1》</a>、<a href="FCR%20%E9%99%84%E5%BD%95%EF%BC%9A90%E6%97%A5%E7%AA%97%E5%8F%A3%E4%B8%8E%E4%BB%B7%E5%80%BC%E9%87%8F%E5%8C%96%E8%AF%B4%E6%98%8E.html">《FCR 附录》</a>、<a href="../06_%E8%A7%A3%E9%87%8A%E4%B8%8E%E5%8F%99%E4%BA%8B/GAIA%20%E6%88%90%E7%AB%8B%E7%90%86%E7%94%B1%E4%B9%A6%EF%BC%88%E8%89%BA%E6%9C%AF%E5%AE%B6%E4%B8%BA%E4%BD%95%E8%81%94%E5%90%88%EF%BC%89.html">《成立理由书》§5.4</a></em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

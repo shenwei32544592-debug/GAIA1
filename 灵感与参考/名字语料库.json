@@ -1,0 +1,24 @@
+{
+  "names": {
+    "James": {
+      "meaning": "延续、继承、正式感",
+      "origin": "西方，希伯来源",
+      "objects": ["皇冠", "羽毛笔", "书本", "盾牌"],
+      "flowers": ["橡树叶片", "月桂枝", "橄榄枝"],
+      "fantasy": ["星标", "守护环", "复古怀表轮廓"],
+      "animals": ["雄狮", "雄鹰", "骏马"],
+      "blessings": ["Own Your Path", "Still Becoming", "Rooted & Free", "Built with care", "Earned, not borrowed"]
+    },
+    "John": {
+      "meaning": "上帝的恩赐，宗教与官方",
+      "origin": "西方，希伯来源",
+      "objects": ["十字架", "圣杯", "圣经", "钥匙与锁"],
+      "flowers": ["百合", "橄榄枝", "白玫瑰"],
+      "fantasy": ["新月", "星光", "守护光环"],
+      "animals": ["白鸽", "羔羊", "雄鹰"],
+      "blessings": ["May You Be Well", "Grace & Gratitude", "Guided by Light", "Peace in Progress"]
+    }
+  },
+  "styles": ["商务", "复古", "简约"],
+  "carriers": ["书法", "绘画", "logo", "符号"]
+}

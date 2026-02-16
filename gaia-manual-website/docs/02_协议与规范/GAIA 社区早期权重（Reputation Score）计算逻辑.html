@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAIA 社区早期权重（Reputation Score）计算逻辑 · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>GAIA 社区早期权重（Reputation Score）计算逻辑</h1>
+<p><strong>用途</strong>：将「发言、挑刺、拉人」等轻量参与转化为可量化、可展示的<strong>参与度权重</strong>；引导围观者→发言者→初代公民的转化；为 FCR 评估提供可操作输入；实现<strong>社会资本自动化募集</strong><br><strong>版本</strong>：草案 v0.1<br><strong>性质</strong>：协议附件，与<a href="./创世贡献记录与确认机制（论坛版）.html" class="doc-link">《创世贡献记录与确认机制（论坛版）》</a><a href="./FCR 附录：90日窗口与价值量化说明.html" class="doc-link">《FCR 附录》</a>配套<br><strong>设计意图</strong>：将「无用的噪音」转化为「系统的算力」；注意力挖矿、零边际成本的社会资本置换高昂账面资本</p>
+<hr>
+<h2>一、核心定位</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+<th>与 FCR 关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Reputation Score（社区权重）</strong></td>
+<td>参与度、可见度、贡献密度的<strong>可量化展示</strong>；供本人与他人查看；引导行为、降低加入门槛</td>
+<td><strong>FCR 评估的参考输入之一</strong>；参与度高≠自动获得 FCR 比例；有实质贡献方进入 FCR</td>
+</tr>
+<tr>
+<td><strong>FCR 经济权利</strong></td>
+<td>从 20% 池结余按约定比例分配；90 日内实质性贡献；确权时锁定</td>
+<td>社区权重高者，在 FCR 协商与评估时具有<strong>参考优势</strong>；二者不直接等同</td>
+</tr>
+</tbody></table></div>
+<p><strong>一句话</strong>：社区权重让你「被看见」；FCR 让你「拿钱」。权重积累有助于获得 FCR，但 FCR 需实质性贡献 + 书面协议。</p>
+<p><strong>与 C/G 分类的关系</strong>：本逻辑为<a href="./公民参与与贡献记账（Public Participation & Credits）.html" class="doc-link">《公民参与与贡献记账》</a>之操作化；C 类（共识贡献）对应发言、挑刺、提案、评议；G 类（增长贡献）对应拉人、带来订单/艺术家/渠道。详见<a href="%E5%85%AC%E6%B0%91%E5%8F%82%E4%B8%8E%E4%B8%8E%E8%B4%A1%E7%8C%AE%E8%AE%B0%E8%B4%A6%EF%BC%88Public%20Participation%20%26%20Credits%EF%BC%89.html">《公民参与与贡献记账》</a>。</p>
+<hr>
+<h2>二、参与度 vs 权重（核心区分）</h2>
+<h3>2.1 硬规则：发言本身不产生权重</h3>
+<blockquote>
+<p><strong>发言本身不产生权重；被采纳、被引用、被验证的贡献才产生权重。</strong></p>
+</blockquote>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+<th>产生方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>参与度</strong></td>
+<td>发帖数、首参与日期、附和次数；可记录、可展示；让人「被看见」</td>
+<td>任何有效发言、附和；计入展示，<strong>不进入权重公式</strong></td>
+</tr>
+<tr>
+<td><strong>权重（RP）</strong></td>
+<td>用于排序、高亮、可见度的量化值；决定发言在讨论中的显眼程度</td>
+<td><strong>仅来自</strong>：被采纳建议、被验证批评、有效邀请、首参与奖励</td>
+</tr>
+</tbody></table></div>
+<p><strong>设计意图</strong>：避免「发言就加分」导致灌水、权力崇拜；权重=低成本警察，而非统治工具。</p>
+<h3>2.2 产生权重的行为（示意）</h3>
+<p>以 <strong>RP（Reputation Point）</strong> 为计量单位；具体数值可经创世期共识微调。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>贡献类型</th>
+<th>权重单位（示意）</th>
+<th>说明</th>
+<th>防滥用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>建议被采纳</strong></td>
+<td>3 RP/次</td>
+<td>创世者或确认人标记「已采纳」；对应协议或任务的实际改进</td>
+<td>需书面或论坛记录</td>
+</tr>
+<tr>
+<td><strong>建设性批评被验证</strong></td>
+<td>1.5 RP/帖</td>
+<td>指出逻辑漏洞、规则矛盾；经确认人标记为「有效批评」并验证</td>
+<td>须有具体论点；单纯情绪宣泄不计入</td>
+</tr>
+<tr>
+<td><strong>发言被引用/附和达阈值</strong></td>
+<td>0.5–1 RP/次</td>
+<td>他人引用、附和形成社会验证；具体阈值由创世期共识约定</td>
+<td>自附和无效；防刷上限</td>
+</tr>
+<tr>
+<td><strong>有效邀请（拉人）</strong></td>
+<td>2 RP/人</td>
+<td>直接邀请且被邀请人完成签约或实质贡献；须可追溯</td>
+<td>同 IP、虚假注册不计入</td>
+</tr>
+<tr>
+<td><strong>首参与日期奖励</strong></td>
+<td>0.5 RP/日提前量</td>
+<td>Day 1 参与 vs Day 80 参与，前者获额外权重</td>
+<td>与「风险对齐」逻辑一致</td>
+</tr>
+</tbody></table></div>
+<p><strong>不产生权重</strong>：单纯发帖、单纯附和——仅计参与度（发帖数、附和次数），供展示与 FCR 参考，不进入 RP 公式。</p>
+<h3>2.3 围观者的路径</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>阶段</th>
+<th>行为</th>
+<th>参与度</th>
+<th>权重（RP）</th>
+<th>转化逻辑</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>纯围观</strong></td>
+<td>浏览文档、论坛，无发言</td>
+<td>0</td>
+<td>0</td>
+<td>沉没成本心理：看得越多，越易迈出第一步</td>
+</tr>
+<tr>
+<td><strong>首次发言</strong></td>
+<td>发第一帖（哪怕质疑、挑刺）</td>
+<td>发帖数+1</td>
+<td>0（除非被采纳/验证）</td>
+<td><strong>挑刺即入门</strong>；参与度可见→归属感</td>
+</tr>
+<tr>
+<td><strong>建议被采纳</strong></td>
+<td>创世者标记「已采纳」</td>
+<td>—</td>
+<td>+3 RP</td>
+<td>实质性贡献→权重上升→发言高亮</td>
+</tr>
+<tr>
+<td><strong>拉人</strong></td>
+<td>邀请有效新成员</td>
+<td>—</td>
+<td>+2 RP/人</td>
+<td>亲友圈层的高信任转化</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>三、计算公式（简化版，待共识确定）</h2>
+<h3>3.1 单用户 Reputation Score（权重公式）</h3>
+<pre><code>Score = Σ(采纳建议×3 + 有效批评×1.5 + 被引用/附和达阈值×0.5~1 + 有效邀请×2) + 首参与奖励
+</code></pre>
+<p><strong>不进入公式</strong>：单纯发帖、单纯附和——仅计参与度，不产生 RP。</p>
+<p><strong>首参与奖励</strong>（示意）：<code>0.5 × (90 - 首参与日序)</code>，即 Day 1 参与最多加 44.5，Day 90 参与为 0。</p>
+<h3>3.2 展示层级（Phase 1–3，与创世贡献机制对齐）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>Phase</th>
+<th>展示元素</th>
+<th>实现难度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Phase 1</strong></td>
+<td>发帖数、首参与日期、参与度（不含 RP）</td>
+<td>低；可手工或半自动</td>
+</tr>
+<tr>
+<td><strong>Phase 2</strong></td>
+<td>被附和次数、附和他人次数、<strong>签约者身份标识</strong>（头像/徽章可区分）、总 RP</td>
+<td>中；需确认人标记</td>
+</tr>
+<tr>
+<td><strong>Phase 3</strong></td>
+<td>建议被采纳数、有效邀请数、RP 排行、<strong>权重参数公开可见</strong>；权重高者发言默认高亮</td>
+<td>中高；需与签约/入驻系统打通</td>
+</tr>
+</tbody></table></div>
+<p><strong>权重影响可见度，不影响发言权</strong>：所有人都能发言；权重高→默认高亮；权重低→需被点赞/引用后上浮。引导而非统治。</p>
+<p><strong>身份可见效应</strong>：签约认可宪章者，头像/身份与权重在论坛内可查；人人可见谁在参与、谁有分量，极大促进自发维护者与建设者涌现。</p>
+<hr>
+<h2>四、与 FCR 评估的衔接</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>输入</th>
+<th>用途</th>
+<th>最终决定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>论坛记录</strong></td>
+<td>贡献自报、任务对应、产出物</td>
+<td>人的判断 + 投票</td>
+</tr>
+<tr>
+<td><strong>Reputation Score</strong></td>
+<td>参与度、可见度、贡献密度的量化参考</td>
+<td>供协商与加权时参照</td>
+</tr>
+<tr>
+<td><strong>邀请人数</strong></td>
+<td>直接邀请且成为创始贡献者的人数</td>
+<td>FCR 附录 §3.6：作为权重因素之一，不单独设池</td>
+</tr>
+<tr>
+<td><strong>任务难度、不可替代性</strong></td>
+<td>FCR 附录 §2.2 量化原则</td>
+<td>确权时比例约定的核心依据</td>
+</tr>
+</tbody></table></div>
+<p><strong>原则</strong>：Reputation Score 不替代人的判断；高 RP 不自动等于高 FCR 比例；但 RP 为「谁在积极参与」提供可追溯、可审计的证据。</p>
+<hr>
+<h2>五、制度效应：为何能促进扩张</h2>
+<h3>5.1 注意力挖矿</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>现象</th>
+<th>制度含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>围观者花时间阅读、思考</td>
+<td><strong>认知能量注入</strong>；沉没成本促转化</td>
+</tr>
+<tr>
+<td>挑刺者寻找漏洞</td>
+<td><strong>免费 QA 团队</strong>；压力测试即价值；被验证后产生权重</td>
+</tr>
+<tr>
+<td>发言者获得参与度</td>
+<td><strong>即时反馈</strong>；「被看见」增强归属感；采纳后产生权重</td>
+</tr>
+<tr>
+<td>拉人者获得 RP + 潜在分润</td>
+<td><strong>社交杠杆</strong>；高信任圈层指数级拓扑</td>
+</tr>
+</tbody></table></div>
+<h3>5.2 极低 CAC（获客成本）</h3>
+<ul>
+<li>传统平台：巨额买量成本</li>
+<li>GAIA：分配「未来治理权重」换取当下「社会算力」；<strong>极低销售费用，极高品牌粘性</strong></li>
+</ul>
+<h3>5.3 全频谱协作网络</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>角色</th>
+<th>贡献方式</th>
+<th>系统价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>艺术家</td>
+<td>创作、模板、首批供给</td>
+<td>生产端</td>
+</tr>
+<tr>
+<td>技术/运营</td>
+<td>架构、获客、物流</td>
+<td>基础设施</td>
+</tr>
+<tr>
+<td><strong>围观者</strong></td>
+<td>注意力、潜在转化</td>
+<td>传播端</td>
+</tr>
+<tr>
+<td><strong>批评者</strong></td>
+<td>压力测试、规则改进</td>
+<td>质量保证</td>
+</tr>
+<tr>
+<td><strong>拉人者</strong></td>
+<td>亲友圈层、高信任背书</td>
+<td>扩张引擎</td>
+</tr>
+<tr>
+<td><strong>IT 在艺术家直连区有效回应</strong></td>
+<td>需求回应、采纳、解释</td>
+<td>计入 IT 贡献权重；反向驱动 IT 盯住源头</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>六、防滥用与边界</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>风险</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>灌水刷分</td>
+<td>单日 RP 上限；附和权重低于发起；明显无意义帖不计入</td>
+</tr>
+<tr>
+<td>虚假拉人</td>
+<td>被邀请人须完成签约或实质贡献；同 IP、虚假注册不计入</td>
+</tr>
+<tr>
+<td>批评滥用</td>
+<td>「有效批评」须经确认人标记；须有具体论点</td>
+</tr>
+<tr>
+<td>过度游戏化</td>
+<td>RP 为参考，非硬通货；FCR 经济权利仍由书面协议锁定</td>
+</tr>
+<tr>
+<td><strong>拉新层级</strong></td>
+<td>最多两层（推荐人/推荐人的推荐人）；不做无限层级返利</td>
+</tr>
+</tbody></table></div>
+<h3>6.1 兑现原则（采纳/验证后才兑现）</h3>
+<p><strong>C 类贡献</strong>：发言、挑刺计入参与度；<strong>仅当建议被采纳或经评议人（Steward）标记为「可执行」</strong>，方进入可兑现权重或获得额外声誉。避免「发言就有分」导致劣币驱逐良币。</p>
+<p><strong>G 类贡献</strong>：仅对真实订单、真实签约、真实合规节点奖励。</p>
+<h3>6.2 对外用词（合规护栏）</h3>
+<p>不说：空投、代币、挖矿、返佣。<br>说：<strong>贡献记账、声誉积分、公共信用、里程碑奖励</strong>。</p>
+<p>本机制不构成投资、证券或收益承诺。</p>
+<hr>
+<h2>七、生效与迭代</h2>
+<ol>
+<li>权重单位、系数、上限经创世期共识确定后写入生效版；</li>
+<li>Phase 1 可先行（发帖数、首参与日期）；Phase 2–3 随论坛与 IT 成熟逐步上线；</li>
+<li>与<a href="./创世贡献记录与确认机制（论坛版）.html" class="doc-link">《创世贡献记录与确认机制》</a>§3.1a、<a href="./FCR 附录：90日窗口与价值量化说明.html" class="doc-link">《FCR 附录》</a>§1.6.4 保持一致。</li>
+</ol>
+<hr>
+<p><em>配套：<a href="%E5%85%AC%E6%B0%91%E5%8F%82%E4%B8%8E%E4%B8%8E%E8%B4%A1%E7%8C%AE%E8%AE%B0%E8%B4%A6%EF%BC%88Public%20Participation%20%26%20Credits%EF%BC%89.html">《公民参与与贡献记账》</a>、<a href="%E5%88%9B%E4%B8%96%E8%B4%A1%E7%8C%AE%E8%AE%B0%E5%BD%95%E4%B8%8E%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%EF%BC%88%E8%AE%BA%E5%9D%9B%E7%89%88%EF%BC%89.html">《创世贡献记录与确认机制（论坛版）》</a>、<a href="FCR%20%E9%99%84%E5%BD%95%EF%BC%9A90%E6%97%A5%E7%AA%97%E5%8F%A3%E4%B8%8E%E4%BB%B7%E5%80%BC%E9%87%8F%E5%8C%96%E8%AF%B4%E6%98%8E.html">《FCR 附录：90日窗口与价值量化说明》</a>、<a href="../06_%E8%A7%A3%E9%87%8A%E4%B8%8E%E5%8F%99%E4%BA%8B/GAIA%20%E6%88%90%E7%AB%8B%E7%90%86%E7%94%B1%E4%B9%A6%EF%BC%88%E8%89%BA%E6%9C%AF%E5%AE%B6%E4%B8%BA%E4%BD%95%E8%81%94%E5%90%88%EF%BC%89.html">《成立理由书》§5.4 内生动力</a></em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

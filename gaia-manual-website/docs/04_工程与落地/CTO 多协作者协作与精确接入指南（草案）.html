@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CTO 多协作者协作与精确接入指南（草案） · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>CTO 多协作者协作与精确接入指南（草案）</h1>
+<p><strong>用途</strong>：当 CTO 下属有多个 IT 协作者时，如何全盘协调多任务并行开发，并确保各产出<strong>精确接入联盟</strong>（遵循 GAIA 协议、不破坏母结构、可替换可审计）<br><strong>版本</strong>：草案 v0.1<br><strong>依据</strong>：《GAIA · CTO / PM 架构对齐图》《GAIA IT 供应链准入与 API 隔离标准》《signa-ink-architecture-v1.1》；建国期人事网任务认领制</p>
+<hr>
+<h2>一、核心目标</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>目标</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>多任务并行</strong></td>
+<td>不同 IT 人员同时开发不同任务，互不阻塞</td>
+</tr>
+<tr>
+<td><strong>精确接入联盟</strong></td>
+<td>各产出通过<strong>标准化接口</strong>接入 GAIA/signa.ink；遵循架构分层、数据主权、逻辑归联盟</td>
+</tr>
+<tr>
+<td><strong>可替换可审计</strong></td>
+<td>任一协作者产出均可被替换；核心逻辑可审计、不失控</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>二、CTO 的四种角色</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>角色</th>
+<th>职责</th>
+<th>不职责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>架构定义者</strong></td>
+<td>定义分层、模块边界、接口契约；产出《接口规范》《数据模型》《接入清单》</td>
+<td>不替协作者写具体实现</td>
+</tr>
+<tr>
+<td><strong>任务拆分与分配者</strong></td>
+<td>将建&quot;国&quot;任务清单拆解为可并行、边界清晰的子任务；分配给人；定义交付标准</td>
+<td>不 micromanage 每日进度</td>
+</tr>
+<tr>
+<td><strong>接口守门人</strong></td>
+<td>审批所有对外暴露的 API、数据 Schema、事件格式；确保符合联盟标准</td>
+<td>不审批业务逻辑细节</td>
+</tr>
+<tr>
+<td><strong>集成与审计者</strong></td>
+<td>负责集成测试、合并；对核心逻辑有源代码审计权</td>
+<td>不替代协作者做单元测试</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>三、精确接入的六大约束</h2>
+<p>协作者产出要「精确接入联盟」，必须满足以下约束（来自《GAIA IT 供应链准入与 API 隔离标准》《架构对齐图》）：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>约束</th>
+<th>说明</th>
+<th>落地方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>① 接口标准化</strong></td>
+<td>所有跨模块/跨人协作必须通过<strong>联盟定义的标准化接口</strong></td>
+<td>CTO 出具《接口契约》文档；协作者实现时必须遵循</td>
+</tr>
+<tr>
+<td><strong>② 逻辑归 GAIA</strong></td>
+<td>业务流程、分配规则、治理逻辑的<strong>定义权与审计权</strong>归联盟</td>
+<td>分账、RuleID、共识裁定相关逻辑由 CTO 或指定核心人实现；协作者只实现「调用接口」</td>
+</tr>
+<tr>
+<td><strong>③ 数据归 GAIA</strong></td>
+<td>订单、分润、贡献记录等数据的<strong>所有权与可携权</strong>归联盟</td>
+<td>Schema 由 CTO 定义；协作者不得新增未批准的持久化表</td>
+</tr>
+<tr>
+<td><strong>④ 四红线不破</strong></td>
+<td>不删覆盖源头署名；不让平台成最终裁决者；不分润变运营策略；不取消共识流程</td>
+<td>每项任务交付前，CTO 按《红线清单》做合规检查</td>
+</tr>
+<tr>
+<td><strong>⑤ 供应商可替换</strong></td>
+<td>协作者产出均为「搬砖」；表现不佳可切换</td>
+<td>模块化设计；接口稳定；无隐性依赖</td>
+</tr>
+<tr>
+<td><strong>⑥ 可审计</strong></td>
+<td>联盟享有源代码审计权</td>
+<td>代码入统一仓库；PR 须经 CTO 或指定人 review</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>四、任务拆分与分配原则</h2>
+<h3>4.1 按架构层拆分（优先）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>层</th>
+<th>可并行任务示例</th>
+<th>依赖关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Identity Layer</strong></td>
+<td>Node 注册、Capability Mask、认证</td>
+<td>其它层依赖本层</td>
+</tr>
+<tr>
+<td><strong>Asset &amp; Truth</strong></td>
+<td>资产录入、源头锚定、版本冻结</td>
+<td>依赖 Identity</td>
+</tr>
+<tr>
+<td><strong>Consensus &amp; Governance</strong></td>
+<td>提案、陪审遴选、裁定记录</td>
+<td>依赖 Identity、Asset</td>
+</tr>
+<tr>
+<td><strong>Physical Reality</strong></td>
+<td>载体映射、责任签署、物流对接</td>
+<td>依赖 Asset</td>
+</tr>
+<tr>
+<td><strong>Atomic Ledger</strong></td>
+<td>分账指令、分配引擎、流水</td>
+<td>依赖 Identity、Asset；<strong>CTO 自管或极信任者</strong></td>
+</tr>
+<tr>
+<td><strong>Alliance &amp; Evolution</strong></td>
+<td>跨平台 ID、Federation API</td>
+<td>依赖前述各层</td>
+</tr>
+</tbody></table></div>
+<p><strong>原则</strong>：下层先于上层；同层内按模块拆分，尽量减少交叉依赖。</p>
+<h3>4.2 按「核心 vs 边缘」拆分（来自 IT 供应链标准）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>类型</th>
+<th>谁做</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Core</strong></td>
+<td>CTO 或 1 名核心协作者</td>
+<td>RuleID、分账逻辑、分配引擎、宪章级数据接口</td>
+</tr>
+<tr>
+<td><strong>Edge</strong></td>
+<td>其它协作者可并行</td>
+<td>UI/UX、多语言、物流 API、支付对接、CRM、通知</td>
+</tr>
+</tbody></table></div>
+<p><strong>原则</strong>：Core 不外包给不熟悉 GAIA 的人；Edge 可分配，但须通过接口契约接入。</p>
+<h3>4.3 任务包结构（每个任务须包含）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>要素</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>任务 ID</strong></td>
+<td>与建&quot;国&quot;任务清单对应</td>
+</tr>
+<tr>
+<td><strong>交付物</strong></td>
+<td>代码/配置/文档；可验证的产出</td>
+</tr>
+<tr>
+<td><strong>接口契约</strong></td>
+<td>输入/输出、Schema、调用方；CTO 事先定义</td>
+</tr>
+<tr>
+<td><strong>依赖</strong></td>
+<td>依赖哪些其它任务或模块；阻塞关系</td>
+</tr>
+<tr>
+<td><strong>负责人</strong></td>
+<td>认领人</td>
+</tr>
+<tr>
+<td><strong>验收标准</strong></td>
+<td>功能清单、性能要求、红线检查</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>五、协作流程与节奏</h2>
+<h3>5.1 任务发布与认领</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>环节</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CTO 发布</strong></td>
+<td>在论坛/看板发布任务包；含接口契约、依赖、验收标准</td>
+</tr>
+<tr>
+<td><strong>协作者认领</strong></td>
+<td>发帖认领；CTO 确认（类似建国期人事网认领制）</td>
+</tr>
+<tr>
+<td><strong>开工前对齐</strong></td>
+<td>协作者阅读《架构对齐图》《接口契约》；有疑问集中问；CTO 解答</td>
+</tr>
+</tbody></table></div>
+<h3>5.2 开发期协调</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>机制</th>
+<th>频率</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>接口锁定期</strong></td>
+<td>任务启动前</td>
+<td>接口契约冻结；变更须 CTO 审批</td>
+</tr>
+<tr>
+<td><strong>周/双周站会</strong></td>
+<td>可选</td>
+<td>阻塞点、依赖变更、接口碰撞</td>
+</tr>
+<tr>
+<td><strong>异步沟通</strong></td>
+<td>随时</td>
+<td>论坛/Slack/Discord；技术问题、接口疑问</td>
+</tr>
+<tr>
+<td><strong>共享文档</strong></td>
+<td>持续</td>
+<td>架构图、接口文档、Schema、部署说明；所有人可读</td>
+</tr>
+</tbody></table></div>
+<h3>5.3 交付与集成</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>环节</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PR 提交</strong></td>
+<td>协作者完成开发 → 提 PR 至统一仓库</td>
+</tr>
+<tr>
+<td><strong>CTO Review</strong></td>
+<td>检查：接口是否符合契约、是否触碰红线、有无隐性依赖</td>
+</tr>
+<tr>
+<td><strong>集成</strong></td>
+<td>CTO 或指定人合并；跑集成测试</td>
+</tr>
+<tr>
+<td><strong>部署</strong></td>
+<td>按约定流程部署；Staging 验证后再 Prod</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>六、接口契约模板（CTO 须事先出具）</h2>
+<p>每个跨人/跨模块任务，CTO 须提供类似以下的契约（可简化）：</p>
+<pre><code class="language-yaml"># 任务 T-XXX 接口契约
+任务: 多语言文案模块
+负责人: [认领人]
+依赖: 无
+
+## 输入
+- 文案 key (string)
+- 语言 code (string, zh|en)
+
+## 输出
+- 文案内容 (string) 或 404
+
+## 调用方式
+- GET /api/v1/i18n/{lang}/{key}
+
+## 数据归属
+- 文案表 i18n 归联盟；只读接口，不写分润/身份
+
+## 红线检查
+- 不涉及源头署名、不涉及裁定、不涉及分润
+</code></pre>
+<p>协作者按此实现；CTO Review 时对表即可。</p>
+<hr>
+<h2>七、常见冲突与化解</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>冲突</th>
+<th>化解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>接口变更</strong></td>
+<td>契约变更须 CTO 审批；影响多人时须同步</td>
+</tr>
+<tr>
+<td><strong>依赖循环</strong></td>
+<td>拆分时避免；若出现，CTO 介入重新切分</td>
+</tr>
+<tr>
+<td><strong>多人改同一模块</strong></td>
+<td>按文件/目录分配；或拆子模块</td>
+</tr>
+<tr>
+<td><strong>交付质量不一</strong></td>
+<td>验收标准明确；不达标不合并；可指定「技术 Lead」做初筛</td>
+</tr>
+<tr>
+<td><strong>协作者离职/退出</strong></td>
+<td>代码在联盟仓库；文档齐全；接口稳定→可换人接</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>八、工具与基础设施</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>工具</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>代码仓库</strong></td>
+<td>统一 Git 仓库；分支策略（main 保护；feature 分支）</td>
+</tr>
+<tr>
+<td><strong>接口文档</strong></td>
+<td>OpenAPI/Swagger 或 Markdown；与代码同步</td>
+</tr>
+<tr>
+<td><strong>任务看板</strong></td>
+<td>建&quot;国&quot;任务清单 + 子任务状态；见建国期人事网</td>
+</tr>
+<tr>
+<td><strong>沟通</strong></td>
+<td>论坛（制度级）+ Slack/Discord（日常技术）</td>
+</tr>
+<tr>
+<td><strong>CI/CD</strong></td>
+<td>自动跑测试、lint；PR 合并前必过</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>九、与既有文档的衔接</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>文档</th>
+<th>衔接点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>《GAIA · CTO / PM 架构对齐图》</td>
+<td>协作者必读；红线与分层</td>
+</tr>
+<tr>
+<td>《GAIA IT 供应链准入与 API 隔离标准》</td>
+<td>接口主权、可替换、审计权</td>
+</tr>
+<tr>
+<td>《建国期人事网》</td>
+<td>任务认领、负责人、完成确认</td>
+</tr>
+<tr>
+<td>《signa-ink-architecture-v1.1》</td>
+<td>signa 具体模块与 Phase</td>
+</tr>
+<tr>
+<td>《艺术家与系统需求直连机制》</td>
+<td>艺术家提需求→IT 回应；协作者可认领</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>十、总结：精确接入的落地 checklist</h2>
+<p>协作者产出要「精确接入联盟」，须满足：</p>
+<ol>
+<li>✅ 任务来自 CTO 拆解，有清晰边界</li>
+<li>✅ 接口契约由 CTO 事先定义，实现时严格遵循</li>
+<li>✅ 不触碰 Core（RuleID、分账、裁定）除非 CTO 授权</li>
+<li>✅ 数据 Schema 经 CTO 批准</li>
+<li>✅ 通过四红线检查</li>
+<li>✅ 代码入联盟仓库，PR 经 Review</li>
+<li>✅ 文档齐全，可被他人接手</li>
+</ol>
+<p><strong>CTO 的杠杆点</strong>：把精力放在<strong>接口定义、任务拆分、红线审查</strong>上，而非替每个人写代码。</p>
+<hr>
+<p><em>本指南为 CTO 多协作者协作的操作设计草案；与建国期人事网、IT 供应链标准配套使用。</em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

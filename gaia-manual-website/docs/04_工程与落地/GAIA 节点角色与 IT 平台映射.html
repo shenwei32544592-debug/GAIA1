@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAIA 节点角色与 IT 平台映射 · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>GAIA 节点角色与 IT 平台映射</h1>
+<p><strong>用途</strong>：明确系统中各节点角色类型，及其与美国宪政体系部门的类比；规划 GAIA 官网及多 IT 平台下的功能映射<br><strong>版本</strong>：v0.1<br><strong>性质</strong>：架构设计文档，供官网与系统规划参考</p>
+<p>本架构不仅是商业计划，更是<strong>数字联邦的制宪大纲</strong>。<br>终极目标是建立<strong>艺术家的理想国</strong>；十二类节点的设计，是实现这一目标的权力制衡与责任分摊结构。<br>在商人眼里，这是极高的社会资本组织艺术；在会计师眼里，这是清晰的责任与风险分摊模型。<br>通过将「灵魂（GAIA 规矩与档案）」与「肉体（商业实例）」分离，架构层面已实现<strong>永续经营（Going Concern）</strong>——即便某一实例因不可抗力消失，协议与档案依然存在。</p>
+<hr>
+<h2>一、结论先行：GAIA 需要官网</h2>
+<p>GAIA 须有一<strong>官网</strong>，作为：</p>
+<ul>
+<li>宪法、成立理由书、创世档案的<strong>正式发布与存证</strong>场所</li>
+<li>各节点按身份访问不同功能的<strong>统一入口</strong>（或入口索引）</li>
+<li>与 signa.ink、WhoAmI.Art 等<strong>商业实例</strong>区分：官网 = 规矩与档案；实例 = 商业层</li>
+</ul>
+<hr>
+<h2>二、节点主要角色类型</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>角色类型</th>
+<th>定义</th>
+<th>功能身份</th>
+<th>类比（美国宪政）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>创世者（Founder）</strong></td>
+<td>元规则制定者；三项不可谈判权力</td>
+<td><strong>执行权</strong>；72h 紧急暂停、最终解释权</td>
+<td>总统（Executive）+ 制宪会议召集人</td>
+</tr>
+<tr>
+<td><strong>门类理事会（Domain Council）</strong></td>
+<td>按艺术门类设立；3–5 人；行业准入、竞争协调、伦理边界</td>
+<td><strong>准入权</strong>；不碰钱、不碰码</td>
+<td>国会各专业委员会（Legislative Committee）</td>
+</tr>
+<tr>
+<td><strong>裁定者（Steward）</strong></td>
+<td>高贡献、参与共识裁定的专业节点</td>
+<td><strong>裁定权</strong>；陪审团；无永久法官</td>
+<td>陪审团 + 大法官（Judicial）</td>
+</tr>
+<tr>
+<td><strong>分配引擎</strong></td>
+<td>参数化、自动执行、无人干预</td>
+<td>分配权；按 RuleID 分账</td>
+<td>国库/美联储（非民选，按规则运行）</td>
+</tr>
+<tr>
+<td><strong>执行节点（LLC）</strong></td>
+<td>代收代付、技术结算与合规接口</td>
+<td>托管与结算；不拥有规则权</td>
+<td>财政部/IRS（执行层，非决策层）</td>
+</tr>
+<tr>
+<td><strong>CTO / 技术节点</strong></td>
+<td>代码宪法执行者；分配引擎实现者；<strong>负责落实任何节点提出的 IT 建设需求</strong></td>
+<td>技术实现；无权改参数；保障联盟与时俱进、高效先进</td>
+<td>技术官僚机构</td>
+</tr>
+<tr>
+<td><strong>创世公民 / Anchor Artist</strong></td>
+<td>创世公民；信用底座；签自然人宪章</td>
+<td>5% Anchor 分润；Kill Switch</td>
+<td>制宪会议代表 / 开国元勋</td>
+</tr>
+<tr>
+<td><strong>源头艺术家</strong></td>
+<td>拥有资产发行权的创作者</td>
+<td>65% 分润；递归反哺接收；署名权</td>
+<td>公民（财产权主体）</td>
+</tr>
+<tr>
+<td><strong>普通艺术家（Batch 1+）</strong></td>
+<td>标准化 DIL 签约；系统使用者</td>
+<td>65% 分润；符合准入后可参与</td>
+<td>公民（有限权）</td>
+</tr>
+<tr>
+<td><strong>用户 / 收藏者</strong></td>
+<td>购买身份授权、支持源头</td>
+<td>支付、查阅、评价</td>
+<td>公民（需求方）</td>
+</tr>
+<tr>
+<td><strong>SOC（公益节点）</strong></td>
+<td>经认证公益/社会组织</td>
+<td>反哺接收方；可审计</td>
+<td>慈善/非营利部门</td>
+</tr>
+<tr>
+<td><strong>营销节点 / 社会资本节点</strong></td>
+<td>引入流量、背书</td>
+<td>CPS 分润；入口筛选建议</td>
+<td>游说团体 / 利益相关方（受约束）</td>
+</tr>
+<tr>
+<td><strong>制宪会议 / 创世档案</strong></td>
+<td>过程记录；IT 系统协助</td>
+<td>记录、结构化、可追溯</td>
+<td>制宪会议记录 / 国家档案馆</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>2.1 权力制衡与多视角穿透</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>角色</th>
+<th>商人视角的潜台词</th>
+<th>会计师视角的防线</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>创世者（Founder）</strong></td>
+<td>72h 暂停是终极熔断机制，确保系统不在意外中崩塌</td>
+<td>最终解释权即规则的会计准则制定者；掌握定义「利润」的话语权</td>
+</tr>
+<tr>
+<td><strong>门类理事会（Domain Council）</strong></td>
+<td>行业准入制造稀缺性；老兵社会资本实现行业自治</td>
+<td>风险前置；同行审核质量，降低后续退货损失（FCR）</td>
+</tr>
+<tr>
+<td><strong>裁定者（Steward）</strong></td>
+<td>纠纷仲裁外包给共识，实现名誉风险隔离</td>
+<td>每笔非标支出有证据链支撑，非个人意愿</td>
+</tr>
+<tr>
+<td><strong>创世公民</strong></td>
+<td>早期信用背书；利益共同体，非松散节点</td>
+<td>信用底座即平台初始商誉（Goodwill），不可估量</td>
+</tr>
+<tr>
+<td><strong>SOC（公益节点）</strong></td>
+<td>占据道德高地；社会价值二次分配</td>
+<td>合法税务抵扣通道；反哺是品牌抵御舆论的防火墙</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>2.2 灵肉分离：GAIA 与商业实例的双层主权</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>层级</th>
+<th>性质</th>
+<th>商人逻辑</th>
+<th>会计逻辑</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>GAIA（灵魂层/中枢）</strong></td>
+<td>协议、宪法、创世档案；法律与档案库</td>
+<td>核心资产隔离池；不参与买卖，故「洁净」；即便 signa.ink 因监管或攻击消失，GAIA 依然存在</td>
+<td>永续经营基础；规矩与档案 与 风险敞口分离</td>
+</tr>
+<tr>
+<td><strong>signa.ink / WhoAmI.Art（肉体层/实例）</strong></td>
+<td>赚钱机器；对接 TikTok、Stripe、物流</td>
+<td>商业执行层；可替换</td>
+<td>风险敞口层；若产生税务纠纷，可经 GAIA 协议重启新实例，不丢失艺术家与用户数据</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>三、与美国宪政体系的部门映射</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>美国宪政部门</th>
+<th>GAIA 对应</th>
+<th>IT 平台需求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>立法（Congress）</strong></td>
+<td>Domain Council（行业规则）、裁定者共识（宪法修正）、制宪会议（创世期）</td>
+<td>提案系统、投票/共识界面、会议记录</td>
+</tr>
+<tr>
+<td><strong>行政（Executive）</strong></td>
+<td>Founder（执行权、紧急暂停）、执行节点 LLC（结算托管）</td>
+<td>决策入口、72h 暂停开关、结算后台</td>
+</tr>
+<tr>
+<td><strong>司法（Judiciary）</strong></td>
+<td>Steward Jury、DAS、PAC 引擎</td>
+<td>仲裁界面、证据提交、陪审团遴选、裁决记录</td>
+</tr>
+<tr>
+<td><strong>国库/央行（非民选机构）</strong></td>
+<td>分配引擎、FCR、公益金池</td>
+<td>自动分账、RuleID 指令执行、余额查询</td>
+</tr>
+<tr>
+<td><strong>国家档案馆</strong></td>
+<td>创世档案、宪法、成立理由书</td>
+<td>GAIA 官网：宪法发布、创世档案查阅</td>
+</tr>
+<tr>
+<td><strong>公民</strong></td>
+<td>艺术家、用户、创世公民</td>
+<td>实例平台（signa.ink 等）：购物、创作、查看分润</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>四、IT 平台与角色映射（可能形态）</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>IT 平台</th>
+<th>主要服务角色</th>
+<th>功能</th>
+<th>与官网关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>GAIA 官网</strong></td>
+<td>全节点（公共查阅）；Founder、制宪会议</td>
+<td>宪法、成立理由书、创世档案发布；制宪会议记录；各平台入口索引</td>
+<td>规矩与档案中枢；不可替代</td>
+</tr>
+<tr>
+<td><strong>signa.ink / WhoAmI.Art</strong></td>
+<td>艺术家、用户、创世公民</td>
+<td>商品、订单、分润查看、创作、授权</td>
+<td>商业实例；接官网协议</td>
+</tr>
+<tr>
+<td><strong>治理后台</strong></td>
+<td>创世者、门类理事会、裁定者</td>
+<td>准入审核、共识投票、仲裁界面、紧急暂停</td>
+<td>可独立或嵌入实例</td>
+</tr>
+<tr>
+<td><strong>结算/财务系统</strong></td>
+<td>执行节点 LLC、分配引擎</td>
+<td>Stripe/Mercury 对接、RuleID 分配执行、FCR、公益金池</td>
+<td>后台；与实例分离</td>
+</tr>
+<tr>
+<td><strong>RuleID / 账本</strong></td>
+<td>分配引擎、执行节点、审计方</td>
+<td>分配指令、流水、余额、溯源</td>
+<td>核心数据层；多平台共享</td>
+</tr>
+<tr>
+<td><strong>讨论/共识广场</strong></td>
+<td>艺术家、裁定者、公众</td>
+<td>公众指认提案、讨论、共识形成</td>
+<td>可独立或嵌实例</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>五、GAIA 官网：神圣感与透明度</h2>
+<p>GAIA 官网不需要花哨，需要的是<strong>公信力</strong>。它是这个联邦的「国库」与「最高法院」——让所有人看到规则不可篡改、财务阳光透明。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>板块</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>宪法与协议</strong></td>
+<td>给所有节点的定心丸：65% 分润等规则是不可更改的代码逻辑</td>
+</tr>
+<tr>
+<td><strong>创世档案</strong></td>
+<td>记录每一 创世公民 的贡献，将社交资本数字化；超越金钱的荣誉感</td>
+</tr>
+<tr>
+<td><strong>公益金池明细</strong></td>
+<td>阳光下的财务；哪怕 1 美元也可查；建立全球信任的唯一路径</td>
+</tr>
+<tr>
+<td><strong>FAQ（联邦党人文集溯源版）</strong></td>
+<td>常见问题的权威回答；思想来源可追溯；对外阐释的重要依据</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>六、GAIA 官网应承载的内容（最低可行）</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>板块</th>
+<th>内容</th>
+<th>访问</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>宪法与协议</strong></td>
+<td>宪法全文、成立理由书、创意载体规范、递归反哺细则等</td>
+<td>公开</td>
+</tr>
+<tr>
+<td><strong>建国路线图</strong></td>
+<td>从思想启蒙到首届治理；七阶段映射；叙事性入门</td>
+<td>公开</td>
+</tr>
+<tr>
+<td><strong>常见问题（FAQ）</strong></td>
+<td>联邦党人文集溯源版；10 问 10 答</td>
+<td>公开</td>
+</tr>
+<tr>
+<td><strong>创世档案</strong></td>
+<td>制宪会议、输入映射、更新日志、讨论沉淀索引</td>
+<td>公开</td>
+</tr>
+<tr>
+<td><strong>公益金池</strong></td>
+<td>余额、入账、出账、用途（全平台可查）</td>
+<td>公开</td>
+</tr>
+<tr>
+<td><strong>平台入口</strong></td>
+<td>signa.ink、WhoAmI.Art 及未来实例的入口链接</td>
+<td>公开</td>
+</tr>
+<tr>
+<td><strong>治理入口</strong></td>
+<td>治理后台、共识广场链接（按身份权限）</td>
+<td>需登录/权限</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>七、角色 → 平台访问矩阵（草图）</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>角色</th>
+<th>GAIA 官网</th>
+<th>signa.ink</th>
+<th>治理后台</th>
+<th>结算/财务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Founder</td>
+<td>全权限；制宪档案</td>
+<td>可查阅</td>
+<td>全权限</td>
+<td>可查阅（受托）</td>
+</tr>
+<tr>
+<td>Domain Council</td>
+<td>公开区</td>
+<td>可查阅</td>
+<td>准入/伦理</td>
+<td>不可</td>
+</tr>
+<tr>
+<td>裁定者</td>
+<td>公开区</td>
+<td>可查阅</td>
+<td>仲裁/共识</td>
+<td>不可</td>
+</tr>
+<tr>
+<td>分配引擎</td>
+<td>—</td>
+<td>只写（指令）</td>
+<td>—</td>
+<td>只写（分配）</td>
+</tr>
+<tr>
+<td>执行节点</td>
+<td>公开区</td>
+<td>对接</td>
+<td>不可</td>
+<td>托管执行</td>
+</tr>
+<tr>
+<td>创世公民 / Artist</td>
+<td>公开区</td>
+<td>创作/订单/分润</td>
+<td>部分（若为 DC）</td>
+<td>提现</td>
+</tr>
+<tr>
+<td>用户</td>
+<td>公开区</td>
+<td>购物/支付</td>
+<td>不可</td>
+<td>不可</td>
+</tr>
+<tr>
+<td>公众</td>
+<td>公开区</td>
+<td>可浏览</td>
+<td>可提案（PAC）</td>
+<td>不可</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>八、下一步</h2>
+<ol>
+<li><strong>官网域名与托管</strong>：GAIA 官网 vs signa.ink 的域名策略</li>
+<li><strong>最小可行官网（MVP）</strong>：宪法、成立理由书、创世档案、公益金入口、实例链接</li>
+<li><strong>治理后台</strong>：是否与 signa.ink 同域或独立</li>
+<li><strong>RuleID 与多平台</strong>：账本层如何被官网、实例、结算系统共用</li>
+</ol>
+<hr>
+<p><strong>思想来源</strong>：《联邦党人文集》——第 10 篇（派系与扩展共和国）、第 39 篇（复合共和国）、第 51 篇（用野心抗衡野心）、第 70 篇（行政能量）、第 78 篇（司法最不危险）。详见<a href="../06_%E8%A7%A3%E9%87%8A%E4%B8%8E%E5%8F%99%E4%BA%8B/GAIA%20%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88FAQ%EF%BC%89%C2%B7%E8%81%94%E9%82%A6%E5%85%9A%E4%BA%BA%E6%96%87%E9%9B%86%E6%BA%AF%E6%BA%90.html">《GAIA 常见问题（FAQ）·联邦党人文集溯源》</a>。</p>
+<p><em>配合使用：<a href="../01_%E5%AE%AA%E6%B3%95%E4%B8%8E%E6%B2%BB%E7%90%86/GAIA%20%E5%AE%AA%E6%B3%95%20%E2%86%92%20%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97%E6%98%A0%E5%B0%84%E8%A1%A8.html">《GAIA 宪法→系统模块映射表》</a>、<a href="../05_%E5%AF%B9%E5%A4%96%E4%B8%8E%E5%A4%96%E4%BA%A4/WhoAmI.Art%20%E5%88%9B%E4%B8%96%E5%85%AC%E6%B0%91%E4%B8%8E%E5%87%86%E5%85%A5%E5%88%86%E5%B1%82%EF%BC%88%E8%87%AA%E7%84%B6%E4%BA%BA%E5%AE%AA%E7%AB%A0%E9%85%8D%E5%A5%97%EF%BC%89.html">《创世公民与准入分层》</a>、《Founder Master Document》、<a href="../06_%E8%A7%A3%E9%87%8A%E4%B8%8E%E5%8F%99%E4%BA%8B/GAIA%20%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88FAQ%EF%BC%89%C2%B7%E8%81%94%E9%82%A6%E5%85%9A%E4%BA%BA%E6%96%87%E9%9B%86%E6%BA%AF%E6%BA%90.html">《GAIA 常见问题（FAQ）·联邦党人文集溯源》</a></em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

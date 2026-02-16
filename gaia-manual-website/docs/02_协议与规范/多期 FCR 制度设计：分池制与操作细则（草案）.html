@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多期 FCR 制度设计：分池制与操作细则（草案） · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>多期 FCR 制度设计：分池制与操作细则（草案）</h1>
+<p><strong>用途</strong>：以分池制实现多期 FCR，确保各期互不稀释、与造血节奏对齐、建国叙事清晰；每一条设计配有思量说明<br><strong>性质</strong>：协议草案；须经共识程序通过后生效；与 FCR 1.1、FCR 附录、建国方案配套<br><strong>版本</strong>：草案 v0.1</p>
+<hr>
+<h2>〇、设计总览</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>池</th>
+<th>结余占比</th>
+<th>窗口</th>
+<th>人数</th>
+<th>思量摘要</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FCR-1</td>
+<td>40%</td>
+<td>首单前→首单后 1 月</td>
+<td>3–5</td>
+<td>风险最高，池最大</td>
+</tr>
+<tr>
+<td>FCR-2</td>
+<td>35%</td>
+<td>50–150 单/天</td>
+<td>5–8</td>
+<td>验证已有，扩大参与</td>
+</tr>
+<tr>
+<td>FCR-3</td>
+<td>25%</td>
+<td>150–500 单/天</td>
+<td>5–10</td>
+<td>造血前收尾，建国锁定</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><strong>100%</strong></td>
+<td>—</td>
+<td><strong>13–23</strong></td>
+<td>各期互不稀释</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>第一条｜分池结构</h2>
+<h3>1.1 池的定义</h3>
+<p>20% 公共运营池的<strong>结余</strong>（运营成本扣除后）为 FCR 分配对象。结余按<strong>三池固定占比</strong>切分：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>池</th>
+<th>结余占比</th>
+<th>分配对象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FCR-1 池</td>
+<td>40%</td>
+<td>仅 FCR-1 持有者，按各人在本池内比例分配</td>
+</tr>
+<tr>
+<td>FCR-2 池</td>
+<td>35%</td>
+<td>仅 FCR-2 持有者，按各人在本池内比例分配</td>
+</tr>
+<tr>
+<td>FCR-3 池</td>
+<td>25%</td>
+<td>仅 FCR-3 持有者，按各人在本池内比例分配</td>
+</tr>
+</tbody></table></div>
+<p><strong>思量</strong>：分池制使 FCR-2、FCR-3 加入者不稀释 FCR-1 持有者。各期利益边界清晰，符合「结构性稳定」——背叛无利可图，因结构自带约束。若用单一池 + 剩余空间，后期加入者比例从何而来、如何不触碰既有者，易生争议；分池则天然隔离。</p>
+<h3>1.2 本池内比例之和</h3>
+<p>各池内部，所有持有者的分配比例之和须等于 <strong>100%</strong>。例如 FCR-1 池：A 25%、B 20%、C 20%、D 20%、E 15% = 100%。</p>
+<p><strong>思量</strong>：本池比例之和 = 100% 确保该池的结余份额被完整分配，无遗漏、无超额。创世者与贡献者协商时，须在「本池 100%」约束下切分。</p>
+<hr>
+<h2>第二条｜各池占比的确定</h2>
+<h3>2.1 占比取值</h3>
+<p>FCR-1 : FCR-2 : FCR-3 = 40 : 35 : 25。</p>
+<p><strong>思量</strong>：</p>
+<ul>
+<li><strong>FCR-1 最大</strong>：首单前或刚首单时，无流水验证，不确定性最高。承担最高风险者应得最大池，体现风险溢价；与「在系统最不确定时投入」的 FCR 附录逻辑一致。</li>
+<li><strong>FCR-2 居中</strong>：首单已入、50–150 单/天，有可验证成功信号。风险下降，池占比次之。</li>
+<li><strong>FCR-3 最小</strong>：接近造血临界，成功在望。风险最低，池占比最小；但仍保留一定空间，以吸纳造血前最后一批关键贡献者（如冲刺期供应商、渠道、合规落地等）。</li>
+</ul>
+<h3>2.2 占比的可调性</h3>
+<p>上述占比为<strong>生效版默认值</strong>。创世期可经共识调整（如 45/30/25 或 35/40/25），调整后须写入协议附件并全节点公示。生效后非经修正程序不得单方变更。</p>
+<p><strong>思量</strong>：预留弹性以应对不同冷启动情境；但须书面化、可追溯，避免事后争议。</p>
+<hr>
+<h2>第三条｜窗口与触发条件</h2>
+<h3>3.1 FCR-1 窗口</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>开启</strong></td>
+<td>协议冻结 + 001 物证就绪；可接单（含人工记账）</td>
+</tr>
+<tr>
+<td><strong>关闭</strong></td>
+<td>首笔订单入账日后 <strong>30 日</strong>，或首份 FCR-2 授予（以先到为准）</td>
+</tr>
+<tr>
+<td><strong>人数</strong></td>
+<td>建议 3–5 人；本池比例之和须 = 100%</td>
+</tr>
+</tbody></table></div>
+<p><strong>思量</strong>：FCR-1 针对「敢在无订单时下注」的节点。首单后 30 日仍属高不确定性（订单可能偶发、未成势），故予缓冲。首份 FCR-2 授予表示已进入爬坡期，FCR-1 窗口自然关闭，避免边界模糊。</p>
+<h3>3.2 FCR-2 窗口</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>开启</strong></td>
+<td>平台连续 7 日日均订单 ≥ 50 单，或首笔跨境到账</td>
+</tr>
+<tr>
+<td><strong>关闭</strong></td>
+<td>平台连续 7 日日均订单 ≥ 300 单，或建国成功投票发起（以先到为准）</td>
+</tr>
+<tr>
+<td><strong>人数</strong></td>
+<td>建议 5–8 人；本池比例之和须 = 100%</td>
+</tr>
+</tbody></table></div>
+<p><strong>思量</strong>：50 单/天 = 10 艺术家人均 5 单，代表「需求已被初步验证」。300 单/天 = 人均 30 单，已接近造血临界的一半，此时进入者风险显著低于 FCR-1。用「连续 7 日」减少单日波动干扰。</p>
+<h3>3.3 FCR-3 窗口</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>开启</strong></td>
+<td>平台连续 7 日日均订单 ≥ 300 单</td>
+</tr>
+<tr>
+<td><strong>关闭</strong></td>
+<td><strong>建国成功投票通过</strong> 之日</td>
+</tr>
+<tr>
+<td><strong>人数</strong></td>
+<td>建议 5–10 人；本池比例之和须 = 100%</td>
+</tr>
+</tbody></table></div>
+<p><strong>思量</strong>：FCR-3 为建国前最后窗口。建国成功 = 造血临界达成 + 有权重投票通过；投票通过即 Batch 0 锁定，FCR 窗口全部关闭。此后加入者为 Batch 1+，不参与 FCR 分配。</p>
+<h3>3.4 窗口重叠</h3>
+<p>FCR-1 关闭后 FCR-2 开启；FCR-2 关闭后 FCR-3 开启。<strong>窗口不重叠</strong>，任一节点只能归属一个池。</p>
+<p><strong>思量</strong>：不重叠避免「同一人同时拿多池」的复杂性与争议。贡献者可等 FCR-2 开启后再加入，但须接受 FCR-2 的池占比与风险结构。</p>
+<hr>
+<h2>第四条｜建国成功与 Batch 0 锁定</h2>
+<h3>4.1 建国成功定义（原则性、可协商）</h3>
+<p>建国成功须满足以下<strong>原则</strong>，具体数值为<strong>参考区间</strong>，可经关键节点协商调整：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>原则</th>
+<th>含义</th>
+<th>参考区间（可协商）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>供给分散</strong></td>
+<td>艺术家数量与结构足以支撑持续运转，不过度依赖极少数人</td>
+<td>有持续订单的艺术家 ≥ 10 人</td>
+</tr>
+<tr>
+<td><strong>订单可验证</strong></td>
+<td>已有稳定订单流，造血路径可见</td>
+<td>日均订单 ≥ 500，或月 15,000 单</td>
+</tr>
+<tr>
+<td><strong>可分配利润</strong></td>
+<td>月 Net Pool 足以支撑分润结构与运营</td>
+<td>月 Net Pool ≥ 150 万，或月平台收入 ≥ 37.5 万</td>
+</tr>
+<tr>
+<td><strong>供给集中度</strong></td>
+<td>单艺术家订单占比不过高</td>
+<td>单艺术家 ≤ 25–30% 总订单</td>
+</tr>
+<tr>
+<td><strong>结构就绪</strong></td>
+<td>分润、FCR、论坛、治理骨架已就位</td>
+<td>—</td>
+</tr>
+</tbody></table></div>
+<p><strong>程序</strong>：有权重节点发起「建国成功」投票，赞成达门槛（如 75%）；有效参与者 ≥ 5 人。</p>
+<p><strong>思量</strong>：建国时间长短与联盟能否运转无关；建国是制度确认时刻。多维原则让地基更牢；参考区间保留协商空间。美国建国早、世界领袖地位百年后；建国 ≠ 完全成熟。</p>
+<h3>4.2 协商与 Founder 最终裁决</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>情形</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>能形成共识</strong></td>
+<td>以投票结果为准；共识高于裁决</td>
+</tr>
+<tr>
+<td><strong>条件处于模糊区</strong></td>
+<td>Founder 综合实际进展与各方意见，决定是否发起投票</td>
+</tr>
+<tr>
+<td><strong>协商无法形成一致</strong></td>
+<td>由 Founder 最终裁决，书面说明理由并存档（Governance Log）</td>
+</tr>
+<tr>
+<td><strong>参与不足或程序僵局</strong></td>
+<td>Founder 裁量，书面说明；与 FCR 附录兜底规则一致</td>
+</tr>
+</tbody></table></div>
+<p><strong>思量</strong>：Founder 裁决为补充与兜底，非替代共识。裁量须可追溯，便于事后复盘与制度演进。</p>
+<h3>4.3 Batch 0 锁定</h3>
+<p>建国成功投票通过之时（采用分池锁定路径时）：</p>
+<ul>
+<li>所有 FCR 窗口（含 FCR-3）关闭；</li>
+<li>FCR-1、FCR-2、FCR-3 全体持有者构成 <strong>Batch 0</strong>；</li>
+<li>不再新增创始贡献者；</li>
+<li>Batch 1+ 启动，建国回补机制按<a href="./建国回补与确定性溢价机制（草案）.html" class="doc-link">《建国回补与确定性溢价机制》</a>运行。</li>
+</ul>
+<p><strong>思量</strong>：Batch 0 即「建国功臣」的固定集合。若采用开放 FCR 扩展（见附录 C），则 Batch 0 语义可调整。</p>
+<h3>4.4 时间兜底</h3>
+<p>若启动后 <strong>18 月</strong>内未达商业原则，可经有权重投票决定：是否以「时间兜底」发起建国成功投票（此时商业条件可放宽）。或由 Founder 裁量并书面说明。具体由创世期书面约定。</p>
+<p><strong>思量</strong>：避免无限期等待；18 月对应典型冷启动周期上限。</p>
+<hr>
+<h2>第五条｜贡献量化与比例约定</h2>
+<h3>5.1 量化原则</h3>
+<p>各池内比例依 FCR 附录 §2.2 贡献类型与权重参考：</p>
+<ul>
+<li>不可替代性、时间投入、风险承担、模块边界。</li>
+</ul>
+<p><strong>思量</strong>：与既有 FCR 量化逻辑一致，不另造一套标准，降低解释成本。</p>
+<h3>5.2 各池参考区间（示意）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>池</th>
+<th>典型角色</th>
+<th>本池内比例参考区间</th>
+<th>思量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FCR-1</td>
+<td>Founder 关联、CTO、首艺术家、首运营、首投资人</td>
+<td>15%–40%</td>
+<td>人少，单份比例可高；体现最高风险溢价</td>
+</tr>
+<tr>
+<td>FCR-2</td>
+<td>追加艺术家、供应商、IT、运营、渠道</td>
+<td>8%–25%</td>
+<td>人数增多，单份下降；贡献可验证</td>
+</tr>
+<tr>
+<td>FCR-3</td>
+<td>冲刺期供应商、合规、渠道、最后一批核心节点</td>
+<td>3%–15%</td>
+<td>风险最低，池最小；单份进一步下降</td>
+</tr>
+</tbody></table></div>
+<p><strong>思量</strong>：区间为协商参照，非刚性。创世者提名权可容纳特殊情形，但须书面记载。</p>
+<h3>5.4 FCR 单人比例上限</h3>
+<p>任一 FCR 持有者在本池内的分配比例 ≤ <strong>40%</strong>。超出须经治理共识特别批准并书面记载。</p>
+<p><strong>思量</strong>：避免少数人 FCR 权重超过 CTO 的结构性地位（CTO 固定 2% Net Pool）；让建国地基更牢、权力分布更均衡。</p>
+<h3>5.3 书面锁定</h3>
+<p>每人比例须写入《FCR 授予书》，载明：池归属（FCR-1/2/3）、本池内比例、贡献描述、签署日期。双方签署即生效。口头承诺不作数。</p>
+<p><strong>思量</strong>：书面化是公平与可审计的底线；FCR 附录 §2.4 已有要求，此处强调多期场景下的池归属字段。</p>
+<hr>
+<h2>第六条｜剩余空间与未用满</h2>
+<h3>6.1 本池未用满</h3>
+<p>若某池窗口关闭时，本池内比例之和 &lt; 100%（如 FCR-1 仅 3 人，合计 85%），剩余 15% 的处理：</p>
+<ul>
+<li><strong>选项 A</strong>：剩余归入联盟储备，不分配；</li>
+<li><strong>选项 B</strong>：剩余按既有持有者比例追加分配；</li>
+<li><strong>选项 C</strong>：剩余转入下一池（仅 FCR-1 可转 FCR-2，FCR-2 可转 FCR-3）。</li>
+</ul>
+<p><strong>建议</strong>：选项 A。剩余不分配，保持规则简洁；避免「为何某人多拿」的二次争议。</p>
+<p><strong>思量</strong>：选项 B 会稀释「比例」的语义（比例不变但分配增加）；选项 C 增加复杂度。选项 A 最清晰。</p>
+<h3>6.2 书面约定</h3>
+<p>采用哪一选项须在创世期书面约定，写入本制度附件。</p>
+<hr>
+<h2>第七条｜与 FCR 1.1 的关系</h2>
+<h3>7.1 不抵触</h3>
+<p>本制度为 FCR 1.1 的<strong>多期操作细则</strong>，不修改 FCR 1.1 关于身份界定、经济权利、署名权利、撤销、退出的实质性条款。</p>
+<h3>7.2 「90 日」的语义</h3>
+<p>FCR 1.1 所称「首个 90 日内」在采用多期 FCR 时，理解为：<strong>各池窗口的开放期</strong>。FCR-1 窗口约 0–4 月，FCR-2 约 2–6 月，FCR-3 约 4–9 月；均可能在启动后 90 日内或之后，依实际造血节奏而定。</p>
+<p><strong>思量</strong>：保留「90 日」用语以维持与既有协议一致；实质边界由各池窗口与建国成功决定。</p>
+<hr>
+<h2>第八条｜与创世者提名权的关系</h2>
+<p>创世者依 FCR 附录 §1.7 享有提名权。提名时须载明：池归属、本池内比例、理由。提名比例可超参考区间，但须书面说明；争议时可请门类理事会或裁定者出具公平性意见。</p>
+<p><strong>思量</strong>：提名权服务于「难以简单评估」的贡献；多期 FCR 不削弱该权，但须与分池规则兼容——提名进入某池即占用该池空间。</p>
+<hr>
+<h2>第九条｜生效与修正</h2>
+<h3>9.1 生效条件</h3>
+<ol>
+<li>本草案经治理共识（如 75% 裁定者或创世公民）通过；</li>
+<li>具体占比、窗口触发值、剩余空间选项经共识确定并写入生效版；</li>
+<li>与 FCR 1.1、FCR 附录、建国方案同步修订。</li>
+</ol>
+<h3>9.2 修正</h3>
+<p>本制度修正须经相同共识程序；修正不得追溯性减损既有 FCR 持有者的既得比例。</p>
+<p><strong>思量</strong>：修正权保留，但「不追溯减损」与 FCR 1.1「不接受追溯性比例稀释」一致。</p>
+<hr>
+<h2>附录 A：操作检查清单</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>阶段</th>
+<th>动作</th>
+<th>检查</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>启动时</td>
+<td>书面约定池占比、窗口触发值、剩余空间选项</td>
+<td>存入 Governance Log</td>
+</tr>
+<tr>
+<td>FCR-1 开启</td>
+<td>协议+001 就绪；首份 FCR-1 授予</td>
+<td>本池比例之和 ≤ 100%</td>
+</tr>
+<tr>
+<td>FCR-1 关闭</td>
+<td>首单后 30 日 or 首份 FCR-2</td>
+<td>公示 FCR-1 锁定名单</td>
+</tr>
+<tr>
+<td>FCR-2 开启</td>
+<td>50 单/天 连续 7 日</td>
+<td>首份 FCR-2 授予</td>
+</tr>
+<tr>
+<td>FCR-2 关闭</td>
+<td>300 单/天 连续 7 日 or 建国投票发起</td>
+<td>公示 FCR-2 锁定名单</td>
+</tr>
+<tr>
+<td>FCR-3 开启</td>
+<td>300 单/天 连续 7 日</td>
+<td>首份 FCR-3 授予</td>
+</tr>
+<tr>
+<td>建国成功</td>
+<td>500 单/天 or 37.5万/月 + 投票通过</td>
+<td>FCR-3 关闭；Batch 0 锁定；公示</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>附录 B：思量索引</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>条文</th>
+<th>核心思量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.1 分池</td>
+<td>各期互不稀释；结构自带约束；避免单一池+剩余空间的争议</td>
+</tr>
+<tr>
+<td>1.2 本池 100%</td>
+<td>池内分配完整、无遗漏无超额</td>
+</tr>
+<tr>
+<td>2.1 占比 40/35/25</td>
+<td>风险越大池越大；与造血节奏对齐</td>
+</tr>
+<tr>
+<td>3.1–3.3 窗口</td>
+<td>商业可验证性递进；首单、50、300、500 单为锚点</td>
+</tr>
+<tr>
+<td>3.4 不重叠</td>
+<td>避免一人多池；边界清晰</td>
+</tr>
+<tr>
+<td>4.1 建国成功</td>
+<td>原则性、可协商；多维指标；建国≠完全成熟</td>
+</tr>
+<tr>
+<td>4.2 Founder 裁决</td>
+<td>共识优先、裁决兜底；可追溯</td>
+</tr>
+<tr>
+<td>5.2 参考区间</td>
+<td>人少份大、人多份小；与风险反向</td>
+</tr>
+<tr>
+<td>5.4 单人上限</td>
+<td>FCR 不超 CTO 结构性地位；地基更牢</td>
+</tr>
+<tr>
+<td>6.1 剩余空间</td>
+<td>选项 A 最简；不引争议</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>附录 C：开放 FCR + 增量约束（扩展方案）</h2>
+<p>当创世期经共识采纳本扩展时，FCR 窗口可<strong>不关闭</strong>，分配<strong>可提前开启</strong>，持续吸纳新贡献者，直至自然饱和。</p>
+<h3>C.1 增量约束</h3>
+<p>后来者分走的（T）须 <strong>小于</strong> 其带来的增量（ΔS）：T &lt; ΔS。</p>
+<p><strong>思量</strong>：在此约束下，既有 FCR 持有者<strong>绝对额只增不减</strong>。新血带来订单与供给，池子变大；后来者取走少于其带来部分，剩余归既有者。数学上成立；只有不断有新血输入，盘子才能做大。</p>
+<h3>C.2 入序衰减</h3>
+<p>新加入者权重按入序衰减（如 r=0.85 或 0.9），使总分配收敛；单份随入序递减。</p>
+<h3>C.3 分配开启</h3>
+<p>FCR 分配可<strong>早于建国成功</strong>开启；建国成功表示制度确认，不必等价于 FCR 窗口关闭。</p>
+<h3>C.4 自然饱和</h3>
+<p>当边际贡献者难以满足 T &lt; ΔS 时，新 FCR 授予自然减缓；无须硬性关窗。</p>
+<p><strong>思量</strong>：本扩展与分池锁定路径二选一或经共识组合；采纳须书面约定并写入 Governance Log。</p>
+<hr>
+<p><em>配套：《FCR 1.1》<a href="./FCR 附录：90日窗口与价值量化说明.html" class="doc-link">《FCR 附录》</a>《建国方案：小步快走与多期 FCR》<a href="./建国成功判定与窗口操作速查表.html" class="doc-link">《建国成功判定与窗口操作速查表》</a>《分配方案：公式化定档与供应商定价（草案）》</em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>论坛身份体系与贡献记账规则-MVP · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>论坛身份体系与贡献记账规则（MVP）</h1>
+<p><strong>用途</strong>：论坛身份体系最小可行版本；入籍路径与身份层级；贡献记账一页纸；供 IT 实现与运营参考<br><strong>版本</strong>：MVP v0.1<br><strong>性质</strong>：操作指引，与<a href="./公民参与与贡献记账（Public Participation & Credits）.html" class="doc-link">《公民参与与贡献记账》</a><a href="./GAIA 社区早期权重（Reputation Score）计算逻辑.html" class="doc-link">《GAIA 社区早期权重计算逻辑》</a>配套<br><strong>设计意图</strong>：身份可见→秩序自发；克制设计→引导而非统治；发言不产生权重→避免灌水与权力崇拜</p>
+<hr>
+<h2>一、身份层级（最小可行）</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>身份</th>
+<th>标识</th>
+<th>权限</th>
+<th>权重展示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>游客</strong></td>
+<td>无头像/默认</td>
+<td>可浏览制度广场；不可发言</td>
+<td>无</td>
+</tr>
+<tr>
+<td><strong>注册者</strong></td>
+<td>自选头像</td>
+<td>可发言、附和；参与度可见</td>
+<td>发帖数、首参与日期</td>
+</tr>
+<tr>
+<td><strong>宪章签署人</strong></td>
+<td>签约后头像/徽章可区分</td>
+<td>同上；身份明确标识</td>
+<td>参与度 + RP（若产生）</td>
+</tr>
+<tr>
+<td><strong>创世贡献者</strong></td>
+<td>专属徽章</td>
+<td>同上；FCR 相关权益另见协议</td>
+<td>参与度 + RP + FCR 比例</td>
+</tr>
+</tbody></table></div>
+<p><strong>入籍路径</strong>：围观→注册→阅读→签署宪章→身份变化（头像/徽章变更）→权重积累</p>
+<hr>
+<h2>二、贡献记账规则（一页纸）</h2>
+<h3>2.1 什么会被记录</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>行为</th>
+<th>参与度</th>
+<th>权重（RP）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发帖</td>
+<td>✓ 发帖数+1</td>
+<td>✗ 不产生</td>
+</tr>
+<tr>
+<td>附和</td>
+<td>✓ 附和次数+1</td>
+<td>✗ 不产生</td>
+</tr>
+<tr>
+<td>建议被采纳</td>
+<td>✓</td>
+<td>✓ +3 RP</td>
+</tr>
+<tr>
+<td>批评被验证</td>
+<td>✓</td>
+<td>✓ +1.5 RP</td>
+</tr>
+<tr>
+<td>发言被引用/附和达阈值</td>
+<td>✓</td>
+<td>✓ +0.5~1 RP</td>
+</tr>
+<tr>
+<td>有效邀请</td>
+<td>✓</td>
+<td>✓ +2 RP/人</td>
+</tr>
+<tr>
+<td>首参与日期</td>
+<td>✓</td>
+<td>✓ 首参与奖励</td>
+</tr>
+</tbody></table></div>
+<h3>2.2 什么不会</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>行为</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>灌水、重复、无意义帖</td>
+<td>不计入</td>
+</tr>
+<tr>
+<td>单纯情绪宣泄</td>
+<td>不计入</td>
+</tr>
+<tr>
+<td>虚假拉人、同 IP 刷量</td>
+<td>不计入</td>
+</tr>
+<tr>
+<td>自附和</td>
+<td>无效</td>
+</tr>
+</tbody></table></div>
+<h3>2.3 硬规则</h3>
+<blockquote>
+<p><strong>发言本身不产生权重；被采纳、被引用、被验证的贡献才产生权重。</strong></p>
+</blockquote>
+<hr>
+<h2>三、权重与可见度</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>原则</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>权重影响可见度，不影响发言权</strong></td>
+<td>所有人都能发言</td>
+</tr>
+<tr>
+<td><strong>权重高</strong></td>
+<td>发言默认高亮、易被看见</td>
+</tr>
+<tr>
+<td><strong>权重低</strong></td>
+<td>发言需被点赞/引用后上浮</td>
+</tr>
+<tr>
+<td><strong>引导，非统治</strong></td>
+<td>不是权力崇拜；是秩序显形</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>四、入籍路径文案（示意）</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>步骤</th>
+<th>动作</th>
+<th>文案/提示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>围观</td>
+<td>「欢迎浏览；制度广场开放阅读」</td>
+</tr>
+<tr>
+<td>2</td>
+<td>注册</td>
+<td>「注册后可发言、参与讨论」</td>
+</tr>
+<tr>
+<td>3</td>
+<td>阅读</td>
+<td>「建议先阅读宪章与理由书」</td>
+</tr>
+<tr>
+<td>4</td>
+<td>签署</td>
+<td>「签署认可宪章，成为创世公民」</td>
+</tr>
+<tr>
+<td>5</td>
+<td>身份变化</td>
+<td>「您的身份已更新；头像/徽章已激活」</td>
+</tr>
+<tr>
+<td>6</td>
+<td>贡献</td>
+<td>「参与讨论、提出建议；被采纳即产生权重」</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>五、与主协议关系</h2>
+<p>本 MVP 为<a href="./公民参与与贡献记账（Public Participation & Credits）.html" class="doc-link">《公民参与与贡献记账》</a>之操作化；若与主协议冲突，以主协议为准。</p>
+<hr>
+<p><em>配套：<a href="%E5%85%AC%E6%B0%91%E5%8F%82%E4%B8%8E%E4%B8%8E%E8%B4%A1%E7%8C%AE%E8%AE%B0%E8%B4%A6%EF%BC%88Public%20Participation%20%26%20Credits%EF%BC%89.html">《公民参与与贡献记账》</a>、<a href="GAIA%20%E7%A4%BE%E5%8C%BA%E6%97%A9%E6%9C%9F%E6%9D%83%E9%87%8D%EF%BC%88Reputation%20Score%EF%BC%89%E8%AE%A1%E7%AE%97%E9%80%BB%E8%BE%91.html">《GAIA 社区早期权重计算逻辑》</a>、<a href="%E5%88%9B%E4%B8%96%E8%B4%A1%E7%8C%AE%E8%AE%B0%E5%BD%95%E4%B8%8E%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%EF%BC%88%E8%AE%BA%E5%9D%9B%E7%89%88%EF%BC%89.html">《创世贡献记录与确认机制（论坛版）》</a></em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

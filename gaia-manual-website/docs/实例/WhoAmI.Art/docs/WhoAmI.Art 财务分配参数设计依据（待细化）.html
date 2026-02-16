@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhoAmI.Art 财务分配参数设计依据（待细化） · GAIA</title>
+  <link rel="stylesheet" href="../../../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>WhoAmI.Art 财务分配参数设计依据</h1>
+<p><strong>用途</strong>：为创始人锁定参数提供合理性说明；供 CTO、法务、审计及后续交接参考<br><strong>版本</strong>：v0.1（框架版，待 Founder 细化）<br><strong>依据</strong>：<a href="./WhoAmI.Art 分润与财务逻辑补充（财务工程 v1.0）.html" class="doc-link">《分润与财务逻辑补充》</a>§12.1 创始人锁定参数<br><strong>性质</strong>：设计依据文档，非协议正文</p>
+<hr>
+<h2>一、主分配比例 65 / 5 / 20 / 10</h2>
+<p><strong>财政结构原则</strong>：5%、20%、10% 不是「谁分走了」，而是这个联盟运转所必须的财政结构。取之于民，用之于民。类比宪政国家：没有法院、税务局、储备金，公民权利无法实现。艺术家联盟亦然。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>池</th>
+<th>比例</th>
+<th>设计依据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>艺术家利润部分</td>
+<td>65%</td>
+<td>艺术家优先原则；创意价值回归源头，不证自明；行业惯例参考；艺术家收入可预期性</td>
+</tr>
+<tr>
+<td>治理基准池（Anchor）</td>
+<td>5%</td>
+<td>联盟信用底座；创世节点信用抵押；封死未来无限加码抽成；制宪会议代表贡献对价；溢出部分入公益金池</td>
+</tr>
+<tr>
+<td>公共运营池</td>
+<td>20%</td>
+<td>联盟运转成本：IT、合规、客服、获客、溯源与分配引擎；无此，65% 无法落地、用户买不到；全外包策略下「买服务」成本</td>
+</tr>
+<tr>
+<td>风险储备金（FCR）</td>
+<td>10%</td>
+<td>全体系保险池：用户退款垫付、硬成本超支缓冲、汇率波动保障；保护艺术家与用户双方；流动性要求</td>
+</tr>
+</tbody></table></div>
+<p><strong>总体逻辑</strong>：四池之和=100%；艺术家拿大头；其余三池为联盟运转必须的财政结构；均有明确用途边界、可查、可审计。</p>
+<hr>
+<h2>二、MMG（最低利润率）40%</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>设计依据（待细化）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Net Pool / Gross</td>
+<td>≥ 40%</td>
+<td>20% 公共运营池在低毛利订单下的覆盖能力；筛选高价值供给；尊严红线</td>
+</tr>
+<tr>
+<td>或单笔 Net Pool</td>
+<td>≥ $200</td>
+<td><em>待补充：单价下限；避免碎片化订单的合规与运营成本</em></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>三、创世公民机制参数</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>设计依据（待细化）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Floor</td>
+<td>5%</td>
+<td><em>与主分配比例一致</em></td>
+</tr>
+<tr>
+<td>Cap</td>
+<td>单人单月 ≤ 过去 6 个月平均的 200%</td>
+<td><em>待补充：抑制极端波动；从无限责任转为有限溢价</em></td>
+</tr>
+<tr>
+<td>Catch-up</td>
+<td>50% → FCR，50% → Platform</td>
+<td><em>待补充：溢出分配的中性处理</em></td>
+</tr>
+<tr>
+<td>Time Decay</td>
+<td>18 个月线性衰减至 50%</td>
+<td><em>待补充：早期贡献溢价随时间递减；18 个月的业务周期考量</em></td>
+</tr>
+<tr>
+<td>订单 1k / 10k 衰减</td>
+<td>各 -10%</td>
+<td><em>待补充：量级触发；规模化后降低单笔溢价</em></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>四、FCR 10%（含 1% FX Buffer）</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>设计依据（待细化）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>比例</td>
+<td>10%</td>
+<td><em>待补充：行业风险预留惯例；退款、争议、硬成本超支的弹性</em></td>
+</tr>
+<tr>
+<td>FX Buffer</td>
+<td>1%</td>
+<td><em>待补充：跨境结算汇率波动；14 天 Escrow 期间的汇率风险</em></td>
+</tr>
+<tr>
+<td>Cap</td>
+<td>6 个月最高月 GMV 120% 或 Escrow 20%</td>
+<td><em>待补充：FCR 池上限；避免过度沉淀</em></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>五、1% 名誉成本</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>设计依据（待细化）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>比例</td>
+<td>创始人各 0.5%，合计 1%</td>
+<td><em>待补充：创始人个人认捐；公益金池来源；可抵税设计</em></td>
+</tr>
+<tr>
+<td>流向</td>
+<td>公益金池（创始人决策权部分）</td>
+<td><em>见递归反哺细则 §5.6.2.1</em></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>六、创世人个人捐赠（不写入协议）</h2>
+<p>创世人若自愿从个人所得中捐入公益金，为个人选择，不写入协议，不形成制度性差异。二人结构平等。</p>
+<hr>
+<h2>七、递归反哺默认比例 0.1%</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>设计依据（待细化）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>比例</td>
+<td>65% 艺术家利润部分 的 0.1%（<strong>暂定</strong>；以后根据众人讨论后共识再明确确定）</td>
+<td>象征性最低回流；对源头创意致敬；单笔成本可接受</td>
+</tr>
+<tr>
+<td>注</td>
+<td>可经共识程序修订（见 §12.2）</td>
+<td><em>非创始人独家锁定</em></td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>八、修订说明</h2>
+<ul>
+<li>本表由 <strong>Founder</strong> 负责细化；CTO、法务可提出澄清请求，但无权修改已锁定参数</li>
+<li>细化完成后，版本号从 v0.1 升级为 v1.0</li>
+<li>最后修订：<em>待填写</em></li>
+</ul>
+<hr>
+<p><em>配合使用：<a href="./WhoAmI.Art 分润与财务逻辑补充（财务工程 v1.0）.html" class="doc-link">《分润与财务逻辑补充》</a><a href="../../../02_协议与规范/递归反哺与源头确权细则.html" class="doc-link">《递归反哺与源头确权细则》</a>《Founder Master Document》</em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../../../glossary-data.js"></script>
+  <script src="../../../../glossary.js"></script>
+</body>
+</html>

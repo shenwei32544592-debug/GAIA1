@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文档与论坛一体化方案：制宪档案库设计 · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>文档与论坛一体化方案：制宪档案库设计</h1>
+<p><strong>用途</strong>：实现联盟可公开讨论文档的「单入口浏览 + 论坛化讨论 + 版本留证」；作为 Founder 与 CTO 首次对齐的核心沟通工具，并为英雄贴公开招募奠基<br><strong>版本</strong>：草案 v0.2<br><strong>依据</strong>：<a href="./创世贡献记录与确认机制（论坛版）.html" class="doc-link">《创世贡献记录与确认机制（论坛版）》</a>§3.1、<a href="../00_索引与导航/有效路径与时间节点安排.html" class="doc-link">《有效路径与时间节点安排》</a><br><strong>核心 DNA</strong>：言论自由、信息被记录存证、公开透明</p>
+<p><strong>战略背景</strong>：GAIA_System_OS 为神经中枢；全盘数据在此。论坛为中枢与全部节点交互的主要方式。快速、高质量的中枢回应是建国期让生态看到希望的关键——无华盛顿式中心节点则建国不成。</p>
+<hr>
+<h2>一、目标与原则</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>需求</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>单入口浏览</strong></td>
+<td>文档有统一入口可浏览（gaia-manual-website），与论坛可互通</td>
+</tr>
+<tr>
+<td><strong>文档即帖子</strong></td>
+<td>每份可公开讨论的文档，在论坛中对应一个主帖；正文 = 文档最新版</td>
+</tr>
+<tr>
+<td><strong>跟帖讨论</strong></td>
+<td>CTO、Founder、后续加入者可在帖子下回复、提问、讨论</td>
+</tr>
+<tr>
+<td><strong>更新权归 Founder</strong></td>
+<td>文档内容仅 Founder 更新；讨论区所有人可发言</td>
+</tr>
+<tr>
+<td><strong>版本留证</strong></td>
+<td>每次文档更新时，变更摘要或 diff 追加到帖子中，形成可追溯的创世档案</td>
+</tr>
+<tr>
+<td><strong>言论自由 + 存证</strong></td>
+<td>发言不被事前审查；所有发言与修改可查、可追溯；为后续英雄贴公开招募树立范式</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>二、系统拓扑厘清</h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────┐
+│  GAIA_System_OS（本地文档库，根路径 d:\GAIA_System_OS）                    │
+│  · 源 Markdown 唯一信源                                                   │
+│  · 无 Git（或未来推送至 GAIA 专用仓库）                                     │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ gaia-manual-website/build.js
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│  网站输出（gaia-manual-website/docs/ + index.html）                        │
+│  · 每篇文档 → 独立 HTML 页                                                 │
+│  · 每页含「在论坛讨论此文」链接（指向对应 Discussion）                        │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ 文档→Discussion URL 映射
+                                    │ （见 doc-forum-mapping.json）
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│  论坛 · 制度广场（Phase 1：GitHub Discussions）                             │
+│  · 载体：signa.ink 仓库 或 未来 GAIA 专用仓库                               │
+│  · 每份文档 → 1 个 Discussion（主帖 = 文档正文；跟帖 = 讨论；回复 = 版本留证）  │
+└─────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>仓库选择</strong>：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>选项</th>
+<th>仓库</th>
+<th>适用场景</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>signa.ink（shenwei19790815/signa.ink）</td>
+<td>已有仓库，CTO 已协作；signa = GAIA 001 实例</td>
+<td><strong>Phase 1 推荐</strong>：制宪讨论作为「建&#39;国&#39;」的一部分，与 001 实例同源</td>
+</tr>
+<tr>
+<td>B</td>
+<td>未来 GAIA 专用仓库</td>
+<td>GAIA_System_OS 上 GitHub 后</td>
+<td>Phase 2/3 可迁移；若 GAIA 有独立品牌站点则优先</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>三、可讨论文档清单与映射</h2>
+<h3>3.1 文档分类</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>类别</th>
+<th>说明</th>
+<th>是否建 Discussion</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>核心制宪</strong></td>
+<td>宪章、成立理由书、FCR、分润、创意载体规范、技术可行性</td>
+<td>是，首批</td>
+</tr>
+<tr>
+<td><strong>协议与规范</strong></td>
+<td>CTO 共识、创世贡献记录、英雄贴、建国判定等</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>解释与叙事</strong></td>
+<td>FAQ、路演 PPT、蓝皮书等</td>
+<td>是（按需）</td>
+</tr>
+<tr>
+<td><strong>索引与内部</strong></td>
+<td>Master Index、输入映射表、Founder-AI 协作约定</td>
+<td>否（内部）</td>
+</tr>
+</tbody></table></div>
+<h3>3.2 文档→帖子映射配置</h3>
+<p>映射表独立存放，便于 Founder 维护、build 注入：</p>
+<ul>
+<li><strong>路径</strong>：<code>gaia-manual-website/doc-forum-mapping.json</code></li>
+<li><strong>格式</strong>：<code>{ &quot;文档相对路径&quot;: &quot;GitHub Discussion URL&quot; }</code></li>
+<li><strong>示例</strong>：</li>
+</ul>
+<pre><code class="language-json">{
+  &quot;01_宪法与治理/第一编｜基本权利.md&quot;: &quot;https://github.com/shenwei19790815/signa.ink/discussions/1&quot;,
+  &quot;02_协议与规范/FCR 1.1 创始贡献者权利协议.md&quot;: &quot;https://github.com/shenwei19790815/signa.ink/discussions/2&quot;,
+  &quot;06_解释与叙事/GAIA 技术可行性说明（公众版）.md&quot;: &quot;https://github.com/shenwei19790815/signa.ink/discussions/3&quot;
+}
+</code></pre>
+<ul>
+<li><strong>空缺时</strong>：该文档页不显示「讨论此文」链接，不影响浏览</li>
+</ul>
+<hr>
+<h2>四、实施路径（Phase 1/2/3）</h2>
+<h3>Phase 1：MVP——GitHub Discussions + 手动同步（立即可用）</h3>
+<p><strong>适用</strong>：Founder + CTO 首次对齐；论坛尚未搭建时<br><strong>目标</strong>：本周内可开始讨论；文档页有「讨论此文」入口</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>论坛载体</strong></td>
+<td>在 signa.ink 仓库启用 <strong>Discussions</strong>（Settings → Features → Discussions）</td>
+</tr>
+<tr>
+<td><strong>Category</strong></td>
+<td>创建：<code>制宪讨论</code>、<code>协议与规范</code>、<code>技术实现</code> 等</td>
+</tr>
+<tr>
+<td><strong>文档即帖子</strong></td>
+<td>为核心文档各开一个 Discussion；主帖 = 文档正文（手动粘贴或复制）</td>
+</tr>
+<tr>
+<td><strong>版本留证</strong></td>
+<td>Founder 更新文档后，在同一 Discussion 下<strong>回复一条 comment</strong>，格式见 §五</td>
+</tr>
+<tr>
+<td><strong>跟帖讨论</strong></td>
+<td>CTO、Founder 在 Discussion 下直接回复</td>
+</tr>
+<tr>
+<td><strong>入口</strong></td>
+<td>build.js 读取 doc-forum-mapping.json；每篇有映射的文档页底部注入「在 GitHub 讨论此文」</td>
+</tr>
+</tbody></table></div>
+<p><strong>操作步骤</strong>：</p>
+<ol>
+<li>在 signa.ink 仓库启用 Discussions，创建 Category</li>
+<li>为核心文档各建一个 Discussion，主帖贴入文档正文（可从 gaia-manual-website/docs/ 复制）</li>
+<li>新建 <code>doc-forum-mapping.json</code>，填入「文档路径 → Discussion URL」映射</li>
+<li>修改 build.js：复制 docs 时，若文档在映射表中，则在 <code>&lt;/article&gt;</code> 前插入讨论链接块</li>
+<li>运行 <code>npm run build</code>，验证文档页底部出现讨论链接</li>
+</ol>
+<p><strong>优点</strong>：零成本、立即可用、Git 原生、可追溯<br><strong>缺点</strong>：主帖与文档需手动同步；版本留证靠 Founder 自觉回复</p>
+<hr>
+<h3>Phase 2：半自动——同步脚本 + 论坛 API（CTO 参与后）</h3>
+<p><strong>适用</strong>：论坛已搭建（Discourse / 自建 / 其他），有 API</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>同步触发</strong></td>
+<td>Founder 执行「一键同步」或 <code>git push</code> 时，触发 post-commit / GitHub Action</td>
+</tr>
+<tr>
+<td><strong>同步逻辑</strong></td>
+<td>脚本读取变更的 .md → 调用论坛 API：创建/更新主帖；追加「版本变更」区块</td>
+</tr>
+<tr>
+<td><strong>版本格式</strong></td>
+<td>主帖结构：<code>[正文]\n\n---\n\n## 版本历史\n### 2025-02-14\n[变更摘要]\n...</code></td>
+</tr>
+</tbody></table></div>
+<p><strong>技术要点</strong>：论坛需提供 API；同步脚本（Node/Python）读取 git diff 或文件内容，调用 API。</p>
+<hr>
+<h3>Phase 3：全自动——文档为单一数据源（远期）</h3>
+<p><strong>适用</strong>：论坛成熟、有专职运维</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数据流</strong></td>
+<td>Markdown 唯一信源；CI/CD：构建网站 + 同步论坛，双重输出</td>
+</tr>
+<tr>
+<td><strong>版本留证</strong></td>
+<td>每次 commit 自动生成 changelog，写入论坛主帖的「版本历史」区块</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>五、版本留证格式</h2>
+<p>每次 Founder 更新文档后，在对应 Discussion 下回复一条 comment：</p>
+<pre><code class="language-markdown">---
+### 更新记录 2025-02-14
+
+**变更摘要**：第一编基本权利新增通俗解释附录；开篇补充联盟登记确权说明。
+
+**涉及章节**：附录、开篇
+
+---
+</code></pre>
+<p><strong>原则</strong>：可查证、可追溯；为创世档案留下不可篡改的时间戳证据。</p>
+<hr>
+<h2>六、与<a href="./创世贡献记录与确认机制（论坛版）.html" class="doc-link">《创世贡献记录与确认机制（论坛版）》</a>的衔接</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>创世贡献记录 §3.1 约定</th>
+<th>本方案对应实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>建&quot;国&quot;路线图专区承载网站全部内容</td>
+<td>gaia-manual-website = 文档入口；Discussions = 专区讨论区</td>
+</tr>
+<tr>
+<td>按条款/按文件讨论</td>
+<td>每份文档 → 1 Discussion</td>
+</tr>
+<tr>
+<td>创世者重点回复、CTO 技术答疑</td>
+<td>跟帖中分工；创世者制度/战略，CTO 技术/实现</td>
+</tr>
+<tr>
+<td>transparent 透明化历史档案</td>
+<td>版本留证 + 讨论可查</td>
+</tr>
+<tr>
+<td>文档与论坛一体化、版本留证、同步机制</td>
+<td>本文档即其技术与操作设计</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>七、操作清单与建议</h2>
+<h3>7.1 Founder 立即可做（无需 CTO）</h3>
+<ol>
+<li><strong>启用 Discussions</strong>：在 signa.ink 仓库 Settings → Features → Discussions，勾选启用</li>
+<li><strong>创建 Category</strong>：<code>制宪讨论</code>、<code>协议与规范</code>、<code>技术实现</code></li>
+<li><strong>建 Discussion</strong>：为首批 5–10 份核心文档各建一个，主帖贴入正文</li>
+<li><strong>建映射表</strong>：<code>doc-forum-mapping.json</code>，填入文档路径 → Discussion URL</li>
+<li><strong>改 build</strong>：按 §四 Phase 1 步骤 4，注入「讨论此文」</li>
+</ol>
+<h3>7.2 需 CTO 参与</h3>
+<ol>
+<li><strong>论坛选型与搭建</strong>：按《有效路径》「论坛优先」，CTO 负责论坛/制度广场；选型时优先考虑带 API、支持 Markdown、可程序化发帖的平台</li>
+<li><strong>文档→帖子同步脚本</strong>：论坛就绪后，实现 sync 逻辑；Founder 维持「一键同步」工作流</li>
+</ol>
+<h3>7.3 制度层面</h3>
+<ol>
+<li><strong>讨论区规则</strong>：主帖或专区置顶明确——「正文更新权归 Founder；讨论区所有人可自由发言；发言即被记录、可追溯」</li>
+<li><strong>中枢回应原则</strong>：本专区由 Founder 作为制度与战略的核心答疑者；全盘数据在中枢，反馈力求快速、有据、可追溯。节点的问题会被看见，回复即创世档案的一部分</li>
+<li><strong>与 Governance Log 的关系</strong>：论坛讨论与版本记录可择要归档；重大共识、制度修正须有正式记录</li>
+<li><strong>英雄贴衔接</strong>：论坛稳定、讨论可查、版本可追溯时，广发英雄贴即具备「公开、透明、可验证」的档案基础</li>
+</ol>
+<h3>7.3a 中枢回应增强（补充方法）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>FAQ 动态更新</strong></td>
+<td>论坛反复出现的问题沉淀进 FAQ；新节点自助，减轻中枢负担</td>
+</tr>
+<tr>
+<td><strong>分层响应</strong></td>
+<td>技术类 → CTO；制度/战略/共识类 → Founder；中枢聚焦高杠杆</td>
+</tr>
+<tr>
+<td><strong>AI 预答 + Founder 确认</strong></td>
+<td>常见问题由 AI 据文档起草，Founder 审阅后发出</td>
+</tr>
+<tr>
+<td><strong>透明 backlog</strong></td>
+<td>帖标注「已读/待回复/已回复」，节点知悉被看见</td>
+</tr>
+<tr>
+<td><strong>优先级队列</strong></td>
+<td>阻塞建国者优先；一般讨论批次处理</td>
+</tr>
+</tbody></table></div>
+<h3>7.4 风险与边界</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>风险</th>
+<th>应对</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>讨论区不当言论</td>
+<td>事后处理；不事前审查；严重违规可依共识删除并记录</td>
+</tr>
+<tr>
+<td>文档与帖子不同步</td>
+<td>明确「文档为权威版本」；帖子滞后时以文档为准；定期人工校对</td>
+</tr>
+<tr>
+<td>版本历史冗长</td>
+<td>可设「仅保留近 N 次变更」；早期归档至 Governance Log</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>八、下一步行动</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>时间</th>
+<th>动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>本周</strong></td>
+<td>在 signa.ink 启用 Discussions；为核心文档建 Discussion；创建 doc-forum-mapping.json；修改 build 注入讨论链接；Founder 与 CTO 约定首次讨论动议</td>
+</tr>
+<tr>
+<td><strong>论坛搭建时</strong></td>
+<td>将「文档→帖子、版本留证、讨论区」纳入 CTO 需求规格</td>
+</tr>
+<tr>
+<td><strong>英雄贴前</strong></td>
+<td>确保至少 3–5 份核心文档已有可讨论、可追溯的帖子与版本记录</td>
+</tr>
+</tbody></table></div>
+<hr>
+<p><em>本文档为操作设计草案；与<a href="./创世贡献记录与确认机制（论坛版）.html" class="doc-link">《创世贡献记录与确认机制（论坛版）》</a><a href="../00_索引与导航/有效路径与时间节点安排.html" class="doc-link">《有效路径与时间节点安排》</a>配套使用。</em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

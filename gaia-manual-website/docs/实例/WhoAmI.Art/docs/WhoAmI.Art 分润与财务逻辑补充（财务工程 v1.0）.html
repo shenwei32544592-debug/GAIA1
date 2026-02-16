@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhoAmI.Art 分润与财务逻辑补充（财务工程 v1.0） · GAIA</title>
+  <link rel="stylesheet" href="../../../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>WhoAmI.Art 分润与财务逻辑补充（财务工程 v1.0）</h1>
+<p><strong>用途</strong>：分润底座、成本剥离、最低利润率、物料补偿、FCR 处理、穿透式结算；供 IT 实现与会计师参考<br><strong>版本</strong>：v1.0<br><strong>性质</strong>：制度补充，可写入协议附件</p>
+<hr>
+<h2>一、核心名词大白话</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>术语</th>
+<th>财务定义</th>
+<th>大白话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Gross Price</td>
+<td>用户支付总金额</td>
+<td>客户刷卡的总钱数</td>
+</tr>
+<tr>
+<td>Hard Costs</td>
+<td>快递、第三方物料、支付手续费</td>
+<td>必须给别人的钱，不参与分润</td>
+</tr>
+<tr>
+<td>Net Pool</td>
+<td>总价 - 硬成本</td>
+<td>咱们自己人分得着的钱</td>
+</tr>
+<tr>
+<td>艺术家利润部分 (65%)</td>
+<td>劳务、IP 授权、个人溢价</td>
+<td>艺术家凭本事拿走的大头；创意价值回归源头</td>
+</tr>
+<tr>
+<td>创世分润池 (2%+2%+1%)</td>
+<td>创世者 2%、创世技术官 2%、公益积累金 1%</td>
+<td>创世节点信用抵押；原始内核人物、必不可少守夜人角色；道义与结构性双重正当性；封死未来无限加码；1% 入<a href="../02_%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%A7%84%E8%8C%83/%E5%85%AC%E7%9B%8A%E9%87%91%E6%B1%A0%E7%BB%86%E5%88%99.html">公益金池（全平台公益积累金）</a>；取之于民，用之于民</td>
+</tr>
+<tr>
+<td>公共运营池 (20%)</td>
+<td>联盟运转成本</td>
+<td>IT、合规、客服、获客、溯源与分配引擎；先覆盖运营成本，<strong>结余</strong>按 FCR 比例分配；取之于民，用之于民</td>
+</tr>
+<tr>
+<td>风险储备金 (10%)</td>
+<td>全体系保险池</td>
+<td>退款、争议、FX 缓冲；达阈值后停计、超额转入 20%；结余可优先用于节点内人道救助；取之于民，用之于民</td>
+</tr>
+</tbody></table></div>
+<p><strong>财政结构原则</strong>：65%、2%+2%+1%、20%、10% 不是「谁分走了」，而是这个联盟运转所必须的财政结构。类比宪政国家：没有法院、税务局、储备金，公民权利无法实现。艺术家联盟亦然。人民须看好钱袋子；所有池均有明确用途边界、可查、可审计。</p>
+<h3>1.1 各池用途与溢出规则总表</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>池子</th>
+<th>比例</th>
+<th>首要用途</th>
+<th>结余/溢出去向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>艺术家利润部分</td>
+<td>65%</td>
+<td>劳务、IP 授权、个人溢价；创意价值回归源头</td>
+<td>直接分配，无结余</td>
+</tr>
+<tr>
+<td>创世者分润</td>
+<td>2%</td>
+<td>Founder 信用抵押与制度设计对价；原始内核人物、必不可少守夜人角色；道义与结构性双重正当性</td>
+<td>无溢出（固定 2%）</td>
+</tr>
+<tr>
+<td>创世技术官分润</td>
+<td>2%</td>
+<td>技术架构与基础设施对价；原始内核人物、必不可少守夜人角色；道义与结构性双重正当性</td>
+<td>无溢出（固定 2%）</td>
+</tr>
+<tr>
+<td>公益积累金</td>
+<td>1%</td>
+<td><a href="../02_%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%A7%84%E8%8C%83/%E5%85%AC%E7%9B%8A%E9%87%91%E6%B1%A0%E7%BB%86%E5%88%99.html">公益金池（全平台公益积累金）</a>（传承、教育、扶持新人）</td>
+<td>直接入公益金池</td>
+</tr>
+<tr>
+<td>公共运营池</td>
+<td>20%</td>
+<td>IT、合规、客服、获客、溯源与分配引擎</td>
+<td>结余 → FCR 持有者分配</td>
+</tr>
+<tr>
+<td>风险储备金</td>
+<td>10%</td>
+<td>退款垫付、争议解决、FX 缓冲、硬成本超支</td>
+<td>达阈值后超额 → 转入 20%；池内结余可优先节点内人道救助；20%+10% 仍不足时可触发紧急状态</td>
+</tr>
+<tr>
+<td>行业始祖待认领池</td>
+<td>0.1%×订单</td>
+<td>无指认源头时按品类暂存</td>
+<td>找到始祖 → 付其账户；公投认定无法指认 → 转入公益</td>
+</tr>
+<tr>
+<td>紧急状态</td>
+<td>例外</td>
+<td>20%+10% 仍不足时</td>
+<td>14 天披露后 75% 共识；7 天生效；≤6 月；续延≤3 月；12 月冷却；60 天内事后审查</td>
+</tr>
+</tbody></table></div>
+<p><strong>公益金池来源</strong>：1%（二人各 0.5% 合成）+ 行业始祖 0.1%（先入待认领池，经公投转入后入公益金池）+ 主动捐赠。详见<a href="../02_%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%A7%84%E8%8C%83/%E5%85%AC%E7%9B%8A%E9%87%91%E6%B1%A0%E7%BB%86%E5%88%99.html">《公益金池细则》</a>。创世人个人捐不捐为个人选择，不写入协议。</p>
+<h3>1.2 建国信用池（Batch 1+ 艺术家限期回补）</h3>
+<p><strong>条件触发</strong>：仅当订单来自 <strong>Batch 1+ 艺术家</strong>（建国成功或 FCR 窗口关闭后加入），且处于其<strong>回补期内</strong>（如前 90 天或前 30 单）时，该艺术家 Artist Pool 的 1%–3% 进入<strong>建国信用池</strong>。详见<a href="../02_%E5%8D%8F%E8%AE%AE%E4%B8%8E%E8%A7%84%E8%8C%83/%E5%BB%BA%E5%9B%BD%E5%9B%9E%E8%A1%A5%E4%B8%8E%E7%A1%AE%E5%AE%9A%E6%80%A7%E6%BA%A2%E4%BB%B7%E6%9C%BA%E5%88%B6%EF%BC%88%E8%8D%89%E6%A1%88%EF%BC%89.html">《建国回补与确定性溢价机制（草案）》</a>。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>来源</strong></td>
+<td>艺术家利润部分（65%）中 carve-out 1%–3%；仅 Batch 1+ 回补期内</td>
+</tr>
+<tr>
+<td><strong>去向</strong></td>
+<td>建国信用池；按 FCR 权重分配予创世公民；不得进私人或公司</td>
+</tr>
+<tr>
+<td><strong>期限</strong></td>
+<td>回补为限期机制；满足 90 天或 30 单后自动停止；不构成永久抽成</td>
+</tr>
+<tr>
+<td><strong>可审计</strong></td>
+<td>池子流水与分配可追溯、可公示</td>
+</tr>
+</tbody></table></div>
+<p><strong>公平逻辑</strong>：早期的人承担的是「系统可能失败」的风险；后来的人享受的是「系统已被证明可用」的确定性。后来者用一小段时间对早期试错成本做有限回补，这是同一套公平。</p>
+<hr>
+<h2>二、分配公式：穿透式结算</h2>
+<pre><code>收钱：用户付 $1000
+剥离：快递 $50 + 物料 $50 → 硬成本 $100
+Net Pool：$900
+
+分润（65/5/20/10，其中 5% = 2%+2%+1%）：
+艺术家：$900 × 65% = $585
+创世分润池：$900 × 5% = $45（含 Founder 2%、CTO 2%、公益 1%）
+公共运营池：$900 × 20% = $180
+风险储备金：$900 × 10% = $90
+</code></pre>
+<hr>
+<h2>三、物料成本：Material Baseline（MB）</h2>
+<h3>3.1 问题</h3>
+<p>艺术家自担大量物料成本（宣纸、特制颜料、贵金属）时，若死扣 65%，其纯利被压缩。</p>
+<h3>3.2 方案：先报销，后分红</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>原逻辑</th>
+<th>新逻辑</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(总价 - 快递) × 65% = 艺术家</td>
+<td>(总价 - 快递 - 物料) × 65% + 物料 = 艺术家</td>
+</tr>
+</tbody></table></div>
+<p>物料从「分润」变为「报销」，从 Net Pool 计算前剥离。</p>
+<h3>3.3 平滑方式</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>分级 SKU</strong></td>
+<td>标准版 $499 含 $20 物料；典藏版 $799 含 $150 物料；系统自动识别</td>
+</tr>
+<tr>
+<td><strong>Class A 实报实销</strong></td>
+<td>高度定制时，艺术家上传凭证，平台先划拨物料费，不计入 Net Pool</td>
+</tr>
+<tr>
+<td><strong>平台采购</strong></td>
+<td>由美国节点采购底座/框，艺术家只交付数字或轻量素材</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>四、最低利润率（MMG）</h2>
+<h3>4.1 定义</h3>
+<p><strong>Net Pool / Gross ≥ 40%</strong>（或单笔 Net Pool ≥ $200）。</p>
+<p>低于此线，系统<strong>不接单</strong>。</p>
+<h3>4.2 意义</h3>
+<ul>
+<li>筛选高价值供给</li>
+<li>保护 20% 公共运营池覆盖能力</li>
+<li>IT 只需：<code>IF (Price - Hard_Costs) / Price &lt; 40% THEN REJECT_ORDER</code></li>
+</ul>
+<h3>4.3 对外表述</h3>
+<p>「尊严红线」——拉低档次的不接。</p>
+<hr>
+<h2>五、20% 公共运营池：用途与结余分配</h2>
+<h3>5.1 必须覆盖的成本（优先支出）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>类别</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>IT 与基础设施</strong></td>
+<td>服务器、API、数字存证</td>
+</tr>
+<tr>
+<td><strong>人工与客服</strong></td>
+<td>美国侧运营、纠纷处理</td>
+</tr>
+<tr>
+<td><strong>治理与合规</strong></td>
+<td>LLC 年审、CPA、法律</td>
+</tr>
+<tr>
+<td><strong>品牌与获客</strong></td>
+<td>域名、SEO、策展</td>
+</tr>
+</tbody></table></div>
+<h3>5.2 无人受雇原则（No-Employment Principle）</h3>
+<p><strong>联盟及其执行节点不与任何自然人建立劳动合同或固定雇佣关系。</strong> IT、合规、客服、获客、治理支持等均以<strong>外包</strong>（按项目、按单、按量计费）或<strong>选举岗位</strong>（可设 per-task 补偿，非工资）形式运作。法定签字人由选举或指定产生，可为<strong>多人协作签署</strong>；其身份为受托人，非雇员。</p>
+<p><strong>目的</strong>：使 20% 池成本随业务量波动，无固定人力 overhead；保护 FCR 结余可预期性。无订单则无外包支出，结余自然显现。</p>
+<h3>5.3 结余分配：创始贡献者权利（FCR）</h3>
+<p>运营成本覆盖后的<strong>结余部分</strong>，按《FCR 授予书》约定比例分配给 90 日窗口内的创始贡献者。结余披露、审计要求见治理约定。</p>
+<p><strong>全外包策略</strong>：客服、快递、财务、IT、合规均外包；20% 用来「买服务」而非「养人」。按单计费，无订单无支出。此池为联盟运转所必须——无此，艺术家拿不到 65%，用户也买不到；取之于民，用之于民。</p>
+<p><strong>创世后加入者</strong>：创世成功后再加入的 IT、设计师、运营等，<strong>不参与</strong> FCR 分配；仅能通过工资或公民权（如艺术家 65%）创收。详见<a href="../../../02_协议与规范/FCR 附录：90日窗口与价值量化说明.html" class="doc-link">《FCR 附录》</a>§4.2。</p>
+<p><strong>供应商定价与 FCR 贡献</strong>：第三方供应商（装裱、制作等）定价采用<strong>可评估成本 + 合理利润</strong>；供应商若为 FCR 持有者，其贡献以履约质量与长期合作为主，非价低者得。详见《分配方案：公式化定档与供应商定价》§第二条。</p>
+<hr>
+<h2>六、风险储备金处理</h2>
+<p><strong>术语说明</strong>：风险储备金（Risk Reserve）与创始贡献者权利（FCR）为不同概念；本节仅指风险储备金。</p>
+<h3>6.1 存放</h3>
+<p>Mercury 逻辑隔离子账户；100% 流动性；利息归系统积累池。</p>
+<h3>6.2 首要用途（调用场景）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>场景</th>
+<th>触发</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户拒付/退款</td>
+<td>自动从风险储备金垫付</td>
+</tr>
+<tr>
+<td>硬成本超支</td>
+<td>快递暴涨、供应商加价</td>
+</tr>
+<tr>
+<td>汇率剧烈波动</td>
+<td>FX Buffer</td>
+</tr>
+</tbody></table></div>
+<h3>6.3 动态上限与溢出</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>规则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cap</td>
+<td>过去 6 个月最高月 GMV 的 120%，或 Escrow 总量 20%</td>
+</tr>
+<tr>
+<td>达阈值后</td>
+<td>不再计提 10%；后续本应入池的 10% <strong>转入 20% 公共运营池</strong></td>
+</tr>
+<tr>
+<td>池内结余</td>
+<td>在保证风控需求前提下，可优先用于<strong>节点内人道主义救助</strong>；决策程序由治理约定</td>
+</tr>
+</tbody></table></div>
+<h3>6.4 目的表述</h3>
+<p>风险储备金为全体系保险池：保护艺术家与用户双方；达阈值后溢出回流联盟运转；结余可体现共同体关怀。取之于民，用之于民。</p>
+<h3>6.5 紧急状态：20% 与 10% 仍不足时的安全阀</h3>
+<p>当 20% 公共运营池不足以维持联盟运转，且已依规动用 10% 风险储备金后仍存在可预见的运营缺口时，可启动<strong>紧急状态分配调整</strong>。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>环节</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>触发</strong></td>
+<td>20% 耗尽 + 10% 风险金动用 + 仍有可预见运营缺口</td>
+</tr>
+<tr>
+<td><strong>提议</strong></td>
+<td>任一主体（创世公民 / 门类理事会 / 裁定者）可单独提议；须附<strong>书面缺口说明与预算</strong></td>
+</tr>
+<tr>
+<td><strong>披露期</strong></td>
+<td>提议后 <strong>14 天</strong> 披露期，方可表决；全平台可查</td>
+</tr>
+<tr>
+<td><strong>决策</strong></td>
+<td>创世公民 + 门类理事会 + 裁定者 <strong>75% 以上共识</strong>通过</td>
+</tr>
+<tr>
+<td><strong>生效延迟</strong></td>
+<td>通过后 <strong>7 天</strong> 生效；期间任何人可提请裁定者复核</td>
+</tr>
+<tr>
+<td><strong>措施</strong></td>
+<td>从艺术家利润部分（65%）<strong>临时</strong>提取不超过 5% 份额（具体比例及上限由动议约定），补入公共运营池</td>
+</tr>
+<tr>
+<td><strong>期限</strong></td>
+<td>每次有效期不超过 6 个月；续延须重新投票，<strong>单次续延不超过 3 个月</strong></td>
+</tr>
+<tr>
+<td><strong>冷却期</strong></td>
+<td>状态结束后 <strong>12 个月内</strong>不得再次启动</td>
+</tr>
+<tr>
+<td><strong>恢复</strong></td>
+<td>状态结束后，分配比例<strong>自动恢复</strong>为 65/5/20/10</td>
+</tr>
+<tr>
+<td><strong>事后审查</strong></td>
+<td>结束后 <strong>60 天内</strong>须公布：缺口成因、动用金额、恢复情况；裁定者须出具「是否必要」结论；全平台可查</td>
+</tr>
+</tbody></table></div>
+<p><strong>类比</strong>：平时税率够用；战时须加税应对。此机制为非常状态下的安全阀，非对 65% 的永久削减。</p>
+<hr>
+<h2>七、第三方物料协作的穿透结算</h2>
+<p>当艺术家上架产品且使用第三方装裱/制作：</p>
+<ol>
+<li><strong>上架</strong>：勾选协作模式，锁定 Total Hard Costs（如 $200）</li>
+<li><strong>支付</strong>：用户付 $1000 → Stripe → 14 天 Escrow</li>
+<li><strong>剥离</strong>：$200 划入应付账款池，不参与分润</li>
+<li><strong>Net Pool</strong>：$800，按 65/5/20/10 分配</li>
+<li><strong>结算</strong>：14 天后自动给供应商 $150、物流 $50、艺术家 $520 等</li>
+</ol>
+<p><strong>RuleID 要求</strong>：OrderID 与 SupplierID 强绑定；Hard_Cost 零级优先隔离。</p>
+<hr>
+<h2>八、创世分润池（2%+2%+1%）对外表述</h2>
+<p><strong>结构</strong>：创世者 2%、创世技术官 2%、公益积累金 1%；合计 5%，对外可称「创世信用与公益池」。<strong>正当性</strong>：道义（早期投入与风险回报）+ 结构性（二人为原始内核人物、必不可少守夜人，协议须其在场方能运转）。<strong>过渡期</strong>：当前为<strong>创世守夜人过渡期</strong>——此结构是到达系统完全安全平稳过程中的风险抵御机制；待更多守夜人加入、<strong>风险解除</strong>后，宪政共和国将实现自动安全运行，对所有人的保护由制度承担。风险解除条件与<strong>创世荣誉监护</strong>见术语表。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>避免</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>建&quot;国&quot;功劳费、创始人红利</td>
+<td><strong>创世分润池</strong>（联盟信用底座；2%+2%+1%）</td>
+</tr>
+<tr>
+<td>—</td>
+<td><strong>取之于民，用之于民</strong>：创世节点信用抵押；封死未来无限加码；1% 入公益金</td>
+</tr>
+<tr>
+<td>—</td>
+<td><strong>低费率裁定者（Low-Fee Guardian）</strong></td>
+</tr>
+</tbody></table></div>
+<p>「创始节点通过固定 2%+2%+1% 封死未来无限加码抽成的可能。此结构是联盟运转必须的财政安排，不是谁分走了。」</p>
+<h3>8.1 创世节点收益之收款主体指定</h3>
+<p>为确保平台运营之财务独立性，并与创世者个人流水隔离，创世节点（创世公民 / Founder / 创世技术官）之 2% 制度对价收益遵循以下清算原则：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>条款</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>收款主体</strong></td>
+<td>创世节点有权指定其收益的接收主体；该主体可为本人、其控制的法律实体（LLC/Corp）、或专项事务信托（Trust）</td>
+</tr>
+<tr>
+<td><strong>财务隔离</strong></td>
+<td>指定旨在将「规则对价」与个人日常流水分离，维护 GAIA 账本可审计性</td>
+</tr>
+<tr>
+<td><strong>效力延续</strong></td>
+<td>除非创世节点另行书面指示，系统沿用该指定路径；分配引擎按 RuleID 执行，无人干预</td>
+</tr>
+</tbody></table></div>
+<p><strong>依据</strong>：执行节点（LLC）按创世者/CTO 书面指定的收款账户划付 2%；变更须经书面更新并通知财务。</p>
+<hr>
+<h2>九、1% 名誉成本</h2>
+<p>创始人各认捐 0.5%（合计 1%），预扣划入<strong>公益金池</strong>（与行业始祖基金同一账户）。自动划转、可抵税。<strong>用途提议权与最终决策权</strong>：该部分归属「创世者（Founder）决策权」，<strong>创世者专属</strong>；可主动提议用途亦可最终决定；创世技术官有知情权与建议权，无决定权；其它节点有提议权与监督权。动用前须提前 7 天向 CTO 披露；拨款决议须注明是否采纳 CTO 建议及理由。此为创世者制度性影响力来源，系其核心优势。详见<a href="../../../02_协议与规范/递归反哺与源头确权细则.html" class="doc-link">《递归反哺与源头确权细则》</a>§5.8.2、§5.8.2.1a。</p>
+<p><strong>创世人个人捐赠</strong>：创世人若自愿从个人所得中捐入公益金，为个人选择，不写入协议，不形成制度性差异。</p>
+<hr>
+<h2>十、递归反哺（收益回流）</h2>
+<p><strong>依据</strong>：宪法第四编；<a href="../../../02_协议与规范/递归反哺与源头确权细则.html" class="doc-link">《递归反哺与源头确权细则》</a></p>
+<h3>10.1 原则</h3>
+<ul>
+<li>回流必须从<strong>经认定</strong>的、在平台销售的、使用源头创意的作品收益中拆分</li>
+<li>从衍生创作者的 <strong>65%</strong> 中抽取，由使用者让渡给源头</li>
+<li>自认定日起执行</li>
+</ul>
+<h3>10.2 源头两层（最多两层，不越级）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>层级</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>绝对源头</strong></td>
+<td>真正原创者，可经审查动议事后确认</td>
+</tr>
+<tr>
+<td><strong>应用层源头</strong></td>
+<td>在绝对源头影响下创作、首次在平台登记的版权主体</td>
+</tr>
+</tbody></table></div>
+<h3>10.3 定价权</h3>
+<ul>
+<li>版权使用费由<strong>版权所有者</strong>自主定价</li>
+<li>平台不代为定价；提供定价入口与执行</li>
+</ul>
+<h3>10.4 建设费用</h3>
+<ul>
+<li>回流给艺术家的钱：来自衍生销售本身</li>
+<li>回流机制（溯源、分配引擎）建设：来自公共运营池 20%</li>
+</ul>
+<h3>10.5 行业始祖 0.1%（不可指认源头）</h3>
+<p>当衍生作品声明「归属某品类传统，无具体可指认源头」时：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>金额</strong></td>
+<td>65% 艺术家利润部分 的 0.1%（暂定比例；以后根据众人讨论后共识再明确确定），与协议默认一致</td>
+</tr>
+<tr>
+<td><strong>流向</strong></td>
+<td><strong>行业始祖待认领池</strong>（按品类暂存）；<strong>不直接入公益</strong></td>
+</tr>
+<tr>
+<td><strong>指认</strong></td>
+<td>经公众指认（PAC）或等效程序找到始祖 → 支付该品类历史积累及未来 0.1% 至其账户</td>
+</tr>
+<tr>
+<td><strong>转入公益</strong></td>
+<td>仅当公投认定无法指认或满 N 年无指认时，该品类余额转入公益金池</td>
+</tr>
+</tbody></table></div>
+<p><strong>详细规则</strong>见<a href="../../../02_协议与规范/递归反哺与源头确权细则.html" class="doc-link">《递归反哺与源头确权细则》</a>§5 行业始祖 0.1%：待认领池与处分；池内动用权分层见 §5.8.2.1。</p>
+<hr>
+<hr>
+<h2>十一、财务分配参数：决策权与可变更性</h2>
+<h3>11.1 创始人锁定（任何人无权染指）</h3>
+<p>以下参数由<strong>创始人决策设定</strong>，未经创始人书面同意，任何人、任何治理主体不得变更。执行节点、门类理事会、裁定者均无权修改。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>参数</th>
+<th>当前值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主分配比例</td>
+<td>65 / 5 / 20 / 10</td>
+<td>Artist / 创世分润池(2%+2%+1%) / 公共运营池 / 风险储备金；硬编码，执行节点无权改</td>
+</tr>
+<tr>
+<td>MMG（最低利润率）</td>
+<td>Net Pool / Gross ≥ 40%</td>
+<td>尊严红线；低于此线不接单</td>
+</tr>
+<tr>
+<td>创世分润池</td>
+<td>Net Pool 的 5%（2%+2%+1%）</td>
+<td>Founder 2%、CTO 2%、公益 1%</td>
+</tr>
+<tr>
+<td>创世公民 Cap</td>
+<td>单人单月 ≤ 过去 6 个月平均的 200%</td>
+<td>超出部分 Catch-up</td>
+</tr>
+<tr>
+<td>Catch-up 分流</td>
+<td>50% → 创始贡献者池，50% → 公共运营池</td>
+<td>超出 Cap 部分的去向</td>
+</tr>
+<tr>
+<td>Time Decay</td>
+<td>18 个月线性衰减至 50%</td>
+<td>创世公民 时间衰减</td>
+</tr>
+<tr>
+<td>订单触发衰减</td>
+<td>1k 单 -10%，10k 单再 -10%</td>
+<td>创世公民 量级衰减</td>
+</tr>
+<tr>
+<td>风险储备金比例</td>
+<td>10%（含 1% FX Buffer）</td>
+<td>全体系保险池；达阈值后溢出转入 20%</td>
+</tr>
+<tr>
+<td>1% 名誉成本</td>
+<td>创始人各 0.5%，合计 1%</td>
+<td>创始人认捐，流入公益金池</td>
+</tr>
+<tr>
+<td>公益金池创世者决策权</td>
+<td>1% 名誉成本的提议权与用途决策权；<strong>创世者（Founder）专属</strong>；创世技术官知情权与建议权、无决定权；其它节点提议权与监督权</td>
+<td>受 §5.8.2.2–5.8.2.4 边界约束</td>
+</tr>
+</tbody></table></div>
+<p><strong>变更程序</strong>：上述参数若需变更，须经<strong>创始人书面同意</strong>，并视条款级别同步履行：多签（Founder + CTO + 法务/财务）、或共识程序（见下）。</p>
+<h3>11.2 可变更参数：形式与程度</h3>
+<p>以下参数可经规定程序变更，变更权不在创始人独家持有。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>参数</th>
+<th>当前值</th>
+<th>变更形式</th>
+<th>变更程度</th>
+<th>决策/参与主体</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>递归反哺默认比例</td>
+<td>65% 的 0.1%</td>
+<td>共识程序</td>
+<td>可调；总回流封顶不变（≤65% 的 50%）</td>
+<td>经裁定者/共识程序修订</td>
+</tr>
+<tr>
+<td>多源引用封顶</td>
+<td>65% 的 50%</td>
+<td>共识程序</td>
+<td>固定为 50%；不得突破封顶逻辑</td>
+<td>裁定者裁定</td>
+</tr>
+<tr>
+<td>宪法第四编收益比例</td>
+<td>见宪法</td>
+<td>第六编多阶段共识</td>
+<td>须 75% 裁定者同意 + 90 天缓冲</td>
+<td>宪法修正程序</td>
+</tr>
+<tr>
+<td>公共运营池 20% 内部切分</td>
+<td>运营/IT/合规/获客</td>
+<td>运营层决策</td>
+<td>内部调配，不改变 20% 总额</td>
+<td>Founder 或指定运营负责人</td>
+</tr>
+<tr>
+<td>营销节点 CPS 比例</td>
+<td>10% 公共运营池给营销</td>
+<td>Domain Council 建议</td>
+<td>在 20% 公共运营池内调剂</td>
+<td>Domain Council 采纳后执行</td>
+</tr>
+<tr>
+<td>风险储备金 Cap 公式</td>
+<td>6 个月最高月 GMV 120% 或 Escrow 20%</td>
+<td>共识程序</td>
+<td>可调整倍数或口径</td>
+<td>裁定者 + 财务复核</td>
+</tr>
+<tr>
+<td>风险储备金溢出流向</td>
+<td>转入 20% 公共运营池</td>
+<td>共识程序</td>
+<td>可调整；人道救助等</td>
+<td>裁定者共识</td>
+</tr>
+<tr>
+<td>新人准入评分权重</td>
+<td>艺术 40%/授权 20%/交付 20%/生态 20%</td>
+<td>Domain Council 建议 + Founder 采纳</td>
+<td>权重可调；≥75 通过线可经共识调整</td>
+<td>Domain Council 提议，Founder 合规复核</td>
+</tr>
+</tbody></table></div>
+<h3>11.3 变更程序层级</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>层级</th>
+<th>适用对象</th>
+<th>程序</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>创始人书面同意</td>
+<td>§11.1 所列参数</td>
+<td>创始人签字；视需同步 Founder + CTO + 法务/财务 多签</td>
+</tr>
+<tr>
+<td>共识程序</td>
+<td>递归反哺默认比例、多源封顶、FCR 细则等</td>
+<td>裁定者超级多数（≥75%）+ 披露期</td>
+</tr>
+<tr>
+<td>宪法修正</td>
+<td>第四编收益与反哺等宪法条款</td>
+<td>第六编：技术审查 + 伦理评审 + 裁定者 75% + 90 天缓冲</td>
+</tr>
+<tr>
+<td>运营层调配</td>
+<td>20% 公共运营池内部、营销 CPS 等</td>
+<td>在总额与比例边界内，Founder 或指定负责人决策</td>
+</tr>
+</tbody></table></div>
+<h3>11.4 不可篡改</h3>
+<p>无论何种程序，<strong>RuleID 数据库生成的分配指令</strong>为最高执行依据；会计与结算系统须服从 RuleID，任何人不得 override 已生效的分配结果。</p>
+<hr>
+<p><em>配合使用：《Founder Master Document》《制度补充说明》<a href="../../../02_协议与规范/递归反哺与源头确权细则.html" class="doc-link">《递归反哺与源头确权细则》</a><a href="../../../02_协议与规范/三项不可谈判权力声明.html" class="doc-link">《三项不可谈判权力声明》</a><a href="./WhoAmI.Art 财务分配参数设计依据（待细化）.html" class="doc-link">《财务分配参数设计依据（待细化）》</a></em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../../../glossary-data.js"></script>
+  <script src="../../../../glossary.js"></script>
+</body>
+</html>

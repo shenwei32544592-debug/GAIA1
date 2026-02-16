@@ -1,0 +1,121 @@
+{
+  "input": "James",
+  "generated_at": "2026-02-10 16:34",
+  "in_corpus": true,
+  "prompts": [
+    {
+      "prompt_en": "James, business formal style, 'Own Your Path', horse, guardian ring, clean composition, signable, fine line",
+      "prompt_cn": "James，商务风格，Own Your Path，骏马、守护环，干净构图，可签名，细线",
+      "style": "商务",
+      "blessing": "Own Your Path",
+      "elements": [
+        "骏马",
+        "守护环"
+      ],
+      "id": 1
+    },
+    {
+      "prompt_en": "James, vintage style, 'Still Becoming', horse, vintage pocket watch, book, clean composition, signable, fine line",
+      "prompt_cn": "James，复古风格，Still Becoming，骏马、复古怀表轮廓、书本，干净构图，可签名，细线",
+      "style": "复古",
+      "blessing": "Still Becoming",
+      "elements": [
+        "骏马",
+        "复古怀表轮廓",
+        "书本"
+      ],
+      "id": 2
+    },
+    {
+      "prompt_en": "James, minimal style, 'Built with care', oak leaf, star symbol, olive branch, clean composition, signable, fine line",
+      "prompt_cn": "James，简约风格，Built with care，橡树叶片、星标、橄榄枝，干净构图，可签名，细线",
+      "style": "简约",
+      "blessing": "Built with care",
+      "elements": [
+        "橡树叶片",
+        "星标",
+        "橄榄枝"
+      ],
+      "id": 3
+    },
+    {
+      "prompt_en": "James, business formal style, 'Still Becoming', star symbol, lion, vintage pocket watch, clean composition, signable, fine line",
+      "prompt_cn": "James，商务风格，Still Becoming，星标、雄狮、复古怀表轮廓，干净构图，可签名，细线",
+      "style": "商务",
+      "blessing": "Still Becoming",
+      "elements": [
+        "星标",
+        "雄狮",
+        "复古怀表轮廓"
+      ],
+      "id": 4
+    },
+    {
+      "prompt_en": "James, minimal style, 'Still Becoming', crown, book, clean composition, signable, fine line",
+      "prompt_cn": "James，简约风格，Still Becoming，皇冠、书本，干净构图，可签名，细线",
+      "style": "简约",
+      "blessing": "Still Becoming",
+      "elements": [
+        "皇冠",
+        "书本"
+      ],
+      "id": 5
+    },
+    {
+      "prompt_en": "James, minimal style, 'Still Becoming', star symbol, oak leaf, clean composition, signable, fine line",
+      "prompt_cn": "James，简约风格，Still Becoming，星标、橡树叶片，干净构图，可签名，细线",
+      "style": "简约",
+      "blessing": "Still Becoming",
+      "elements": [
+        "星标",
+        "橡树叶片"
+      ],
+      "id": 6
+    },
+    {
+      "prompt_en": "James, minimal style, 'Earned, not borrowed', oak leaf, guardian ring, clean composition, signable, fine line",
+      "prompt_cn": "James，简约风格，Earned, not borrowed，橡树叶片、守护环，干净构图，可签名，细线",
+      "style": "简约",
+      "blessing": "Earned, not borrowed",
+      "elements": [
+        "橡树叶片",
+        "守护环"
+      ],
+      "id": 7
+    },
+    {
+      "prompt_en": "James, vintage style, 'Own Your Path', book, vintage pocket watch, crown, clean composition, signable, fine line",
+      "prompt_cn": "James，复古风格，Own Your Path，书本、复古怀表轮廓、皇冠，干净构图，可签名，细线",
+      "style": "复古",
+      "blessing": "Own Your Path",
+      "elements": [
+        "书本",
+        "复古怀表轮廓",
+        "皇冠"
+      ],
+      "id": 8
+    },
+    {
+      "prompt_en": "James, minimal style, 'Still Becoming', laurel, oak leaf, clean composition, signable, fine line",
+      "prompt_cn": "James，简约风格，Still Becoming，月桂枝、橡树叶片，干净构图，可签名，细线",
+      "style": "简约",
+      "blessing": "Still Becoming",
+      "elements": [
+        "月桂枝",
+        "橡树叶片"
+      ],
+      "id": 9
+    },
+    {
+      "prompt_en": "James, business formal style, 'Own Your Path', shield, oak leaf, clean composition, signable, fine line",
+      "prompt_cn": "James，商务风格，Own Your Path，盾牌、橡树叶片，干净构图，可签名，细线",
+      "style": "商务",
+      "blessing": "Own Your Path",
+      "elements": [
+        "盾牌",
+        "橡树叶片"
+      ],
+      "id": 10
+    }
+  ]
+}

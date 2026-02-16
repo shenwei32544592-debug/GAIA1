@@ -1,0 +1,46 @@
+{
+  "input": "James",
+  "generated_at": "2025-02-10",
+  "prompts": [
+    {
+      "id": 1,
+      "prompt_en": "James, vintage style, calligraphy, sovereign declaration 'Own Your Path', crown and quill elements, oak leaf accent, minimalist layout, white space, signable, fine line",
+      "prompt_cn": "James，复古风格，书法，主权宣言 Own Your Path，皇冠与羽毛笔元素，橡树叶点缀，极简布局，留白，可签名，细线",
+      "style": "复古",
+      "blessing": "Own Your Path",
+      "elements": ["皇冠", "羽毛笔", "橡树叶"]
+    },
+    {
+      "id": 2,
+      "prompt_en": "James, classic minimal, 'Still Becoming' in elegant script, lion silhouette, star symbol, refined white space, signature grade",
+      "prompt_cn": "James，经典极简，Still Becoming 优雅书写，雄狮剪影，星标，精致留白，签名级",
+      "style": "简约",
+      "blessing": "Still Becoming",
+      "elements": ["雄狮", "星标"]
+    },
+    {
+      "id": 3,
+      "prompt_en": "James, business formal, 'Rooted & Free', shield and laurel, eagle motif, clean composition, dignified",
+      "prompt_cn": "James，商务正式，Rooted & Free，盾牌与月桂，雄鹰元素，干净构图，庄重",
+      "style": "商务",
+      "blessing": "Rooted & Free",
+      "elements": ["盾牌", "月桂", "雄鹰"]
+    },
+    {
+      "id": 4,
+      "prompt_en": "James, vintage pocket watch frame, 'Built with care', quill and book, subtle stardust, sovereign feel",
+      "prompt_cn": "James，复古怀表轮廓，Built with care，羽毛笔与书本，微妙星尘，主权感",
+      "style": "复古",
+      "blessing": "Built with care",
+      "elements": ["羽毛笔", "书本", "复古怀表"]
+    },
+    {
+      "id": 5,
+      "prompt_en": "James, minimalist logo, 'Earned, not borrowed', horse silhouette, olive branch, single accent letter J as seal",
+      "prompt_cn": "James，极简 logo，Earned not borrowed，骏马剪影，橄榄枝，字母 J 作印章",
+      "style": "简约",
+      "blessing": "Earned, not borrowed",
+      "elements": ["骏马", "橄榄枝", "J 印章"]
+    }
+  ]
+}

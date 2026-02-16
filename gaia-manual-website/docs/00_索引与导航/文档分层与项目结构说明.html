@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文档分层与项目结构说明 · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>文档分层与项目结构说明</h1>
+<p><strong>版本</strong>：v1.0<br><strong>用途</strong>：明确联盟层面与实例层面的文档归属；主项目与独立项目的划分<br><strong>原则</strong>：灵肉分离——官网 = 规矩与档案；实例 = 商业层</p>
+<hr>
+<h2>一、分层定义</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>层级</th>
+<th>定位</th>
+<th>对应概念</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>联盟层</strong></td>
+<td>宪法、成立理由书、创世档案、协议、FCR、创意载体规范；各节点统一入口</td>
+<td>规矩与档案（灵魂）</td>
+</tr>
+<tr>
+<td><strong>实例层</strong></td>
+<td>WhoAmI.Art、signa.ink；接单、收钱、履约、产品</td>
+<td>商业（躯干）</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>二、当前目录归属</h2>
+<h3>联盟层（主项目 · GAIA）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>目录</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00_索引与导航</td>
+<td>Master Index、快速查找表、有效路径、Founder-AI 协作约定、节点说服分析</td>
+</tr>
+<tr>
+<td>01_宪法与治理</td>
+<td>宪法六编、序言、合章性裁定、系统映射</td>
+</tr>
+<tr>
+<td>02_协议与规范</td>
+<td>创意载体规范、FCR、CTO 共识、三项权力、递归反哺、公益金池等</td>
+</tr>
+<tr>
+<td>03_创世与权益</td>
+<td>创世者誓、定位、权利附录</td>
+</tr>
+<tr>
+<td>05_对外与外交</td>
+<td>艺术家信函、自然人宪章说明、创世公民准入（<strong>制度性</strong>部分）</td>
+</tr>
+<tr>
+<td>06_解释与叙事</td>
+<td>成立理由书、建国路线图、FAQ、技术可行性说明、对外官网版（<strong>叙事</strong>部分）；入口见 <code>06_索引.md</code></td>
+</tr>
+<tr>
+<td>gaia-manual-website</td>
+<td>联盟说明书网站；宪法、协议、源文档的发布与浏览</td>
+</tr>
+</tbody></table></div>
+<p><strong>说明</strong>：04_工程与落地中<strong>联盟相关</strong>（冷启动、建国方案、胚胎发展、文档论坛一体化、IT 甘特图等）归属联盟层。</p>
+<h3>实例层（独立项目 · 小殖民地 → 联邦）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>目录/文件</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>实例/signa.ink/</strong></td>
+<td>第一殖民地：签名品类站点</td>
+</tr>
+<tr>
+<td>实例/signa.ink/signa-website</td>
+<td>网站代码、部署、架构</td>
+</tr>
+<tr>
+<td>实例/signa.ink/docs/</td>
+<td>美国市场战略、Phase 1 Checklist、90 天行动计划、LOGO 定锚、创意词条、讨论沉淀</td>
+</tr>
+<tr>
+<td><strong>实例/WhoAmI.Art/</strong></td>
+<td>联邦层：跨站点商业计划、分润、宪章、合作备忘录</td>
+</tr>
+<tr>
+<td>实例/WhoAmI.Art/docs/</td>
+<td>分润与财务、自然人宪章、创世公民准入、商业计划书、讲稿、合规等</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>三、当前实例层结构（小殖民地 → 联邦）</h2>
+<pre><code>GAIA_System_OS/
+├── 00_索引与导航/
+├── 01_宪法与治理/
+├── 02_协议与规范/
+├── 03_创世与权益/
+├── 04_工程与落地/          ← 仅保留联盟相关（冷启动、胚胎、IT 甘特图、文档论坛等）
+├── 05_对外与外交/          ← 联盟层艺术家信函、LOI、名字清单等
+├── 06_解释与叙事/
+├── gaia-manual-website/
+├── 实例/                   ← 实例层：按实体分
+│   ├── signa.ink/          ← 第一殖民地（签名品类）
+│   │   ├── signa-website/  ← 网站代码
+│   │   └── docs/           ← 市场战略、Checklist、90 天计划、讨论沉淀等
+│   └── WhoAmI.Art/         ← 联邦层（未来多殖民地汇聚平台）
+│       └── docs/            ← 分润、宪章、商业计划书、合作备忘录等
+├── 人际关系/
+└── 归档/
+</code></pre>
+<hr>
+<h2>四、与 GAIA 官网、signa.ink 网站的关系</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>站点</th>
+<th>域名（待定）</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>GAIA 官网</strong></td>
+<td>gaia-alliance.org 等</td>
+<td>宪法、成立理由书、创世档案、协议；节点按身份访问</td>
+</tr>
+<tr>
+<td><strong>gaia-manual-website</strong></td>
+<td>当前为本地/预览</td>
+<td>完整说明书、文档浏览器；可迁移至 GAIA 官网</td>
+</tr>
+<tr>
+<td><strong>signa.ink</strong></td>
+<td>signa.ink</td>
+<td>商业实例；接单、产品、获客</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>五、实例层 CTO 架构原则</h2>
+<p>实例层技术底座遵循 <strong>《实例层架构原则》</strong>（实例/实例层架构原则.md）：</p>
+<ul>
+<li><strong>表面独立</strong>：各站点各自品牌、各自域名；对外看似独立</li>
+<li><strong>底层同一</strong>：同一套逻辑系统、同一套数据库；IT 统一支撑</li>
+<li><strong>成熟后联邦</strong>：随站点成熟，汇聚至 WhoAmI.Art 平台</li>
+<li><strong>点子分层</strong>：战略层 → 实例层架构原则；品类层 → 各实体 <code>docs/</code> 下的基础设施与数据规划</li>
+</ul>
+<hr>
+<h2>六、检索时的分层意识</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>你在做…</th>
+<th>主要查阅</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>宪法、协议、FCR、建国、制度设计</td>
+<td>联盟层（00–03, 05–06, gaia-manual-website）</td>
+</tr>
+<tr>
+<td>signa.ink 产品、美国市场、TikTok、定价、履约</td>
+<td>实例层（signa.ink 相关）</td>
+</tr>
+<tr>
+<td>冷启动、艺术家启动策略、探路</td>
+<td>联盟层（04 中冷启动、节点说服）</td>
+</tr>
+<tr>
+<td>网站代码、部署、文案对齐</td>
+<td>实例层（signa-website）</td>
+</tr>
+<tr>
+<td>实例层技术底座、多站点共享逻辑、数据范围与节奏</td>
+<td>实例/实例层架构原则、各实体 docs/基础设施与数据规划</td>
+</tr>
+</tbody></table></div>
+<hr>
+<p><em>配套：GAIA Master Index、Founder-AI 协作约定 §7.10 引用范围、实例/实例层架构原则</em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

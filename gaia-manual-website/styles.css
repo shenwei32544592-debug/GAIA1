@@ -1,0 +1,401 @@
+/* GAIA 完整说明书 · 网站样式
+   冷峻、精确、法理感；便于浏览试用与样式调试
+*/
+
+:root {
+  --bg: #f8f6f2;
+  --bg-sidebar: #1a1a1a;
+  --text: #1a1a1a;
+  --text-muted: #5c5c5c;
+  --accent: #2c5282;
+  --accent-hover: #1a365d;
+  --border: #e2e0db;
+  --code-bg: #f0eee8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0d0d;
+    --bg-sidebar: #141414;
+    --text: #e5e5e5;
+    --text-muted: #9ca3af;
+    --accent: #7c9cb5;
+    --accent-hover: #9cb8d4;
+    --border: #2a2a2a;
+    --code-bg: #1a1a1a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Crimson Pro', 'Noto Serif SC', Georgia, serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* 布局 */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* 侧边栏 */
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  background: var(--bg-sidebar);
+  color: #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar-header {
+  padding: 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.logo-sub {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin: 0.25rem 0 0;
+}
+
+.nav {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.4rem 1.25rem;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #fff;
+  background: rgba(255,255,255,0.05);
+}
+
+.sidebar-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+}
+
+/* 主内容区 */
+.content {
+  flex: 1;
+  padding: 2rem 3rem 4rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* 说明书正文 */
+.manual {
+  font-size: 1.05rem;
+}
+
+.manual h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Crimson Pro', serif;
+}
+
+.manual h2:first-child {
+  margin-top: 0;
+}
+
+.manual h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+
+.manual h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.manual p {
+  margin: 0 0 1rem;
+}
+
+.manual strong {
+  font-weight: 600;
+}
+
+.manual ul, .manual ol {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+}
+
+.manual li {
+  margin: 0.25rem 0;
+}
+
+.manual blockquote {
+  margin: 1rem 0;
+  padding: 0.75rem 1.25rem;
+  border-left: 3px solid var(--accent);
+  background: rgba(44, 82, 130, 0.06);
+  font-style: italic;
+}
+
+/* 通俗解释区块：初中生可理解，用不同颜色区分 */
+.manual .plain-lang {
+  margin: 0.8rem 0;
+  padding: 0.9rem 1.2rem;
+  border-left: 4px solid #7d9a6b;
+  background: rgba(125, 154, 107, 0.08);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* 表格：包装器支持横向滚动，确保复杂表格正确排版 */
+.table-scroll-wrapper {
+  overflow-x: auto;
+  margin: 1rem 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.manual table,
+.manual .manual-table {
+  width: 100%;
+  min-width: 400px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.manual th,
+.manual td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.manual th {
+  background: var(--code-bg);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.manual pre {
+  background: var(--code-bg);
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.manual code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+  background: var(--code-bg);
+  padding: 0.15em 0.35em;
+}
+
+.manual pre code {
+  background: none;
+  padding: 0;
+}
+
+.manual hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+/* 相关文档引用块 */
+.manual .doc-ref {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: rgba(44, 82, 130, 0.08);
+  border-left: 3px solid var(--accent);
+  font-size: 0.95rem;
+}
+
+.manual .doc-ref ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.manual .doc-ref li {
+  margin: 0.25rem 0;
+}
+
+.manual .doc-link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.manual .doc-link:hover {
+  text-decoration: underline;
+}
+
+.manual .doc-index {
+  margin: 1.5rem 0;
+}
+
+.manual .doc-index .doc-link {
+  color: var(--accent);
+}
+
+/* 源文档独立页（doc-page） */
+body.doc-page {
+  padding: 0;
+}
+
+.doc-back {
+  padding: 1rem 2rem;
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border);
+}
+
+.doc-back a {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+}
+
+.doc-back a:hover {
+  color: #fff;
+}
+
+.doc-page .doc-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-size: 1.05rem;
+}
+
+/* 文档页：确保表格、列表、引用等与主页面排版一致 */
+.doc-content .table-scroll-wrapper {
+  margin: 1rem 0;
+}
+
+.doc-content h1 { font-size: 1.75rem; margin: 0 0 1rem; }
+.doc-content h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+.doc-content h3 { font-size: 1.2rem; margin: 2rem 0 0.75rem; }
+.doc-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+/* 文档页：在论坛讨论此文 */
+.doc-forum-link {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.doc-forum-link a {
+  color: var(--accent, #6b8cce);
+  text-decoration: none;
+}
+.doc-forum-link a:hover {
+  text-decoration: underline;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-link {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .content {
+    padding: 1.5rem 1.25rem 3rem;
+  }
+}
+
+/* 术语词典：下划线 + 悬浮/点击在右下角浮现释义 */
+.glossary-term {
+  border-bottom: 1px dotted var(--accent);
+  cursor: help;
+  text-decoration: none;
+}
+.glossary-term:hover,
+.glossary-term:focus {
+  outline: none;
+}
+
+/* 词条释义面板：彩色背景突出，左缘强调线 */
+.glossary-popover {
+  position: fixed;
+  max-height: min(360px, 60vh);
+  overflow-y: auto;
+  padding: 1rem 1.25rem;
+  padding-left: 1.125rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text);
+  background: #e8eef5;
+  border: 1px solid var(--accent);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  box-shadow: 0 8px 28px rgba(44, 82, 130, 0.18);
+  white-space: normal;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+@media (prefers-color-scheme: dark) {
+  .glossary-popover {
+    background: #1e2936;
+    border-color: var(--accent);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+  }
+}
+.glossary-popover.visible {
+  opacity: 1;
+  pointer-events: auto;
+}

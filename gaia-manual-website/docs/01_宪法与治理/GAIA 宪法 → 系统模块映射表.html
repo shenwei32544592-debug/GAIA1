@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAIA 宪法 → 系统模块映射表 · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><p>下面是<strong>专门给技术团队使用的工程级文档</strong>，不是愿景稿，也不是对外叙事，而是把 <strong>《GAIA 宪法》直接“编译”为系统结构</strong> 的那张表。</p>
+<p>你可以把它当成：<br>👉 <strong>宪法 = 法律</strong><br>👉 <strong>映射表 = 操作系统内核设计说明</strong></p>
+<hr>
+<h1>🧩《GAIA 宪法 → 系统模块映射表》</h1>
+<p><strong>For Engineering / Architecture Team</strong></p>
+<p>目的：<br>把抽象的文明原则，<strong>逐条落到可实现、可测试、可扩展的系统模块上</strong>，确保工程不会在未来被业务、资本或临时需求“带偏”。</p>
+<hr>
+<h2>一、总体系统分层（Engineering View）</h2>
+<pre><code class="language-plain">┌──────────────────────────────┐
+│        GAIA META-PROTOCOL     │  ← 宪法层（不可被产品逻辑覆盖）
+├──────────────────────────────┤
+│   Governance &amp; Consensus     │
+├──────────────────────────────┤
+│   Asset &amp; Truth Engine       │
+├──────────────────────────────┤
+│   Ledger &amp; Redistribution    │
+├──────────────────────────────┤
+│   Identity &amp; Capability      │
+├──────────────────────────────┤
+│   Application Instances      │  ← WhoAmI.Art（signa.ink）/ painting / sculpture
+└──────────────────────────────┘
+</code></pre>
+<hr>
+<h2>二、宪法条款 → 系统模块精确映射</h2>
+<h3>【序言】文明目标层（不可写代码，但必须可验证）</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>宪法原则</th>
+<th>技术含义</th>
+<th>工程约束</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>源头不可被抹除</td>
+<td>Attribution 永久存在</td>
+<td>禁止 UPDATE，只允许 APPEND</td>
+</tr>
+<tr>
+<td>协议高于平台</td>
+<td>平台可替换</td>
+<td>数据结构需跨系统可迁移</td>
+</tr>
+<tr>
+<td>正义优先于效率</td>
+<td>共识可能慢</td>
+<td>不允许“管理员一键裁决”</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>第一编《身份与节点》</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>宪法定义</th>
+<th>系统模块</th>
+<th>关键实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>所有人皆为节点</td>
+<td><code>Node_Service</code></td>
+<td>Node_ID（不可变）</td>
+</tr>
+<tr>
+<td>权力来自能力</td>
+<td><code>Capability_Mask</code></td>
+<td>位运算，不用 role enum</td>
+</tr>
+<tr>
+<td>权力可获得也可衰减</td>
+<td><code>Score &amp; Decay Engine</code></td>
+<td>定时衰减任务</td>
+</tr>
+</tbody></table></div>
+<p><strong>核心数据对象</strong></p>
+<pre><code class="language-json">Node {
+  node_id,
+  attribution_label,
+  capability_mask,
+  origin_timestamp,
+  decay_score
+}
+</code></pre>
+<hr>
+<h2>第二编《资产与真理》</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>宪法定义</th>
+<th>系统模块</th>
+<th>技术责任</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>创意即主权资产</td>
+<td><code>Asset_Service</code></td>
+<td>统一资产抽象</td>
+</tr>
+<tr>
+<td>真理可被回溯</td>
+<td><code>Truth Engine</code></td>
+<td>证据链存储</td>
+</tr>
+<tr>
+<td>历史不可覆盖</td>
+<td><code>Historical Anchor</code></td>
+<td>版本不可删除</td>
+</tr>
+</tbody></table></div>
+<p><strong>资产抽象（跨领域）</strong></p>
+<pre><code class="language-json">SovereignAsset {
+  asset_id,
+  asset_type,        // SIGNATURE / PAINTING / SCULPTURE
+  origin_node_id,
+  evidence_chain[],
+  immutable_hash
+}
+</code></pre>
+<hr>
+<h2>第三编《共识与裁定》</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>宪法原则</th>
+<th>系统模块</th>
+<th>实现逻辑</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>公众可指认源头</td>
+<td><code>Justice API</code></td>
+<td>提名接口</td>
+</tr>
+<tr>
+<td>同行裁定真理</td>
+<td><code>Steward Jury Engine</code></td>
+<td>临时陪审团</td>
+</tr>
+<tr>
+<td>无永久法官</td>
+<td><code>Issue-Triggered DAO</code></td>
+<td>议题即生即散</td>
+</tr>
+</tbody></table></div>
+<p><strong>关键流程</strong></p>
+<pre><code class="language-plain">Nomination →
+Evidence Submission →
+Steward Selection →
+Blind Review →
+Consensus Threshold →
+Ledger / Asset Update
+</code></pre>
+<hr>
+<h2>第四编《收益与反哺》</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>宪法原则</th>
+<th>系统模块</th>
+<th>工程实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用即反哺</td>
+<td><code>Atomic Ledger</code></td>
+<td>即时拆分</td>
+</tr>
+<tr>
+<td>源头优先</td>
+<td><code>Royalty Router</code></td>
+<td>多目标路由</td>
+</tr>
+<tr>
+<td>公益可绑定</td>
+<td><code>SOC Node</code></td>
+<td>组织节点支持</td>
+</tr>
+</tbody></table></div>
+<p><strong>账本最小单位</strong></p>
+<pre><code class="language-json">LedgerEntry {
+  entry_id,
+  asset_id,
+  amount,
+  target_node_id,
+  purpose,  // royalty / donation / derivative
+  timestamp
+}
+</code></pre>
+<hr>
+<h2>第五编《平台与实例》</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>宪法原则</th>
+<th>系统模块</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>平台只是实例</td>
+<td><code>Instance Layer</code></td>
+<td>可插拔</td>
+</tr>
+<tr>
+<td>协议统一</td>
+<td><code>GAIA Core SDK</code></td>
+<td>所有平台复用</td>
+</tr>
+<tr>
+<td>数据可汇流</td>
+<td><code>Alliance Gateway</code></td>
+<td>跨平台同步</td>
+</tr>
+</tbody></table></div>
+<p><strong>示例</strong></p>
+<ul>
+<li>WhoAmI.Art（signa.ink 为主产品）= GAIA Instance #001</li>
+<li>future.paint = GAIA Instance #002</li>
+</ul>
+<hr>
+<h2>第六编《修正、演进与文明延续》</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>宪法定义</th>
+<th>系统模块</th>
+<th>技术动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>宪法可修正</td>
+<td><code>Amendment Engine</code></td>
+<td>版本化协议</td>
+</tr>
+<tr>
+<td>不破坏历史</td>
+<td><code>Backward Compatibility</code></td>
+<td>老资产照常生效</td>
+</tr>
+<tr>
+<td>文明长期存在</td>
+<td><code>Migration Toolkit</code></td>
+<td>数据可迁移</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>三、给技术团队的三条红线（必须写进 README）</h2>
+<ol>
+<li><strong>任何“方便修改历史”的需求，默认非法</strong></li>
+<li><strong>任何“管理员直接裁定”的接口，必须被拒绝</strong></li>
+<li><strong>任何新功能，先回答：它是否破坏源头保护？</strong></li>
+</ol>
+<hr>
+<h2>四、工程团队一句话共识（可贴在墙上）</h2>
+<p>**“我们不是在写业务代码，<br>**<strong>我们在写一套不会背叛原创者的系统。”</strong></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAIA 文档浏览器 · 按目录浏览</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .browser-layout { display: flex; min-height: 100vh; }
+    .browser-sidebar { width: 280px; min-width: 280px; background: var(--bg-sidebar); color: #e5e5e5; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow: hidden; }
+    .browser-sidebar-header { padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .browser-sidebar-header h1 { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; margin: 0; }
+    .browser-sidebar-header p { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin: 0.25rem 0 0; }
+    .browser-back { padding: 0.5rem 1.25rem; }
+    .browser-back a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; }
+    .browser-back a:hover { color: #fff; }
+    .tree-nav { flex: 1; overflow-y: auto; padding: 0.5rem 0; }
+    .tree-folder { margin-bottom: 0.25rem; }
+    .tree-folder-btn { width: 100%; text-align: left; padding: 0.5rem 1.25rem; background: none; border: none; color: rgba(255,255,255,0.9); font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
+    .tree-folder-btn:hover { background: rgba(255,255,255,0.05); }
+    .tree-folder-btn::before { content: '▼'; font-size: 0.6rem; transition: transform 0.2s; }
+    .tree-folder.collapsed .tree-folder-btn::before { transform: rotate(-90deg); }
+    .tree-folder-content { display: block; }
+    .tree-folder.collapsed .tree-folder-content { display: none; }
+    .tree-doc { display: block; padding: 0.35rem 1.25rem 0.35rem 2rem; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tree-doc:hover, .tree-doc.active { color: #fff; background: rgba(255,255,255,0.05); }
+    .browser-main { flex: 1; display: flex; flex-direction: column; background: var(--bg); overflow: hidden; }
+    .browser-frame-wrap { min-height: 0; }
+    .browser-iframe { border: none; }
+    .browser-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 1rem; background: var(--bg); z-index: 1; }
+  </style>
+</head>
+<body>
+  <div class="browser-layout">
+    <aside class="browser-sidebar">
+      <header class="browser-sidebar-header">
+        <h1>GAIA</h1>
+        <p>文档浏览器 · 按目录</p>
+      </header>
+      <div class="browser-back"><a href="index.html">← 返回主说明书</a></div>
+      <nav class="tree-nav"><div class="tree-folder" data-folder="00_索引与导航">
+    <button type="button" class="tree-folder-btn" aria-expanded="true">索引与导航</button>
+    <div class="tree-folder-content"><a href="docs/00_索引与导航/联盟创世档案（制宪会议）.html" class="tree-doc" data-src="docs/00_索引与导航/联盟创世档案（制宪会议）.html">联盟创世档案（制宪会议）</a><a href="docs/00_索引与导航/输入与解释映射表.html" class="tree-doc" data-src="docs/00_索引与导航/输入与解释映射表.html">输入与解释映射表</a><a href="docs/00_索引与导航/Founder-AI 协作约定.html" class="tree-doc" data-src="docs/00_索引与导航/Founder-AI 协作约定.html">Founder-AI 协作约定</a><a href="docs/00_索引与导航/有效路径与时间节点安排.html" class="tree-doc" data-src="docs/00_索引与导航/有效路径与时间节点安排.html">有效路径与时间节点安排</a><a href="docs/00_索引与导航/节点角色说服与加入路径分析（决策参考）.html" class="tree-doc" data-src="docs/00_索引与导航/节点角色说服与加入路径分析（决策参考）.html">节点角色说服与加入路径分析（决策参考）</a><a href="docs/00_索引与导航/GAIA 标准术语与概念表.html" class="tree-doc" data-src="docs/00_索引与导航/GAIA 标准术语与概念表.html">GAIA 标准术语与概念表</a><a href="docs/00_索引与导航/GAIA Master Index.html" class="tree-doc" data-src="docs/00_索引与导航/GAIA Master Index.html">GAIA Master Index</a><a href="docs/00_索引与导航/文档分层与项目结构说明.html" class="tree-doc" data-src="docs/00_索引与导航/文档分层与项目结构说明.html">文档分层与项目结构说明</a><a href="docs/00_索引与导航/快速查找表.html" class="tree-doc" data-src="docs/00_索引与导航/快速查找表.html">快速查找表</a><a href="docs/00_索引与导航/新节点入门包.html" class="tree-doc" data-src="docs/00_索引与导航/新节点入门包.html">新节点入门包</a><a href="docs/00_索引与导航/更新日志.html" class="tree-doc" data-src="docs/00_索引与导航/更新日志.html">更新日志</a></div>
+  </div>
+<div class="tree-folder" data-folder="01_宪法与治理">
+    <button type="button" class="tree-folder-btn" aria-expanded="true">宪法与治理</button>
+    <div class="tree-folder-content"><a href="docs/01_宪法与治理/GAIA 宪法·序言.html" class="tree-doc" data-src="docs/01_宪法与治理/GAIA 宪法·序言.html">GAIA 联盟宪章·序言</a><a href="docs/01_宪法与治理/第一编｜基本权利.html" class="tree-doc" data-src="docs/01_宪法与治理/第一编｜基本权利.html">第一编｜基本权利</a><a href="docs/01_宪法与治理/第四编｜收益与反哺.html" class="tree-doc" data-src="docs/01_宪法与治理/第四编｜收益与反哺.html">第四编｜收益与反哺</a><a href="docs/01_宪法与治理/第二编｜资产与真理.html" class="tree-doc" data-src="docs/01_宪法与治理/第二编｜资产与真理.html">第二编｜资产与真理</a><a href="docs/01_宪法与治理/第三编｜共识与裁定.html" class="tree-doc" data-src="docs/01_宪法与治理/第三编｜共识与裁定.html">第三编｜共识与裁定</a><a href="docs/01_宪法与治理/第五编｜平台义务与权力边界.html" class="tree-doc" data-src="docs/01_宪法与治理/第五编｜平台义务与权力边界.html">第五编｜平台义务与权力边界</a><a href="docs/01_宪法与治理/第六编｜修正、演进与文明延续.html" class="tree-doc" data-src="docs/01_宪法与治理/第六编｜修正、演进与文明延续.html">第六编｜修正、演进与文明延续</a><a href="docs/01_宪法与治理/GAIA 宪法 → 系统模块映射表.html" class="tree-doc" data-src="docs/01_宪法与治理/GAIA 宪法 → 系统模块映射表.html">GAIA 联盟宪章 → 系统模块映射表</a></div>
+  </div>
+<div class="tree-folder" data-folder="02_协议与规范">
+    <button type="button" class="tree-folder-btn" aria-expanded="true">协议与规范</button>
+    <div class="tree-folder-content"><a href="docs/02_协议与规范/创意载体规范（核心逻辑摘要）.html" class="tree-doc" data-src="docs/02_协议与规范/创意载体规范（核心逻辑摘要）.html">创意载体规范（核心逻辑摘要）</a><a href="docs/02_协议与规范/递归反哺与源头确权细则.html" class="tree-doc" data-src="docs/02_协议与规范/递归反哺与源头确权细则.html">递归反哺与源头确权细则</a><a href="docs/02_协议与规范/公益金池细则.html" class="tree-doc" data-src="docs/02_协议与规范/公益金池细则.html">公益金池细则</a><a href="docs/02_协议与规范/CTO技术共识协议.html" class="tree-doc" data-src="docs/02_协议与规范/CTO技术共识协议.html">CTO 技术共识协议</a><a href="docs/02_协议与规范/FCR 1.1 创始贡献者权利协议.html" class="tree-doc" data-src="docs/02_协议与规范/FCR 1.1 创始贡献者权利协议.html">FCR 1.1 创始贡献者权利协议</a><a href="docs/02_协议与规范/FCR 附录：90日窗口与价值量化说明.html" class="tree-doc" data-src="docs/02_协议与规范/FCR 附录：90日窗口与价值量化说明.html">FCR 附录：90日窗口与价值量化说明</a><a href="docs/02_协议与规范/创世贡献记录与确认机制（论坛版）.html" class="tree-doc" data-src="docs/02_协议与规范/创世贡献记录与确认机制（论坛版）.html">创世贡献记录与确认机制（论坛版）</a><a href="docs/02_协议与规范/文档与论坛一体化方案：制宪档案库设计.html" class="tree-doc" data-src="docs/02_协议与规范/文档与论坛一体化方案：制宪档案库设计.html">文档与论坛一体化方案：制宪档案库设计</a><a href="docs/02_协议与规范/建国期人事网：自发协作结构设计（草案）.html" class="tree-doc" data-src="docs/02_协议与规范/建国期人事网：自发协作结构设计（草案）.html">建国期人事网：自发协作结构设计（草案）</a><a href="docs/02_协议与规范/建国者共建金：小额投入与紧急采购机制（草案）.html" class="tree-doc" data-src="docs/02_协议与规范/建国者共建金：小额投入与紧急采购机制（草案）.html">建国者共建金：小额投入与紧急采购机制（草案）</a><a href="docs/02_协议与规范/公民参与与贡献记账（Public Participation & Credits）.html" class="tree-doc" data-src="docs/02_协议与规范/公民参与与贡献记账（Public Participation & Credits）.html">公民参与与贡献记账</a><a href="docs/02_协议与规范/艺术家与系统需求直连机制（草案）.html" class="tree-doc" data-src="docs/02_协议与规范/艺术家与系统需求直连机制（草案）.html">艺术家与系统需求直连机制（草案）</a><a href="docs/02_协议与规范/建国回补与确定性溢价机制（草案）.html" class="tree-doc" data-src="docs/02_协议与规范/建国回补与确定性溢价机制（草案）.html">建国回补与确定性溢价机制（草案）</a><a href="docs/02_协议与规范/基建期艺术家共投机制（草案）.html" class="tree-doc" data-src="docs/02_协议与规范/基建期艺术家共投机制（草案）.html">基建期艺术家共投机制（草案）</a><a href="docs/02_协议与规范/论坛身份体系与贡献记账规则-MVP.html" class="tree-doc" data-src="docs/02_协议与规范/论坛身份体系与贡献记账规则-MVP.html">论坛身份体系与贡献记账规则-MVP</a><a href="docs/02_协议与规范/GAIA 社区早期权重（Reputation Score）计算逻辑.html" class="tree-doc" data-src="docs/02_协议与规范/GAIA 社区早期权重（Reputation Score）计算逻辑.html">GAIA 社区早期权重（Reputation Score）计算逻辑</a><a href="docs/02_协议与规范/建国务实进度看板：设计说明.html" class="tree-doc" data-src="docs/02_协议与规范/建国务实进度看板：设计说明.html">建国务实进度看板：设计说明</a><a href="docs/02_协议与规范/广发英雄贴：设计与操作说明.html" class="tree-doc" data-src="docs/02_协议与规范/广发英雄贴：设计与操作说明.html">广发英雄贴：设计与操作说明</a><a href="docs/02_协议与规范/建国债券发行与认购机制.html" class="tree-doc" data-src="docs/02_协议与规范/建国债券发行与认购机制.html">建国债券发行与认购机制</a><a href="docs/02_协议与规范/建国成功判定与窗口操作速查表.html" class="tree-doc" data-src="docs/02_协议与规范/建国成功判定与窗口操作速查表.html">建国成功判定与窗口操作速查表</a><a href="docs/02_协议与规范/多期 FCR 制度设计：分池制与操作细则（草案）.html" class="tree-doc" data-src="docs/02_协议与规范/多期 FCR 制度设计：分池制与操作细则（草案）.html">多期 FCR 制度设计（分池制与操作细则）</a><a href="docs/02_协议与规范/分配方案：公式化定档与供应商定价（草案）.html" class="tree-doc" data-src="docs/02_协议与规范/分配方案：公式化定档与供应商定价（草案）.html">分配方案（公式化定档与供应商定价）</a><a href="docs/02_协议与规范/三项不可谈判权力声明.html" class="tree-doc" data-src="docs/02_协议与规范/三项不可谈判权力声明.html">三项不可谈判权力声明</a><a href="docs/02_协议与规范/签字权与法人地位承继规则（草案）.html" class="tree-doc" data-src="docs/02_协议与规范/签字权与法人地位承继规则（草案）.html">签字权与法人地位承继规则（草案）</a><a href="docs/02_协议与规范/裁定者身份、遴选与退出细则.html" class="tree-doc" data-src="docs/02_协议与规范/裁定者身份、遴选与退出细则.html">裁定者身份、遴选与退出细则</a><a href="docs/02_协议与规范/账户应急指令规则（草案）.html" class="tree-doc" data-src="docs/02_协议与规范/账户应急指令规则（草案）.html">账户应急指令规则（草案）</a></div>
+  </div>
+<div class="tree-folder" data-folder="04_工程与落地">
+    <button type="button" class="tree-folder-btn" aria-expanded="true">工程与落地</button>
+    <div class="tree-folder-content"><a href="docs/04_工程与落地/CTO 多协作者协作与精确接入指南（草案）.html" class="tree-doc" data-src="docs/04_工程与落地/CTO 多协作者协作与精确接入指南（草案）.html">CTO 多协作者协作与精确接入指南（草案）</a><a href="docs/04_工程与落地/IT 基础设施甘特图与成本估算（战略预参）.html" class="tree-doc" data-src="docs/04_工程与落地/IT 基础设施甘特图与成本估算（战略预参）.html">IT 基础设施甘特图与成本估算（战略预参）</a><a href="docs/04_工程与落地/联盟胚胎发展：成长时间轴与资源映射（战略预参）.html" class="tree-doc" data-src="docs/04_工程与落地/联盟胚胎发展：成长时间轴与资源映射（战略预参）.html">联盟胚胎发展：成长时间轴与资源映射（战略预参）</a><a href="docs/04_工程与落地/GAIA 节点角色与 IT 平台映射.html" class="tree-doc" data-src="docs/04_工程与落地/GAIA 节点角色与 IT 平台映射.html">GAIA 节点角色与 IT 平台映射</a></div>
+  </div>
+<div class="tree-folder" data-folder="05_对外与外交">
+    <button type="button" class="tree-folder-btn" aria-expanded="true">对外与外交</button>
+    <div class="tree-folder-content"><a href="docs/05_对外与外交/给艺术家的公开信.html" class="tree-doc" data-src="docs/05_对外与外交/给艺术家的公开信.html">给艺术家的公开信</a><a href="docs/05_对外与外交/写给已成名艺术家的邀请函.html" class="tree-doc" data-src="docs/05_对外与外交/写给已成名艺术家的邀请函.html">写给已成名艺术家的邀请函</a><a href="docs/05_对外与外交/给年轻艺术家的短版信.html" class="tree-doc" data-src="docs/05_对外与外交/给年轻艺术家的短版信.html">给年轻艺术家的短版信</a></div>
+  </div>
+<div class="tree-folder" data-folder="06_解释与叙事">
+    <button type="button" class="tree-folder-btn" aria-expanded="true">解释与叙事</button>
+    <div class="tree-folder-content"><a href="docs/06_解释与叙事/GAIA 对外官网版.html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA 对外官网版.html">GAIA 对外官网版</a><a href="docs/06_解释与叙事/WhoAmI.Art 对外官网版.html" class="tree-doc" data-src="docs/06_解释与叙事/WhoAmI.Art 对外官网版.html">WhoAmI.Art 对外官网版</a><a href="docs/06_解释与叙事/GAIA 成立理由书（艺术家为何联合）.html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA 成立理由书（艺术家为何联合）.html">GAIA 成立理由书（艺术家为何联合）</a><a href="docs/06_解释与叙事/GAIA 全球战略蓝皮书.html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA 全球战略蓝皮书.html">GAIA 全球战略蓝皮书</a><a href="docs/06_解释与叙事/GAIA 全球战略路演 PPT 纲要.html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA 全球战略路演 PPT 纲要.html">GAIA 全球战略路演 PPT 纲要</a><a href="docs/06_解释与叙事/GAIA 一页制度杀伤页.html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA 一页制度杀伤页.html">GAIA 一页制度杀伤页</a><a href="docs/06_解释与叙事/GAIA 建国路线图：从思想启蒙到首届治理.html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA 建国路线图：从思想启蒙到首届治理.html">GAIA 建国路线图：从思想启蒙到首届治理</a><a href="docs/06_解释与叙事/GAIA 常见问题（FAQ）·联邦党人文集溯源.html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA 常见问题（FAQ）·联邦党人文集溯源.html">GAIA 常见问题（FAQ）·联邦党人文集溯源</a><a href="docs/06_解释与叙事/GAIA 技术可行性说明（公众版）.html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA 技术可行性说明（公众版）.html">GAIA 技术可行性说明（公众版）</a><a href="docs/06_解释与叙事/06_索引.html" class="tree-doc" data-src="docs/06_解释与叙事/06_索引.html">06_解释与叙事 索引</a><a href="docs/06_解释与叙事/GAIA 完整思想包（单文件参考版）.html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA 完整思想包（单文件参考版）.html">GAIA 完整思想包（单文件参考版）</a><a href="docs/06_解释与叙事/GAIA Video PPT Script (Simple EN).html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA Video PPT Script (Simple EN).html">GAIA Video PPT Script (Simple EN)</a><a href="docs/06_解释与叙事/GAIA Implementation Roadmap (Simple EN).html" class="tree-doc" data-src="docs/06_解释与叙事/GAIA Implementation Roadmap (Simple EN).html">GAIA Implementation Roadmap (Simple EN)</a></div>
+  </div>
+<div class="tree-folder" data-folder="实例">
+    <button type="button" class="tree-folder-btn" aria-expanded="true">实例</button>
+    <div class="tree-folder-content"><a href="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 核心技术节点（创世技术官）合作备忘录（摘要版）.html" class="tree-doc" data-src="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 核心技术节点（创世技术官）合作备忘录（摘要版）.html">WhoAmI.Art 核心技术节点（创世技术官）合作备忘录</a><a href="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 分润与财务逻辑补充（财务工程 v1.0）.html" class="tree-doc" data-src="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 分润与财务逻辑补充（财务工程 v1.0）.html">分润与财务逻辑补充（财务工程 v1.0）</a><a href="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 财务分配参数设计依据（待细化）.html" class="tree-doc" data-src="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 财务分配参数设计依据（待细化）.html">财务分配参数设计依据（待细化）</a><a href="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 自然人宪章说明.html" class="tree-doc" data-src="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 自然人宪章说明.html">自然人宪章说明</a><a href="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 创世公民与准入分层（自然人宪章配套）.html" class="tree-doc" data-src="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 创世公民与准入分层（自然人宪章配套）.html">创世公民与准入分层（自然人宪章配套）</a><a href="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 宪章型协作协议（自然人专用版）结构草案.html" class="tree-doc" data-src="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 宪章型协作协议（自然人专用版）结构草案.html">宪章型协作协议（自然人专用版）结构草案</a><a href="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 执行节点（壳公司）专项授权书（摘要版）.html" class="tree-doc" data-src="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 执行节点（壳公司）专项授权书（摘要版）.html">执行节点（壳公司）专项授权书</a><a href="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 衍生业务优先权与最惠国条款（摘要版）.html" class="tree-doc" data-src="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 衍生业务优先权与最惠国条款（摘要版）.html">衍生业务优先权与最惠国条款</a></div>
+  </div></nav>
+    </aside>
+    <main class="browser-main">
+      <div class="browser-frame-wrap" style="flex:1;position:relative;">
+        <div class="browser-placeholder" id="placeholder">从左侧目录选择文档</div>
+        <iframe name="doc-frame" class="browser-iframe" title="文档内容" style="position:absolute;inset:0;width:100%;height:100%;"></iframe>
+      </div>
+    </main>
+  </div>
+  <script>
+    (function(){
+      const iframe = document.querySelector('.browser-iframe');
+      const placeholder = document.getElementById('placeholder');
+      document.querySelectorAll('.tree-doc').forEach(function(a){
+        a.addEventListener('click', function(e){
+          e.preventDefault();
+          var src = a.getAttribute('data-src');
+          iframe.src = src;
+          placeholder.style.display = 'none';
+          document.querySelectorAll('.tree-doc').forEach(function(x){ x.classList.remove('active'); });
+          a.classList.add('active');
+        });
+      });
+      document.querySelectorAll('.tree-folder-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){ btn.closest('.tree-folder').classList.toggle('collapsed'); });
+      });
+    })();
+  </script>
+</body>
+</html>

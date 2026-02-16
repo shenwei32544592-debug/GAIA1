@@ -1,0 +1,71 @@
+# 将 gaia-manual-website 部署到 GitHub Pages
+# 推送后自动构建并发布，他人可通过链接访问
+
+name: Deploy GAIA Manual to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'gaia-manual-website/**'
+      - '00_索引与导航/**'
+      - '01_宪法与治理/**'
+      - '02_协议与规范/**'
+      - '03_创世与权益/**'
+      - '04_工程与落地/**'
+      - '05_对外与外交/**'
+      - '06_解释与叙事/**'
+      - '实例/**'
+  workflow_dispatch:  # 允许手动触发
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: gaia-manual-website/package-lock.json
+
+      - name: Install
+        run: |
+          cd gaia-manual-website
+          npm ci 2>/dev/null || npm install
+
+      - name: Build
+        run: |
+          cd gaia-manual-website
+          node build.js
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: gaia-manual-website
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

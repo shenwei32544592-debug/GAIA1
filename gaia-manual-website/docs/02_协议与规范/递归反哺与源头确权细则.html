@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>递归反哺与源头确权细则 · GAIA</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="doc-page">
+  <div class="doc-back"><a href="../../index.html" id="doc-back-link">← 返回说明书</a></div>
+  <article class="manual doc-content"><h1>递归反哺与源头确权细则</h1>
+<p><strong>用途</strong>：细化第四编「收益与反哺」的实现逻辑；供协议起草、IT 实现、艺术家签约参考<br><strong>版本</strong>：v1.0<br><strong>日期</strong>：2025-02-13<br><strong>依据</strong>：第四编《收益与反哺》；讨论共识沉淀</p>
+<hr>
+<h2>一、正当性前提：自发组织与自我治理</h2>
+<p><strong>本协议规定的版权保护，其正当性来自：</strong></p>
+<p>艺术家带头承认共识，主动执行并自我管理他们共同参与制定的协议——这是自发组织与自我治理的产物，而非外部强加。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>要素</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>自发组织</strong></td>
+<td>参与者自愿加入，非强制纳入</td>
+</tr>
+<tr>
+<td><strong>除现世版权法外</strong></td>
+<td>在现行法律之外，增加协议内共同约定</td>
+</tr>
+<tr>
+<td><strong>艺术家带头承认</strong></td>
+<td>艺术家是首先认可并践行共识的主体</td>
+</tr>
+<tr>
+<td><strong>自己成立的协议</strong></td>
+<td>协议由参与者共同制定，非平台或政府单方颁布</td>
+</tr>
+<tr>
+<td><strong>执行与自我管理</strong></td>
+<td>参与者按共识执行，自我治理</td>
+</tr>
+</tbody></table></div>
+<p><strong>规矩的层级</strong>：宪法是根本大法；递归反哺、FCR 等是宪法下的具体细则。加入联盟，即表示认同宪法和这些细则，并愿意照做。</p>
+<p><strong>参与即承诺</strong>：加入我们，即表示认同上述共识并愿意照做。</p>
+<hr>
+<h2>二、源头两层结构</h2>
+<p>任何版权在协议内最多同时拥有<strong>两层</strong>溯源关系，不得向上越级。</p>
+<h3>2.1 绝对源头</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>维度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>定义</strong></td>
+<td>真正的原创者；可能当下未知</td>
+</tr>
+<tr>
+<td><strong>可修正性</strong></td>
+<td>可经未来<strong>审查动议</strong>（公众指认等）确认或更正</td>
+</tr>
+<tr>
+<td><strong>当前权利人</strong></td>
+<td>可能知情或不知情自己非真正源头，均可接受审查动议</td>
+</tr>
+<tr>
+<td><strong>层级</strong></td>
+<td>最上游；认定即止，不再追溯</td>
+</tr>
+</tbody></table></div>
+<h3>2.2 应用层源头</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>维度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>定义</strong></td>
+<td>在绝对源头影响下创作、<strong>首次在平台登记</strong>的版权主体</td>
+</tr>
+<tr>
+<td><strong>可确权</strong></td>
+<td>平台可验证、可追溯</td>
+</tr>
+<tr>
+<td><strong>层级</strong></td>
+<td>平台运作中的「可见源头」</td>
+</tr>
+<tr>
+<td><strong>备选称法</strong></td>
+<td>登记源头 / 平台源头 / 确权源头</td>
+</tr>
+</tbody></table></div>
+<h3>2.3 两层约束</h3>
+<ul>
+<li>任何版权<strong>最多同时</strong>拥有：绝对源头 + 应用层源头</li>
+<li><strong>不再向上越级</strong>：认定到绝对源头即止</li>
+</ul>
+<hr>
+<h2>三、收益回流（递归反哺）实现规则</h2>
+<h3>3.1 回流来源</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>原则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>来源</strong></td>
+<td>必须从<strong>经认定</strong>的、在平台销售的、使用源头创意的作品的版权收益中拆分</td>
+</tr>
+<tr>
+<td><strong>扣减对象</strong></td>
+<td>从衍生创作者的 <strong>65% 艺术家利润部分</strong> 中抽取；抽取比例为<strong>暂定</strong>，见下文 §4.3</td>
+</tr>
+<tr>
+<td><strong>责任归属</strong></td>
+<td>使用源头创意的艺术家须让渡部分收益给源头。这是必须履行的责任，也是对每一位源头——包括可能成为源头的自己——的致敬，对艺术创新的鼓励与肯定；敬重源头，即敬重自己、敬重艺术家这个身份</td>
+</tr>
+</tbody></table></div>
+<h3>3.2 生效时点</h3>
+<ul>
+<li><strong>自认定日起执行</strong>：认定日及之后的销售，按回流规则执行。</li>
+<li><strong>认定日前已完成的销售不追溯</strong>：认定日之前的销售，不补扣、不追回。</li>
+</ul>
+<p><strong>举例</strong>：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>情形</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>认定日</td>
+<td>某日经共识或程序确认：B 的作品使用了 A 的创意</td>
+<td>2025 年 3 月 15 日认定</td>
+</tr>
+<tr>
+<td>须回流</td>
+<td>认定日<strong>及之后</strong>的销售，按规则向 A 回流</td>
+<td>3 月 16 日、3 月 20 日卖出的订单 → 回流给 A</td>
+</tr>
+<tr>
+<td>不追溯</td>
+<td>认定日<strong>之前</strong>已完成的销售，不补扣、不追回</td>
+<td>3 月 1 日、3 月 10 日卖出的订单 → 不回流，钱归 B</td>
+</tr>
+</tbody></table></div>
+<h3>3.3 资金流示意</h3>
+<pre><code>衍生订单：B 的作品经认定使用了 A 的创意
+       │
+       ├─ 65% 艺术家利润部分（B 的份额）
+       │       ├─ 按 A 的定价 → 回流给 A（绝对源头或应用层源头）
+       │       └─ 剩余 → B
+       │
+       ├─ 创世分润池（2%+2%+1%；Anchor）
+       ├─ 20% 公共运营池（含回流机制建设与运维）
+       └─ 10% 风险储备金
+</code></pre>
+<h3>3.4 建设费用</h3>
+<ul>
+<li><strong>回流给艺术家的钱</strong>：来自衍生销售本身，不从其他池抽调。</li>
+<li><strong>建设回流机制的钱</strong>：来自公共运营池 (20%)。CTO 负责落实任何节点提出的 IT 建设需求，保障联盟与时俱进、高效先进；职责详见<a href="./CTO技术共识协议.html" class="doc-link">《CTO 技术共识协议》</a>《核心技术节点合作备忘录》等。</li>
+</ul>
+<hr>
+<h2>四、版权使用费定价权</h2>
+<h3>4.1 定价权归属</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>原则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>归属</strong></td>
+<td>由<strong>版权所有者</strong>自主定价（本体系中指绝对源头或应用层源头）</td>
+</tr>
+<tr>
+<td><strong>策略</strong></td>
+<td>想让更多人用 → 定低（如采用协议默认 0.1%）；不想让人用 → 定高（如 50% 以上有效阻止借用）</td>
+</tr>
+<tr>
+<td><strong>平台角色</strong></td>
+<td>提供定价入口与执行，不代为定价；源头不设定时采用协议默认，见 §4.3</td>
+</tr>
+</tbody></table></div>
+<h3>4.2 定价形式</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>形式</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>比例</strong></td>
+<td>按每次衍生销售的百分比</td>
+<td>如 0.1%、1%、5%；未设定时见 §4.3 默认比例</td>
+</tr>
+<tr>
+<td><strong>固定金额</strong></td>
+<td>每次销售固定金额</td>
+<td>如每次 $2、$10</td>
+</tr>
+<tr>
+<td><strong>组合</strong></td>
+<td>比例 + 保底/封顶</td>
+<td>如 1% 或至少 $5，取高者</td>
+</tr>
+<tr>
+<td><strong>0%</strong></td>
+<td>无偿开放；须治理允许</td>
+<td>免费让人用，表示对传播的鼓励</td>
+</tr>
+</tbody></table></div>
+<h3>4.3 协议默认比例</h3>
+<p>当绝对源头<strong>未设定</strong>使用费时，采用协议约定默认比例：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>默认值</strong></td>
+<td>衍生创作者 艺术家利润部分（65%）的 <strong>0.1%</strong>（<strong>暂定比例</strong>）</td>
+</tr>
+<tr>
+<td><strong>性质</strong></td>
+<td>象征性最低回流，保证「必有敬意」</td>
+</tr>
+<tr>
+<td><strong>后续</strong></td>
+<td>以后根据众人讨论后共识，再明确确定最终比例</td>
+</tr>
+<tr>
+<td><strong>可调</strong></td>
+<td>比例可经共识程序修订</td>
+</tr>
+</tbody></table></div>
+<p><strong>计算示例</strong>：Net Pool $1000，65% = $650；暂定 0.1% × $650 ≈ $0.65。</p>
+<h3>4.4 多源引用</h3>
+<p>当衍生作品同时引用多个源头时：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>规则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>各自定价</strong></td>
+<td>各源头按其事先设定的价格适用</td>
+</tr>
+<tr>
+<td><strong>总回流封顶</strong></td>
+<td>回流总额 ≤ 衍生创作者 65% 的 50%</td>
+</tr>
+<tr>
+<td><strong>超限处理</strong></td>
+<td>按各源头报价比例等比缩减，使总和 = 封顶</td>
+</tr>
+<tr>
+<td><strong>争议</strong></td>
+<td>对引用范围、比例有异议时，由<strong>裁定者</strong>裁定</td>
+</tr>
+</tbody></table></div>
+<p><strong>IT 与艺术家实现</strong>：算法可自动化——订单关联多源头及各自价格 → 分配引擎加总 → 若超封顶则等比缩减 → 生成 RuleID。艺术家须在发布衍生作品时声明引用了哪些源头；平台提供勾选/关联入口。争议由裁定者裁定，属共识流程，非系统自动。无根本实现障碍；多源引用若初期少见，可先支持单源，多源作为后续迭代。</p>
+<hr>
+<h2>五、行业始祖 0.1%：待认领池与处分</h2>
+<h3>5.1 适用场景</h3>
+<p>当某<strong>品类</strong>存在共识上的「行业始祖」或「老祖宗」，但<strong>无法指认</strong>在世具体权利人时，衍生创作者可声明「归属某品类传统，无具体可指认源头」，触发本机制。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>情境</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>传统行业</strong></td>
+<td>如书法、非遗、某工艺门类；品类由门类理事会维护</td>
+</tr>
+<tr>
+<td><strong>共识</strong></td>
+<td>行业皆知有源头，但无人可确认</td>
+</tr>
+<tr>
+<td><strong>原则</strong></td>
+<td>0.1% 先暂存，支持迟到正义；钱不进公益直至业内认定无法指认</td>
+</tr>
+</tbody></table></div>
+<h3>5.2 待认领池：暂存优先，不入公益</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>比例</strong></td>
+<td>与协议默认比例一致（65% 的 0.1%，暂定）</td>
+</tr>
+<tr>
+<td><strong>流向</strong></td>
+<td><strong>行业始祖待认领池</strong>（非公益金池）；按品类分账</td>
+</tr>
+<tr>
+<td><strong>声明</strong></td>
+<td>衍生创作者声明「归属某品类传统，无具体可指认源头」时触发</td>
+</tr>
+<tr>
+<td><strong>性质</strong></td>
+<td>暂存；不直接进入公益金池；预留給将来可能被指认的始祖</td>
+</tr>
+</tbody></table></div>
+<p><strong>品类</strong>：粗粒度由门类理事会定义（如书法、剪纸、刺绣等）；声明时须选定品类；无法精确对应时可选「综合传统」。</p>
+<h3>5.3 指认与支付：找到始祖</h3>
+<p>经**公众指认（PAC）**或等效程序指认某人为某品类始祖并确认后：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>环节</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>绑定账户</strong></td>
+<td>该人绑定收款账户</td>
+</tr>
+<tr>
+<td><strong>支付范围</strong></td>
+<td>自确认之日起：<strong>该品类历史积累</strong> + <strong>未来全部 0.1%</strong>（永久）</td>
+</tr>
+<tr>
+<td><strong>资格终止</strong></td>
+<td>直至行业内公投取消其资格（见 §5.4）</td>
+</tr>
+<tr>
+<td><strong>钱不进公益</strong></td>
+<td>此路径下 0.1% 支付给始祖，不进入公益金池</td>
+</tr>
+</tbody></table></div>
+<h3>5.4 公投取消资格</h3>
+<p>行业内公投可<strong>取消</strong>某始祖的接收资格（如发现指认错误、造假等）。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>后果</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>已发放</strong></td>
+<td>原则上不溯及追回（执行成本高）；欺诈等另按单独程序</td>
+</tr>
+<tr>
+<td><strong>未来 0.1%</strong></td>
+<td>停止向该人支付；回流该品类待认领池</td>
+</tr>
+<tr>
+<td><strong>后续</strong></td>
+<td>可再次指认新始祖；或经公投转入公益（见 §5.5）</td>
+</tr>
+</tbody></table></div>
+<h3>5.5 转入公益</h3>
+<p>仅在以下情形下，某品类待认领余额<strong>转入</strong>公益金池的行业始祖部分：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>情形</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>公投认定</strong></td>
+<td>行业内公投认定「该品类无法指认具体始祖」</td>
+</tr>
+<tr>
+<td><strong>长期无指认</strong></td>
+<td>某品类待认领存在满 N 年（具体年数由治理约定）且无有效指认，可经公投转入</td>
+</tr>
+<tr>
+<td><strong>用途</strong></td>
+<td>转入后按协议约定定向用途（传承、教育、扶持新人、记录）；平台级治理决议动用</td>
+</tr>
+</tbody></table></div>
+<p><strong>待认领池处分三种去向</strong>：① 找到始祖 → 支付该人（历史积累 + 未来 0.1%）；② 公投认定无法指认或长期无指认 → 转入公益金池；③ 未决则暂存，等待将来指认。处分权在行业内公投与公众指认，非平台独家。</p>
+<h3>5.6 与可指认源头的关系</h3>
+<ul>
+<li>若衍生作品<strong>仅归属某品类、无具体可指认源头</strong> → 0.1% 进入<strong>待认领池</strong>（该品类）</li>
+<li>若<strong>可指认</strong>具体源头 → 按该人定价或默认支付该人，<strong>不</strong>同时计入待认领池</li>
+<li>若公众指认事后指认出具体源头 → 改向该人支付；若该品类在待认领池有积累，可一并支付</li>
+</ul>
+<h3>5.7 目的</h3>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>目的</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>迟到正义</strong></td>
+<td>为将来可能被指认的始祖保留份额，不提前划入公益</td>
+</tr>
+<tr>
+<td><strong>心存感激</strong></td>
+<td>承认不可指认源头的存在，不把收益尽归己有</td>
+</tr>
+<tr>
+<td><strong>行业自治</strong></td>
+<td>指认、取消资格、转入公益，均由业内共识或公投决定</td>
+</tr>
+</tbody></table></div>
+<p><strong>IT 与制度实现可行性</strong>：0.1% 分流、按品类计入待认领池、指认后支付始祖、公投转入公益——均为<strong>标准账务逻辑 + 治理决议驱动</strong>。订单分配时按衍生创作者声明的品类，将 0.1% 计入该品类子账户；经公众指认确认始祖后，系统将待认领余额及未来 0.1% 路由至其账户；公投转入公益时，治理决议触发系统划款。与电商平台的退款池、代管金、多级分账无异；表结构见 §5.8.6。<strong>无根本实现障碍</strong>；想法可落地。详见<a href="../06_解释与叙事/GAIA 技术可行性说明（公众版）.html" class="doc-link">《GAIA 技术可行性说明（公众版）》</a>§7.3。</p>
+<h3>5.8 治理与财务管理</h3>
+<h4>5.8.1 治理结构</h4>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>环节</th>
+<th>主体</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>决策</strong></td>
+<td>平台级治理（Domain Council 或行业代表联合）</td>
+<td>决定基金用途、拨款方案、年度计划</td>
+</tr>
+<tr>
+<td><strong>托管</strong></td>
+<td>平台（LLC）或指定合规主体</td>
+<td>持有资金、执行拨款、维护账簿</td>
+</tr>
+<tr>
+<td><strong>执行</strong></td>
+<td>平台财务按决议划款</td>
+<td>无平台级批准决议不划款</td>
+</tr>
+<tr>
+<td><strong>审计</strong></td>
+<td>第三方或治理推举的审计人</td>
+<td>年度审计；可随时查阅流水与余额</td>
+</tr>
+</tbody></table></div>
+<p><strong>决策与执行分离</strong>：治理主体不直接持有现金，仅通过批准用途与拨款方案行使治理权；平台作为托管方按决议执行。</p>
+<h4>5.8.2 资金存放：公益金池与待认领池</h4>
+<p><strong>原则</strong>：平台内有明确记录；动用权由协议预先定好；不可能超支；余额永不为负；全平台可共享查看明细账。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>层级</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>行业始祖待认领池</strong></td>
+<td>独立逻辑分区或子账户；0.1% 按品类暂存；<strong>不入公益</strong>直至公投转入；可支付给被指认始祖</td>
+</tr>
+<tr>
+<td><strong>公益金池（全平台公益积累金）</strong></td>
+<td>全平台<strong>仅一个</strong>公益金银行账户或公益信托；详见<a href="%E5%85%AC%E7%9B%8A%E9%87%91%E6%B1%A0%E7%BB%86%E5%88%99.html">《公益金池细则》</a></td>
+</tr>
+<tr>
+<td><strong>入池来源</strong></td>
+<td>① 行业始祖部分（从待认领池<strong>转入</strong>，经公投认定无法指认或满 N 年无指认后）；② 1% 名誉成本（创世者与创世技术官各认捐 0.5%；创世者提议权与决策权专属；创世技术官知情权与建议权、无决定权；其它节点提议权与监督权）；③ 主动捐赠（任何人可捐，含客户与联盟任意角色；平台须提供捐赠通道；捐赠可获公益勋章，勋章持有人享有代表联盟出席公益活动时的优先参与权；详见<a href="./公益金池细则.html" class="doc-link">《公益金池细则》</a>§2.1）</td>
+</tr>
+<tr>
+<td><strong>收益归集</strong></td>
+<td>上述来源统一入池，计入基金可用余额；入账记录标注来源类型</td>
+</tr>
+<tr>
+<td><strong>平台账簿</strong></td>
+<td>入账、出账、可用余额均有明确记录；入账可追溯至 OrderID/来源，出账可追溯至 ResolutionID</td>
+</tr>
+<tr>
+<td><strong>动用权</strong></td>
+<td>见 §5.8.2.1 动用权分层</td>
+</tr>
+<tr>
+<td><strong>不可超支</strong></td>
+<td>单笔拨款 ≤ 可用余额；系统校验；余额永不为负</td>
+</tr>
+<tr>
+<td><strong>透明</strong></td>
+<td>全平台参与者可共享查看明细账；入账、出账、用途、余额皆可查</td>
+</tr>
+</tbody></table></div>
+<p><strong>特性</strong>：账户唯一、记录明确、动用权已定、不可能超支、余额永不为负；明细账全平台共享可查。</p>
+<h5>5.8.2.1 动用权分层</h5>
+<p>公益金池内资金按<strong>决策权</strong>分为两类：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>类型</th>
+<th>来源</th>
+<th>决策主体</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>协议约定定向用途</strong></td>
+<td>行业始祖部分（从待认领池转入后的 0.1%）</td>
+<td>平台级治理（Domain Council 或行业代表联合）</td>
+<td>用途为传承、教育、扶持新人、记录等；须经平台级拨款决议</td>
+</tr>
+<tr>
+<td><strong>创世者决策权部分</strong></td>
+<td>1% 名誉成本</td>
+<td><strong>创世者（Founder）专属</strong></td>
+<td>用途须符合 §5.8.2.2 边界；受披露与审计约束（§5.8.2.3）；制度性影响力，非个人意志（§5.8.2.4）</td>
+</tr>
+</tbody></table></div>
+<p><strong>要点</strong>：同一池、同一银行账户；平台账簿按<strong>决策权类型</strong>分设虚拟子余额（行业始祖部分 / 创世者决策权部分），动用时校验：平台级决议仅可从行业始祖部分划出；**创世者（Founder）**独家决议仅可从创世者决策权部分划出。<strong>CTO 知情权</strong>详见 §5.8.2.1a。CTO 无决定权。二者互不挪用。<strong>待认领池</strong>独立记账，不参与公益金池动用权分层。</p>
+<h5>5.8.2.1a CTO 知情权：程序与「决议须注明是否采纳」</h5>
+<p>创世者动用 1% 创世者决策权部分前，须履行以下程序；<strong>拨款决议</strong>中须对 CTO 建议的处理作出明确记录。</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>环节</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>提前披露</strong></td>
+<td>创世者须提前 <strong>7 天</strong> 向 CTO 披露用途草案（用途、金额、收款方等）</td>
+</tr>
+<tr>
+<td><strong>CTO 建议</strong></td>
+<td>7 天内 CTO 可提交<strong>书面建议</strong>（如：用途是否妥当、金额建议、风险提示等）；可不提</td>
+</tr>
+<tr>
+<td><strong>决议注明</strong></td>
+<td>创世者签发拨款决议时，须在决议正文中注明：① CTO 未提出建议，或 ② 已听取 CTO 建议，并写明「已采纳」或「未采纳，理由：[简要说明]」</td>
+</tr>
+</tbody></table></div>
+<p><strong>「决议须注明是否采纳」含义</strong>：拨款决议（含 ResolutionID、用途、金额、收款方）为可追溯的法律与审计依据。决议须载明对 CTO 建议的处理——若 CTO 有建议而未采纳，须写明理由，形成可查记录；不改变创世者最终决策权，但增强透明与可审查性。</p>
+<p><strong>举例</strong>：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>情境</th>
+<th>CTO 建议</th>
+<th>决议中须注明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CTO 建议先核实收款方资质</td>
+<td>「建议先核实该组织资质再拨款」</td>
+<td>采纳 → 「已采纳 CTO 建议；已核实资质后拨款」；不采纳 → 「未采纳 CTO 建议，理由：该组织为平台既有合作方，资质已备查」</td>
+</tr>
+<tr>
+<td>CTO 建议降低金额</td>
+<td>「建议将金额从 $5000 降至 $3000」</td>
+<td>采纳 → 「已采纳 CTO 建议，按 $3000 拨款」；不采纳 → 「未采纳 CTO 建议，理由：该笔为年度协议拨款，金额已在协议中约定」</td>
+</tr>
+<tr>
+<td>CTO 未提建议</td>
+<td>（7 天内未提交）</td>
+<td>「CTO 未提出建议」</td>
+</tr>
+</tbody></table></div>
+<h5>5.8.2.2 创世者（Founder）决策权：用途边界</h5>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>条款</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>用途范围</strong></td>
+<td>创世者决策权部分的拨款，用途须限于：公益、教育、行业扶持、新人孵化、记录与传承、联盟内成员人道救助（10% 风险储备金结余不足或暂不可用时的补充）、符合平台使命的其它公益性质用途</td>
+</tr>
+<tr>
+<td><strong>联盟内成员界定</strong></td>
+<td>曾在体系内拥有账户或完成宪法承认行为的自然人/实体；认定以系统可追溯记录为准。详见<a href="../00_索引与导航/GAIA 标准术语与概念表.html" class="doc-link">《GAIA 标准术语与概念表》</a></td>
+</tr>
+<tr>
+<td><strong>成员救助专项约束</strong></td>
+<td>仅限重大人道危机（重大疾病、自然灾害、意外致重大损失）；须先向 10% 池申请或确认 10% 不可用；年度占比 ≤ 该部分当年入账 20%；须可核验证明；标准公开。详见<a href="./公益金池细则.html" class="doc-link">《公益金池细则》</a>§4.3.1</td>
+</tr>
+<tr>
+<td><strong>禁止用途</strong></td>
+<td>不得用于创世者个人消费、与平台无关的商业投资、政治捐献、或任何可能损害平台声誉的用途</td>
+</tr>
+<tr>
+<td><strong>单笔上限</strong></td>
+<td>单笔拨款 ≤ 该部分当期余额的 30%，或 ≤ 过去 12 个月该部分入账总额的 50%，取二者较低值；经裁定者或门类理事会 事前书面豁免可例外</td>
+</tr>
+<tr>
+<td><strong>年度复核</strong></td>
+<td>每财年结束后 30 日内，创世者须向治理披露该部分当年拨款汇总（用途、金额、收款方）；可纳入季度披露一并公布</td>
+</tr>
+<tr>
+<td><strong>大额披露</strong></td>
+<td>单笔动用 <strong>≥ 该部分当期余额 20%</strong> 时，须在季度披露中<strong>单独列出</strong>用途与决策依据；全平台可查</td>
+</tr>
+</tbody></table></div>
+<h5>5.8.2.3 创世者决策权：制衡与审计</h5>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>条款</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>定期披露</strong></td>
+<td>创世者决策权部分的入账、出账、余额，与行业始祖部分一并列入季度披露；全平台可查</td>
+</tr>
+<tr>
+<td><strong>审计权</strong></td>
+<td>年度审计须覆盖创世者决策权部分；审计方有权查阅该部分完整流水、决议记录及用途说明</td>
+</tr>
+<tr>
+<td><strong>抽查权</strong></td>
+<td>裁定者或门类理事会 可随时提议对该部分拨款进行抽样复核；创世者须在合理期限内提供用途合理性说明</td>
+</tr>
+<tr>
+<td><strong>救济</strong></td>
+<td>若经共识程序认定某笔拨款违反用途边界或禁止用途，可要求创世者等额补回该部分；补回金额从创世者后续应得收益中扣减</td>
+</tr>
+</tbody></table></div>
+<h5>5.8.2.4 创世者决策权：制度性澄清</h5>
+<p>1% 公益金用途的<strong>提议权与最终决策权</strong>为创世者（Founder）<strong>专属</strong>；可主动提议亦可最终决定；此为创世者制度性影响力来源。创世技术官有知情权与建议权，无决定权；其它节点有提议权与监督权。该权力为<strong>协议约定的制度性权力</strong>，非个人意志或软性影响力。其行使须：</p>
+<ul>
+<li>形成书面拨款决议（含用途、金额、收款方、决策日期）</li>
+<li>关联 ResolutionID，可追溯、可审计</li>
+<li>接受上述用途边界、披露与审计约束</li>
+</ul>
+<p>该权力来源于创世者对 1% 名誉成本的认捐与贡献；二人各出 0.5%，但<strong>用途决策权仅归属创世者</strong>，系其核心制度优势。权力行使须与协议一致，不得超越约定边界。决策权<strong>可移交</strong>：死亡、失能时按承继规则；创世者自愿时可将权力交出予联盟内委员会。移交方式与原因、好处见<a href="./公益金池细则.html" class="doc-link">《公益金池细则》</a>§4.4。</p>
+<h4>5.8.3 入账规则（公益金池）</h4>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>触发</strong></td>
+<td>衍生创作者声明「归属某品类传统，无具体可指认源头」的订单完成结算后</td>
+</tr>
+<tr>
+<td><strong>金额</strong></td>
+<td>该订单 65% 艺术家利润部分 的 0.1%（暂定比例，与协议默认一致）</td>
+</tr>
+<tr>
+<td><strong>流向</strong></td>
+<td>① 0.1% 触发时 → <strong>待认领池</strong>（按品类）；② 经公投转入后 → 公益金池行业始祖部分</td>
+</tr>
+<tr>
+<td><strong>记录</strong></td>
+<td>待认领池入账含：OrderID、品类、金额、结算日期；公益金池入账含来源（待认领转入/1%/捐赠）</td>
+</tr>
+</tbody></table></div>
+<h4>5.8.4 出账规则</h4>
+<p><strong>待认领池出账</strong>（见 §5.3、§5.5）：① 指认始祖并确认 → 支付该品类历史积累及未来 0.1% 至其绑定账户；② 公投转入公益 → 该品类余额划入公益金池行业始祖部分。</p>
+<p><strong>公益金池出账</strong>：</p>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>前置条件</strong></td>
+<td>须有对应决策主体的<strong>拨款决议</strong>（含用途、金额、收款方）</td>
+</tr>
+<tr>
+<td><strong>决策主体校验</strong></td>
+<td>平台级治理决议 → 用途须为传承/教育/扶持新人/记录，金额 ≤ 行业始祖部分余额；创世者决议 → 金额 ≤ 创世者决策权部分余额</td>
+</tr>
+<tr>
+<td><strong>超支校验</strong></td>
+<td>决议金额 ≤ 对应部分可用余额；否则系统拒绝执行</td>
+</tr>
+<tr>
+<td><strong>执行</strong></td>
+<td>平台财务按决议划款；划款记录关联 ResolutionID 与决策主体</td>
+</tr>
+<tr>
+<td><strong>禁止</strong></td>
+<td>无决议不划款；越权决议不执行；超额不划款</td>
+</tr>
+<tr>
+<td><strong>披露</strong></td>
+<td>每笔出账及用途在治理披露中公开</td>
+</tr>
+</tbody></table></div>
+<h4>5.8.5 披露与审计</h4>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>项目</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>定期披露</strong></td>
+<td>每季度公布：公益金池期初/入账/出账/期末；待认领池各品类余额</td>
+</tr>
+<tr>
+<td><strong>审计</strong></td>
+<td>年度审计；审计方有权查阅完整流水与决议记录</td>
+</tr>
+<tr>
+<td><strong>留存</strong></td>
+<td>流水与决议至少保留 7 年</td>
+</tr>
+</tbody></table></div>
+<h4>5.8.6 IT 实现方向（供工程参考）</h4>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>组件</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>资金层</strong></td>
+<td>单一银行账户或公益信托；实际划款均从此出</td>
+</tr>
+<tr>
+<td><strong>待认领池</strong></td>
+<td><code>ancestor_escrow(category_id, amount, order_id, timestamp)</code>；按品类分账</td>
+</tr>
+<tr>
+<td><strong>账务表</strong></td>
+<td><code>fund_ledger(source_type, entry_type, amount, order_id/resolution_id, timestamp)</code>；<code>source_type</code> = 行业始祖转入 / 1%名誉成本 / 主动捐赠</td>
+</tr>
+<tr>
+<td><strong>虚拟子余额</strong></td>
+<td><code>balance_industry_fund</code>（从待认领转入部分）, <code>balance_founder_discretion</code> 由流水聚合</td>
+</tr>
+<tr>
+<td><strong>多源拆分引擎</strong></td>
+<td>0.1% 触发 → 待认领池；转入后 → 行业始祖部分；1%与捐赠 → 各路由</td>
+</tr>
+<tr>
+<td><strong>拨款校验</strong></td>
+<td>平台级决议：<code>amount ≤ balance_industry_fund</code> 且 <code>purpose IN (传承,教育,扶持新人,记录)</code>；创世者决议：<code>amount ≤ balance_founder_discretion</code></td>
+</tr>
+<tr>
+<td><strong>治理决议表</strong></td>
+<td><code>fund_resolution(resolution_id, decision_maker, purpose, amount, payee, status, cto_advice_status, cto_advice_note)</code>；创世者决议须含 <code>cto_advice_status</code>（未提建议/已采纳/未采纳及理由）</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>六、审查动议（公众指认）与认定</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>环节</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>发起</strong></td>
+<td>任何人可提出：某版权另有更早源头</td>
+</tr>
+<tr>
+<td><strong>裁定</strong></td>
+<td>经公众指认 / 裁定者 共识程序</td>
+</tr>
+<tr>
+<td><strong>生效</strong></td>
+<td>自认定日起，回流规则按新认定的绝对源头执行</td>
+</tr>
+<tr>
+<td><strong>不向上越级</strong></td>
+<td>认定到绝对源头即止</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>七、与宪法第四编对应</h2>
+<div class="table-scroll-wrapper"><table class="manual-table">
+<thead>
+<tr>
+<th>第四编条款</th>
+<th>本细则对应</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第三十五条 收益附着原则</td>
+<td>回流附着于衍生销售</td>
+</tr>
+<tr>
+<td>第三十六条 使用即义务</td>
+<td>从使用者 65% 中让渡</td>
+</tr>
+<tr>
+<td>第三十七条 原子化拆分</td>
+<td>源头分润为必含单元</td>
+</tr>
+<tr>
+<td>第三十九条 源头递归权</td>
+<td>绝对源头 + 应用层源头，最多两层</td>
+</tr>
+<tr>
+<td>第四十条 比例动态原则</td>
+<td>由版权人自定，可随市场调节</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>八、检索关键词</h2>
+<p>递归反哺、收益回流、源头确权、绝对源头、应用层源头、版权定价权、公众指认、PAC、审查动议、自我治理、默认比例、行业始祖待认领池、品类分账、统一公益金池、动用权分层、创世者决策权、用途边界、制衡与审计、Domain Council、拨款决议、公投</p>
+<hr>
+<p><em>本文档为协议附件级别；与宪法第四编、分润逻辑补充配套使用。</em></p>
+</article>
+  <script>
+    (function(){ var a=document.getElementById('doc-back-link'); if(a&&window!==window.parent){ a.href='../../browser.html'; a.setAttribute('target','_top'); a.textContent='← 返回文档浏览器'; }
+    })();
+  </script>
+  <script src="../../glossary-data.js"></script>
+  <script src="../../glossary.js"></script>
+</body>
+</html>
