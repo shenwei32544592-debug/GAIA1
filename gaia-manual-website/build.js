@@ -23,6 +23,16 @@ const manualPath = path.join(rootDir, '00_索引与导航', 'GAIA 完整说明�
 const outputPath = path.join(__dirname, 'index.html');
 const docsDir = path.join(__dirname, 'docs');
 
+// 部署排除：以下文档不对外公开，不复制到 docs/，链接替换为「内部文档」
+const DEPLOY_EXCLUDED = new Set([
+  '00_索引与导航/Founder-AI 协作约定.md',
+  '00_索引与导航/输入与解释映射表.md',
+  '00_索引与导航/节点角色说服与加入路径分析（决策参考）.md',
+  '00_索引与导航/Founder-沈炎君 协作与治理要点.md',
+  '00_索引与导航/有效路径与时间节点安排.md',
+  '00_索引与导航/敏感信息防护要点.md',
+]);
+
 // 源文档映射：章节 id => [{ title, path }]
 const DOC_REFS = {
   'sec-1': [
@@ -48,8 +58,7 @@ const DOC_REFS = {
   'sec-4': [
     { title: 'GAIA 建国路线图：从思想启蒙到首届治理', path: '06_解释与叙事/GAIA 建国路线图：从思想启蒙到首届治理.md' },
     { title: '联盟创世档案（制宪会议）', path: '00_索引与导航/联盟创世档案（制宪会议）.md' },
-    { title: '输入与解释映射表', path: '00_索引与导航/输入与解释映射表.md' },
-    { title: 'Founder-AI 协作约定', path: '00_索引与导航/Founder-AI 协作约定.md' },
+    // Founder-AI 协作约定、输入与解释映射表：内部文档，不对外部署
   ],
   'sec-5': [
     { title: 'GAIA 常见问题（FAQ）·联邦党人文集溯源', path: '06_解释与叙事/GAIA 常见问题（FAQ）·联邦党人文集溯源.md' },
@@ -104,8 +113,7 @@ const DOC_REFS = {
     { title: '衍生业务优先权与最惠国条款', path: '实例/WhoAmI.Art/docs/WhoAmI.Art 衍生业务优先权与最惠国条款（摘要版）.md' },
   ],
   'sec-10': [
-    { title: '有效路径与时间节点安排', path: '00_索引与导航/有效路径与时间节点安排.md' },
-    { title: '节点角色说服与加入路径分析（决策参考）', path: '00_索引与导航/节点角色说服与加入路径分析（决策参考）.md' },
+    // 有效路径、节点角色说服：内部文档，不对外部署
   ],
   'sec-11': [
     { title: '给艺术家的公开信', path: '05_对外与外交/给艺术家的公开信.md' },
@@ -119,7 +127,7 @@ const DOC_REFS = {
   'appendix': [
     { title: 'GAIA Master Index', path: '00_索引与导航/GAIA Master Index.md' },
     { title: '文档分层与项目结构说明', path: '00_索引与导航/文档分层与项目结构说明.md' },
-    { title: '快速查找表', path: '00_索引与导航/快速查找表.md' },
+    { title: '快速查找表', path: '00_索引与导航/快速查找表.md' },  // 建时过滤敏感行
     { title: '新节点入门包', path: '00_索引与导航/新节点入门包.md' },
     { title: '更新日志', path: '00_索引与导航/更新日志.md' },
     { title: '06_解释与叙事 索引', path: '06_解释与叙事/06_索引.md' },
@@ -199,6 +207,31 @@ function buildDocAliases() {
   return map;
 }
 
+/** 将指向已排除文档的链接替换为纯文本，避免 404 且不暴露内部文档 */
+function stripExcludedLinks(html) {
+  const patterns = [
+    /Founder-AI\s*协作约定|输入与解释映射表|节点角色说服与加入路径分析|Founder-沈炎君\s*协作与治理要点|有效路径与时间节点安排/,
+  ];
+  return html.replace(/<a\s+([^>]*href=["']([^"']*?)["'][^>]*)>([\s\S]*?)<\/a>/gi, (full, attrs, href, text) => {
+    const hrefDecoded = decodeURIComponent(href);
+    if (patterns.some(p => p.test(hrefDecoded))) return `<span class="internal-doc">${text.replace(/^《|》$/g, '')}（内部文档）</span>`;
+    return full;
+  });
+}
+
+/** 部署时脱敏：移除以括号标注的创世技术官本名，避免协作方身份外泄 */
+function stripSensitiveNames(html) {
+  return html
+    .replace(/（沈炎君）/g, '')
+    .replace(/沈炎君/g, '创世技术官');
+}
+
+/** 从快速查找表 HTML 中移除涉及排除文档的行 */
+function filterSensitiveRowsFromQuickTable(html) {
+  const sensitive = /Founder-沈炎君|Founder-创世技术官\s*协作|Founder-AI\s*协作约定|输入与解释映射表|节点角色说服|有效路径与时间节点|敏感信息防护要点|沈炎君\s*handoff|创世技术官\s*handoff|人物\/沈炎君|沈武档案|范桦档案|人物\/沈武|人物\/范桦/;
+  return html.replace(/<tr>[\s\S]*?<\/tr>/g, (row) => (sensitive.test(row) ? '' : row));
+}
+
 /** 将 HTML 中的《文档名》替换为可跳转链接；basePath 为当前文档路径（doc 页如 02_协议与规范/xx.html；主页面传空则生成 docs/xx 链接）；跳过已存在链接内的《》 */
 function linkifyDocRefs(html, basePath) {
   const fromRoot = !basePath || !basePath.includes('/');
@@ -220,8 +253,25 @@ function linkifyDocRefs(html, basePath) {
 // 将源文档转为 HTML（解决乱码），供网站内链接
 function copyDocs() {
   if (!fs.existsSync(docsDir)) fs.mkdirSync(docsDir, { recursive: true });
+  // 删除 docs 下所有 .md（对外仅提供 .html，避免原始内容外泄）
+  const walkDelMd = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    fs.readdirSync(dir).forEach(name => {
+      const full = path.join(dir, name);
+      if (fs.statSync(full).isDirectory()) walkDelMd(full);
+      else if (name.endsWith('.md')) fs.unlinkSync(full);
+    });
+  };
+  walkDelMd(docsDir);
+  // 删除此前可能存在的排除文档输出，避免旧构建残留
+  DEPLOY_EXCLUDED.forEach(p => {
+    const htmlDest = path.join(docsDir, p.replace(/\.md$/, '.html'));
+    const mdDest = path.join(docsDir, p);
+    if (fs.existsSync(htmlDest)) fs.unlinkSync(htmlDest);
+    if (fs.existsSync(mdDest)) fs.unlinkSync(mdDest);
+  });
   const allPaths = new Set();
-  Object.values(DOC_REFS).flat().forEach(({ path: p }) => allPaths.add(p));
+  Object.values(DOC_REFS).flat().forEach(({ path: p }) => p && !DEPLOY_EXCLUDED.has(p) && allPaths.add(p));
   allPaths.forEach(relPath => {
     const src = path.join(rootDir, relPath);
     const htmlPath = relPath.replace(/\.md$/, '.html');
@@ -229,13 +279,15 @@ function copyDocs() {
     if (fs.existsSync(src)) {
       const destDir = path.dirname(dest);
       if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
-      // 同步根目录源 .md 到 docs，确保全系统对齐
-      fs.copyFileSync(src, path.join(docsDir, relPath));
+      // 不复制 .md 至 docs（仅生成 .html），避免原始敏感内容外泄
       const md = fs.readFileSync(src, 'utf-8');
       let body = marked.parse(md);
       body = linkifyDocRefs(body, htmlPath);
       // 将内部文档 .md 链接替换为 .html，确保点击可打开
       body = body.replace(/href="([^"#:]*?)\.md"/g, 'href="$1.html"');
+      body = stripExcludedLinks(body);
+      if (relPath.includes('快速查找表')) body = filterSensitiveRowsFromQuickTable(body);  // 先过滤，再脱敏
+      body = stripSensitiveNames(body);
       // 为表格添加响应式包装器，确保复杂表格正确排版并可横向滚动
       body = body.replace(/<table>([\s\S]*?)<\/table>/g, '<div class="table-scroll-wrapper"><table class="manual-table">$1</table></div>');
       const relPathNorm = relPath.replace(/\\/g, '/');
@@ -277,8 +329,8 @@ function copyDocs() {
 
 // 生成相关文档 HTML 块（链接指向 .html 避免乱码）
 function docRefBlock(secId) {
-  const refs = DOC_REFS[secId];
-  if (!refs || refs.length === 0) return '';
+  const refs = (DOC_REFS[secId] || []).filter(({ path: p }) => p && !DEPLOY_EXCLUDED.has(p));
+  if (refs.length === 0) return '';
   const links = refs.map(({ title, path: p }) => {
     const href = 'docs/' + p.replace(/\\/g, '/').replace(/\.md$/, '.html');
     return `<li><a href="${href}" class="doc-link">${title}</a></li>`;
@@ -289,6 +341,8 @@ function docRefBlock(secId) {
 const md = fs.readFileSync(manualPath, 'utf-8');
 let contentHtml = marked.parse(md);
 contentHtml = linkifyDocRefs(contentHtml, '');
+contentHtml = stripExcludedLinks(contentHtml);
+contentHtml = stripSensitiveNames(contentHtml);
 // 为表格添加响应式包装器（主页面与文档页一致）
 contentHtml = contentHtml.replace(/<table>([\s\S]*?)<\/table>/g, '<div class="table-scroll-wrapper"><table class="manual-table">$1</table></div>');
 
@@ -336,13 +390,10 @@ const docIndexHtml = `
 <tr><td><a href="docs/04_工程与落地/GAIA 节点角色与 IT 平台映射.html" class="doc-link">GAIA 节点角色与 IT 平台映射</a></td><td>04_工程与落地/</td><td>§7</td></tr>
 <tr><td><a href="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 分润与财务逻辑补充（财务工程 v1.0）.html" class="doc-link">分润与财务逻辑补充</a></td><td>实例/WhoAmI.Art/docs/</td><td>§8</td></tr>
 <tr><td><a href="docs/实例/WhoAmI.Art/docs/WhoAmI.Art 创世公民与准入分层（自然人宪章配套）.html" class="doc-link">创世公民与准入分层</a></td><td>实例/WhoAmI.Art/docs/</td><td>§9</td></tr>
-<tr><td><a href="docs/00_索引与导航/有效路径与时间节点安排.html" class="doc-link">有效路径与时间节点安排</a></td><td>00_索引与导航/</td><td>§10</td></tr>
 <tr><td><a href="docs/05_对外与外交/给艺术家的公开信.html" class="doc-link">给艺术家的公开信</a></td><td>05_对外与外交/</td><td>§11.1</td></tr>
 <tr><td><a href="docs/06_解释与叙事/WhoAmI.Art 对外官网版.html" class="doc-link">WhoAmI.Art 对外官网版</a></td><td>06_解释与叙事/</td><td>§11.2</td></tr>
 <tr><td><a href="docs/00_索引与导航/GAIA 标准术语与概念表.html" class="doc-link">GAIA 标准术语与概念表</a></td><td>00_索引与导航/</td><td>§12</td></tr>
 <tr><td><a href="docs/00_索引与导航/联盟创世档案（制宪会议）.html" class="doc-link">联盟创世档案（制宪会议）</a></td><td>00_索引与导航/</td><td>§4</td></tr>
-<tr><td><a href="docs/00_索引与导航/输入与解释映射表.html" class="doc-link">输入与解释映射表</a></td><td>00_索引与导航/</td><td>§4</td></tr>
-<tr><td><a href="docs/00_索引与导航/Founder-AI 协作约定.html" class="doc-link">Founder-AI 协作约定</a></td><td>00_索引与导航/</td><td>§4</td></tr>
 <tr><td><a href="docs/00_索引与导航/GAIA Master Index.html" class="doc-link">GAIA Master Index</a></td><td>00_索引与导航/</td><td>总索引</td></tr>
 <tr><td><a href="docs/00_索引与导航/快速查找表.html" class="doc-link">快速查找表</a></td><td>00_索引与导航/</td><td>总索引</td></tr>
 <tr><td><a href="docs/00_索引与导航/新节点入门包.html" class="doc-link">新节点入门包</a></td><td>00_索引与导航/</td><td>总索引</td></tr>
@@ -370,6 +421,7 @@ contentHtml = contentHtml.replace(
   /<h2>按文档来源索引<\/h2>\s*(?:<div class="table-scroll-wrapper">)?<table[^>]*>[\s\S]*?<\/table>(?:<\/div>)?/,
   `<h2>按文档来源索引</h2>\n${docIndexHtml}`
 );
+contentHtml = stripExcludedLinks(contentHtml);  // 再次处理，覆盖 docIndexHtml 插入后可能残留的链接
 
 copyDocs();
 
@@ -435,7 +487,7 @@ fs.writeFileSync(outputPath, template, 'utf-8');
 console.log('✅ 已生成 index.html，已复制源文档至 docs/');
 
 // 生成文档浏览器 browser.html
-const FOLDER_ORDER = ['00_索引与导航', '01_宪法与治理', '02_协议与规范', '03_权益与权利', '04_工程与落地', '05_对外与外交', '06_解释与叙事', '实例'];
+const FOLDER_ORDER = ['00_索引与导航', '01_宪法与治理', '02_协议与规范', '03_创世与权益', '04_工程与落地', '05_对外与外交', '06_解释与叙事', '实例'];
 const seenPaths = new Set();
 const byFolder = new Map();
 Object.values(DOC_REFS).flat().forEach(({ title, path: p }) => {

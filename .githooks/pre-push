@@ -1,0 +1,26 @@
+#!/bin/sh
+# 敏感信息防护：push 时自动拦截，防止误将内部文档推向远程
+# 若需临时推送全部内容至私有备份，可：git push --no-verify
+
+SENSITIVE="Founder-AI 协作约定|输入与解释映射表|节点角色说服与加入路径分析|Founder-沈炎君 协作与治理要点|有效路径与时间节点安排|敏感信息防护要点|人际关系/人物/"
+
+while read local_ref local_sha remote_ref remote_sha; do
+  [ -z "$local_sha" ] && continue
+  if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+    range="$local_sha"
+  else
+    range="$remote_sha..$local_sha"
+  fi
+  files=$(git diff --name-only "$range" 2>/dev/null)
+  if echo "$files" | grep -qE "$SENSITIVE"; then
+    echo ""
+    echo "⚠  sensitive content blocked: the following files would be pushed:"
+    echo "$files" | grep -E "$SENSITIVE" | sed 's/^/     /'
+    echo ""
+    echo "  These files are restricted. To push anyway: git push --no-verify"
+    echo "  See: 00_索引与导航/敏感信息防护要点.md"
+    exit 1
+  fi
+done
+
+exit 0

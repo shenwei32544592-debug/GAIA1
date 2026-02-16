@@ -7,6 +7,7 @@ on:
   push:
     branches: [main]
     paths:
+      - '.github/workflows/**'
       - 'gaia-manual-website/**'
       - '00_索引与导航/**'
       - '01_宪法与治理/**'
