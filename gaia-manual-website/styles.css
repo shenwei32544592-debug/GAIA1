@@ -67,6 +67,19 @@ body {
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
+.logo-img {
+  display: block;
+  max-width: 120px;
+  max-height: 48px;
+  width: auto;
+  height: auto;
+  margin-bottom: 0.25rem;
+}
+
+.logo-fallback {
+  display: none;
+}
+
 .logo {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.5rem;
