@@ -25,6 +25,7 @@ const docsDir = path.join(__dirname, 'docs');
 
 // 部署排除：以下文档不对外公开，不复制到 docs/，链接替换为「内部文档」
 const DEPLOY_EXCLUDED = new Set([
+  '00_索引与导航/更新日志.md',
   '00_索引与导航/Founder-AI 协作约定.md',
   '00_索引与导航/输入与解释映射表.md',
   '00_索引与导航/节点角色说服与加入路径分析（决策参考）.md',
@@ -136,7 +137,6 @@ const DOC_REFS = {
     { title: '文档分层与项目结构说明', path: '00_索引与导航/文档分层与项目结构说明.md' },
     { title: '快速查找表', path: '00_索引与导航/快速查找表.md' },  // 建时过滤敏感行
     { title: '新节点入门包', path: '00_索引与导航/新节点入门包.md' },
-    { title: '更新日志', path: '00_索引与导航/更新日志.md' },
     { title: '06_解释与叙事 索引', path: '06_解释与叙事/06_索引.md' },
     { title: 'GAIA 完整思想包（单文件参考版）', path: '06_解释与叙事/GAIA 完整思想包（单文件参考版）.md' },
     { title: 'GAIA 1.0 全系统集成规范（Master Spec）', path: '02_协议与规范/GAIA 1.0 全系统集成规范（Master Spec）.md' },
@@ -206,7 +206,6 @@ function buildDocAliases() {
     ['自然人宪章说明', '实例/WhoAmI.Art/docs/WhoAmI.Art 自然人宪章说明.html'],
     ['创世艺术家', '00_索引与导航/GAIA 标准术语与概念表.html'],
     ['Anchor Artist 专用 2 页版', '05_对外与外交/Anchor Artist 专用 2 页版（谈判底稿）.html'],
-    ['更新日志', '00_索引与导航/更新日志.html'],
     ['创意载体规范', '02_协议与规范/创意载体规范（核心逻辑摘要）.html'],
     ['载体协议', '02_协议与规范/创意载体规范（核心逻辑摘要）.html'], // 旧称→创意载体规范
   ];
@@ -238,7 +237,7 @@ function stripSensitiveNames(html) {
 
 /** 从快速查找表 HTML 中移除涉及排除文档的行 */
 function filterSensitiveRowsFromQuickTable(html) {
-  const sensitive = /Founder-沈炎君|Founder-创世技术官\s*协作|Founder-AI\s*协作约定|输入与解释映射表|节点角色说服|有效路径与时间节点|敏感信息防护要点|沈炎君\s*handoff|创世技术官\s*handoff|人物\/沈炎君|沈武档案|范桦档案|人物\/沈武|人物\/范桦/;
+  const sensitive = /Founder-沈炎君|Founder-创世技术官\s*协作|Founder-AI\s*协作约定|输入与解释映射表|节点角色说服|有效路径与时间节点|敏感信息防护要点|沈炎君\s*handoff|创世技术官\s*handoff|人物\/沈炎君|沈武档案|范桦档案|人物\/沈武|人物\/范桦|更新日志|重大变更记录/;
   return html.replace(/<tr>[\s\S]*?<\/tr>/g, (row) => (sensitive.test(row) ? '' : row));
 }
 
