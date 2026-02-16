@@ -465,6 +465,7 @@ const template = `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GAIA 完整说明书 · Global Art & Identity Alliance</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -474,7 +475,8 @@ const template = `<!DOCTYPE html>
   <div class="layout">
     <aside class="sidebar">
       <header class="sidebar-header">
-        <h1 class="logo">GAIA</h1>
+        <img src="assets/logo.png" alt="GAIA" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <h1 class="logo logo-fallback" style="display:none">GAIA</h1>
         <p class="logo-sub">完整说明书 · v1.0</p>
       </header>
       <nav class="nav">
@@ -533,6 +535,7 @@ const browserHtml = `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GAIA 文档浏览器 · 按目录浏览</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -542,6 +545,7 @@ const browserHtml = `<!DOCTYPE html>
     .browser-sidebar { width: 280px; min-width: 280px; background: var(--bg-sidebar); color: #e5e5e5; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow: hidden; }
     .browser-sidebar-header { padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .browser-sidebar-header h1 { font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; margin: 0; }
+    .browser-logo-img { display: block; max-width: 100px; max-height: 40px; margin-bottom: 0.25rem; }
     .browser-sidebar-header p { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin: 0.25rem 0 0; }
     .browser-back { padding: 0.5rem 1.25rem; }
     .browser-back a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; }
@@ -566,7 +570,8 @@ const browserHtml = `<!DOCTYPE html>
   <div class="browser-layout">
     <aside class="browser-sidebar">
       <header class="browser-sidebar-header">
-        <h1>GAIA</h1>
+        <img src="assets/logo.png" alt="GAIA" class="browser-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <h1 class="browser-logo-fallback" style="display:none">GAIA</h1>
         <p>文档浏览器 · 按目录</p>
       </header>
       <div class="browser-back"><a href="index.html">← 返回主说明书</a></div>
